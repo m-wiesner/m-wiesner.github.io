@@ -1,0 +1,48 @@
+---
+title: About
+layout: page
+---
+<!-- ![Profile Image]({{ site.url }}/{{ site.picture }}) -->
+
+<p>I am a PhD student in the Center for Language and Speech Processing at Johns
+Hopkins University. I am broadly interested in speech technologies, but I
+have primarily worked on multilingual and cross-lingual acoustic modeling for
+low-resource language ASR and topic identification. I am advised by
+<a href="https://www.clsp.jhu.edu/faculty/sanjeev-khudanpur">Sanjeev Khudanpur</a>
+and often work with
+<a href="https://www.clsp.jhu.edu/faculty/jan-trmal">Jan Trmal</a> and
+<a href="https://www.clsp.jhu.edu/faculty/shinji-watanabe">Shinji Watanabe</a>.
+I recently have worked on end-to-end speech recognition in ESPnet, and have
+contributed to Kaldi in the past. Before starting at Johns Hopkins I used work
+on machine learning applications in atmospheric science. Outside of work,
+I spend most of my time making music and with my family.</p>
+
+
+<h2>Publications</h2>
+
+<p><a href="https://arxiv.org/pdf/1807.06204.pdf">Low-Resource Centextual Topic Identification on Speech</a><br />
+<em style="font-size: 75%"><small>Chunxi Liu, <strong>Matthew Wiesner</strong>, Shinji Watanabe, Craig Harman, Jan Trmal, Najim Dehak, Sanjeev Khudanpur, SLT 2018. </small></em></p>
+
+<p><a href="https://www.isca-speech.org/archive/Interspeech_2018/pdfs/1836.pdf">Automatic Speech Recognition and Topic Identification for Almost-Zero-Resource Languages</a><br />
+<em style="font-size: 75%"><small><strong>Matthew Wiesner</strong>, Chunxi Liu, Lucas Ondel, Craig Harman, Vimal Manohar, Jan Trmal, Zhongqiang Huang, Najim Dehak, Sanjeev Khudanpur, INTERSPEECH 2018.</small></em></p>
+
+<p><a href="https://www.isca-speech.org/archive/Interspeech_2018/abstracts/2456.html">Multi-Modal Data Augmentation for End-to-end ASR</a>
+<a href="https://www.clsp.jhu.edu/2018/09/06/clsp-students-win-best-student-paper-award-at-interspeech-2018/"><em style="font-size: 75%"><small><span style="color:red">Best Student Paper!</span></small></em></a><br />
+<em style="font-size: 75%"><small>Adithya Renduchintala, Shuoyang Ding,<strong>Matthew Wiesner</strong> and Shinji Watanabe, INTERSPEECH 2018.</small></em></p>
+
+<p><a href="https://www.isca-speech.org/archive/Interspeech_2018/abstracts/1456.html">ESPnet: End-to-End Speech Processing Toolkit</a><br />
+<em style="font-size: 75%"><small>Shinji Watanabe, Takaaki Hori, Shigeki Karita, Tomoki Hayashi, Jiro Nishitoba, Yuya Unno, Nelson Enrique Yalta Soplin, Jahn Heymann, <strong>Matthew Wiesner</strong>, Nanxin Chen, Adithya Renduchintala, Tsubasa Ochiai, INTERSPEECH 2018.</small></em></p>
+
+<p><a href="https://www.isca-speech.org/archive/Interspeech_2017/pdfs/1093.PDF">Topic Identification for Speech without ASR</a> <em style="font-size: 75%"><small><span style="color:red">Nominated for Best Student Paper</span></small></em><br />
+<em style="font-size: 75%"><small>Chunxi Liu, Jan Trmal, <strong>Matthew Wiesner</strong>, Craig Harman, Sanjeev Khudanpur, INTERSPEECH 2017. </small></em></p>
+
+<p><a href="https://www.isca-speech.org/archive/Interspeech_2017/pdfs/0601.PDF">The Kaldi OpenKWS System: Improving Low Resource Keyword Search</a><br />
+<em style="font-size: 75%"><small>Jan Trmal, <strong>Matthew Wiesner</strong>, Vijayaditya Peddinti, Xiaohui Zhang, Pegah Ghahremani, Yiming Wang, Vimal Manohar, Hainan Xi, Daniel Povey, Sanjeev Khudanpur, INTERSPEECH 2017. </small></em></p>
+
+<p><a href="https://ams.confex.com/ams/94Annual/webprogram/Paper242901.html">Automated Detection of Radar Severe Weather Signature</a><br />
+<em style="font-size: 75%"><small><strong>Matthew Wiesner</strong>, Joseph Hardin, V. Chandrasekaran, American Meteorological Society 2014. </small></em></p>
+
+<h2>Projects</h2>
+
+<a href="https://github.com/m-wiesner/Jotto">Jotto: The Code Breaking Game</a><br />
+<a href="https://soundcloud.com/groschatorange">Music</a>
