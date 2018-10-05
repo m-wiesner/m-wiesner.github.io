@@ -48,7 +48,7 @@ I spend most of my time making music and with my family.</p>
 <h2>Education</h2>
 
 <b>Ph.D. Candidate in Electrical Engineering</b> (Sept 2014 - present) <br />
-Deparment of Electrical and Computer Engineering, Johns Hopkins University, MD, USA
+Johns Hopkins University, MD, USA
 <br />
 <br />
 <b>Masters in Electrical Engineering</b> (May 2016) <br />
