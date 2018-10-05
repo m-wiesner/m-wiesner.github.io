@@ -39,10 +39,11 @@ I spend most of my time making music and with my family.</p>
 <p><a href="https://www.isca-speech.org/archive/Interspeech_2017/pdfs/0601.PDF">The Kaldi OpenKWS System: Improving Low Resource Keyword Search</a><br />
 <em style="font-size: 75%"><small>Jan Trmal, <strong>Matthew Wiesner</strong>, Vijayaditya Peddinti, Xiaohui Zhang, Pegah Ghahremani, Yiming Wang, Vimal Manohar, Hainan Xi, Daniel Povey, Sanjeev Khudanpur, INTERSPEECH 2017. </small></em></p>
 
-<p><a href="https://ams.confex.com/ams/94Annual/webprogram/Paper242901.html">Automated Detection of Radar Severe Weather Signature</a><br />
+<p><a href="https://ams.confex.com/ams/94Annual/webprogram/Paper242901.html">Automated Detection of Radar Severe Weather Signatures</a><br />
 <em style="font-size: 75%"><small><strong>Matthew Wiesner</strong>, Joseph Hardin, V. Chandrasekaran, American Meteorological Society 2014. </small></em></p>
 
 <h2>Projects</h2>
 
 <a href="https://github.com/m-wiesner/Jotto">Jotto: The Code Breaking Game</a><br />
+<a href="https://github.com/m-wiesner/BCUBED">B3 Clustering Metric</a><br />
 <a href="https://soundcloud.com/groschatorange">Music</a>
