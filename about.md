@@ -17,6 +17,7 @@ contributed to Kaldi in the past. Before starting at Johns Hopkins I used work
 on machine learning applications in atmospheric science. Outside of work,
 I spend most of my time making music and with my family.</p>
 
+<hr>
 
 <h2>Publications</h2>
 
@@ -42,6 +43,8 @@ I spend most of my time making music and with my family.</p>
 <p><a href="https://ams.confex.com/ams/94Annual/webprogram/Paper242901.html">Automated Detection of Radar Severe Weather Signatures</a><br />
 <em style="font-size: 75%"><small><strong>Matthew Wiesner</strong>, Joseph Hardin, V. Chandrasekaran, American Meteorological Society 2014. </small></em></p>
 
+<hr>
+
 <h2>Education</h2>
 
 <b>Ph.D. Candidate in Electrical Engineering</b> (Sept 2014 - present) <br />
@@ -55,6 +58,7 @@ Johns Hopkins University, MD, USA
 <b>B.Eng in Electrical Engineering and Minor in Middle East Languages</b> (Dec 2013) <br />
 McGill University, QC, CA
 
+<hr>
 
 <h2>Projects</h2>
 
