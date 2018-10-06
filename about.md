@@ -13,8 +13,8 @@ and often work with
 <a href="https://www.clsp.jhu.edu/faculty/jan-trmal">Jan Trmal</a> and
 <a href="https://www.clsp.jhu.edu/faculty/shinji-watanabe">Shinji Watanabe</a>.
 I recently have worked on end-to-end speech recognition in ESPnet, and have
-contributed to Kaldi in the past. Before starting at Johns Hopkins I used work
-on machine learning applications in atmospheric science. Outside of work,
+contributed to Kaldi in the past. Before starting at Johns Hopkins I used to
+work on machine learning applications in atmospheric science. Outside of work,
 I spend most of my time making music and with my family.</p>
 
 <hr>
@@ -47,7 +47,7 @@ I spend most of my time making music and with my family.</p>
 
 <h2>Education</h2>
 
-<b>Ph.D. Candidate in Electrical Engineering</b> (Sept 2014 - present) <br />
+<b>Ph.D. Candidate in Electrical Engineering</b> (Sep 2014 - present) <br />
 Johns Hopkins University, MD, USA
 <br />
 <br />
