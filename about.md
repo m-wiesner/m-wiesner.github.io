@@ -28,7 +28,7 @@ I spend most of my time making music and with my family.</p>
 <em style="font-size: 75%">Martin Karafiát, Murali Karthick Baskar, Shinji Watanabe, Takaaki Hori, <strong>Matthew Wiesner</strong>, Jan "Honza'' Černocký, INTERSPEECH 2019</em></p>
 
 <p><a href="https://www.aclweb.org/anthology/N19-1009">Massively Multilingual Adversarial Speech Recognition</a><br />
-<em style="font-size: 75%">Oliver Adaoms, <strong>Matthew Wiesner</strong>, Shinji Watanabe, David Yarowsky, NAACL 2018</em></p>
+<em style="font-size: 75%">Oliver Adams, <strong>Matthew Wiesner</strong>, Shinji Watanabe, David Yarowsky, NAACL 2018</em></p>
 
 <p><a href="https://arxiv.org/abs/1810.03459">Multilingual sequence-to-sequence speech recognition:architecture, transfer learning, and language modeling</a><br />
 <em style="font-size: 75%">Jaejin Cho, Murali Karthick Baskar, Ruizhi Li, <strong>Matthew Wiesner</strong>, Sri Harish Mallidi, Nelson Yalta,Martin Karafiat, Shinji Watanabe, Takaaki Hori, SLT 2018</em></p>
