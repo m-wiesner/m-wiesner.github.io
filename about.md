@@ -77,3 +77,6 @@ McGill University, QC, CA
 <a href="https://github.com/m-wiesner/Jotto">Jotto: The Code Breaking Game</a><br />
 <a href="https://github.com/m-wiesner/BCUBED">B3 Clustering Metric</a><br />
 <a href="https://soundcloud.com/groschatorange">Music</a>
+
+<h2><a href="https://m-wiesner.github.io/m-wiesner/matthew_resume.pdf">Résumé</h2>
+
