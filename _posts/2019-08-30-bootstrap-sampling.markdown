@@ -85,7 +85,7 @@ An interesting question might be how many bootstrap samples are necessary for
 the bootstrap estimate to converge? Clearly the more bootstrap samples the
 better, but do we really need that many? Below is a plot of the bootstrap mean
 estimate as a function of the number of bootstrap samples.
-![](Bootstrap_convergence_demo.png)  
+![](/bootstrap-sampling/Bootstrap_convergence_demo.png)  
 
 It seems only a few bootstrap samples are needed to achieve a stable estimate of
 the desired statistic, but if the computation is cheap, you may as well use as
@@ -111,7 +111,7 @@ plt.legend()
 plt.title("Bootstrap Distribution of the Empirical Mean")
 plt.savefig("Bootstrap_distribution_demo.png")
 ```
-![](Bootstrap_distribution_demo.png)
+![](/bootstrap-sampling/Bootstrap_distribution_demo.png)
 
 Sure enough, we find that the bootstrap distribution encodes the uncertainty
 we'd expect when using smaller datasets. To report a confidence interval, we
