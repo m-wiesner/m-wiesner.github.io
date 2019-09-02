@@ -126,7 +126,7 @@ print("95% Confidence interval: (", np.percentile(bs_means, 2.5), ", ", np.perce
 ```
 In our case the 95% confidence interval for the 1000 sample dataset was $$(1.27195901268, 1.32081083565)$$.
 
-## Bootstrap Confidence interval in Kaldi
+## Bootstrap Confidence Interval in Kaldi
 
 For anyone using Kaldi, the bootstrap confidence interval is computed by default
 using the script `./steps/score_kaldi.sh` or the binary `compute-wer-bootci`.
