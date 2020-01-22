@@ -130,7 +130,21 @@ $$ = \frac{1}{\sum_{\pi_W} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\
 
 $$ = \frac{1}{\sum_{\pi_W} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)} \cdot \sum_{\pi_W} \nabla_{\theta} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right) $$
 
-We will again use our gradient of logarithms identity, but this time using $$x\left(\theta\right) = \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)$$.
+We will again use our gradient of logarithms identity and convert the logarithm of the product into a sum of logarithms, by using
+
+$$x\left(\theta\right) = \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)$$
+
+Since 
+
+$$ \nabla_{\theta} \log{\prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)} = \sum_{t=0}^{T-1} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)} + \nabla_{\theta} \log{p\left(s_t | s_{t-1}\right)}
+
+$$ = \sum_{t=0}^{T-1} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)}$$
+
+We have that 
+
+$$\nabla_{\theta} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right) = \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right) \cdot \sum_{t=0}^{T-1} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)}$$
+
+
 
 
 
