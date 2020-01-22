@@ -31,7 +31,7 @@ training ASR systems on GPU. I describe these modificaitons later. For now, I am
 
 ## Relationship of Maximum Mutual Information Objective to Mutual Information
 The MMI objective function is called MMI, because it can be derived from maximizing the mutual information between the input
-$$X$$, and output $$W$$ sequences. First the MMI objective function is
+$$X$$, and output $$W$$ sequences. First the MMI objective function is defined to be
 
 $$F_{MMI} = \sum_{r=1}^N \log{\frac{p_{\theta}\left(X_r | W_r\right)p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right)p\left(W\right)}}$$
 
@@ -75,7 +75,14 @@ into a maximization problem by negating the conditional entropy. This leaves us 
 ## Gradient of MMI
 One way to train the parameters of $$p_{\theta}\left(X_r | W_r\right)$$ is by gradient descent. In practice, rather than working directly with $$p_{\theta}\left(X_r | W_r\right)$$ it is easier to work with $$log{p_{\theta}\left(X_r | W_r\right)}$$.
 
-The gradient can be computed as ...
+There is also an identity using gradients of logarithms that will prove useful in this derivation ...
+
+\begin{align}
+\nabla_{\theta} \log{x\left(\theta\right\)} & = \frac{1}{x\left(\theta\right)} \cdot \nabla_{\theta} x\left(\theta\right) \\\
+\implies x\left(\theta\right) \cdot \nabla_{\theta} \log{x\left(\theta\right)} & = \nabla_{\theta} x\left(\theta\right)  
+\end{align}
+
+Equipped with this identity proceed to take the gradient ...
 
 $$\nabla_{\theta} F_{MMI} = \nabla_{\theta} \sum_{r=1}^N \log{\frac{p_{\theta}\left(X_r | W_r\right)p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right)p\left(W\right)}},$$
 
@@ -85,8 +92,14 @@ by linearity of the gradient and splitting up the log of products of distributio
 
 $$ \implies \nabla_{\theta} F_{MMI} = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \nabla_{\theta} \log{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}\right]$$
 
+$$ = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \frac{\nabla_{\theta}\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}$$
 
+$$ = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \frac{\nabla_{\theta}\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}$$
 
-Now note that $$\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} = \nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} + \nabla_{\theta} \log{p\left(W_r \right)} = \nabla_{\theta} \log{p_{\theta}\left(X_r, W_r \right)}$$ again since $$\nabla_{\theta} \log{p\left(W_r \right)} = 0$$. It happens to be simpler to derive the gradient for $$\nabla_{\theta} \log{p_{\theta}\left(X_r, W_r \right)}$$ so this is how we will proceed.
+Now note that 
+
+$$\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} = \nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} + \nabla_{\theta} \log{p\left(W_r \right)} = \nabla_{\theta} \log{p_{\theta}\left(X_r, W_r \right)}$$
+
+again since $$\nabla_{\theta} \log{p\left(W_r \right)} = 0$$. It happens to be simpler to derive the gradient for $$\nabla_{\theta} \log{p_{\theta}\left(X_r, W_r \right)}$$ so this is how we will proceed.
 
 
