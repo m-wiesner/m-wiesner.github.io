@@ -1,0 +1,68 @@
+---
+title: "Lattice Free Maximum Mutual Information (LF-MMI)"
+layout: post
+date: 2020-01-22 10:27
+image: /assets/images/markdown.jpg
+headerImage: false
+tag:
+- Statistics
+star: false
+category: blog
+author: MatthewWiesner
+description: Bootstrap Sampling Tutorial and Example
+---
+
+I'm writing this so to remember all of the details of MMI and LF-MMI. I probably missed a few things, but hopefully the main concepts are covered.
+__________________________________________________________________________
+
+The LF-MMI objective function is a particular discriminative objective function used especially in hybrid HMM-DNN ASR.
+Discriminative objective functions are of interest because they allow us to not only train models to make the correct output sequence
+more likely, but they also learn to make incorrect sequences less likely. In other words they are trained to maximize the separation
+between the correct and incorrect answers, or to discriminate between rather than simply assign high weights to the correct sequence.
+
+One such objective function is called the **Maximum Mutual Information** (MMI) objective function. It is also sometimes referred to as
+**Maximum Conditional Likelihood Estimation**. LF-MMI is essentially just the MMI objective function that has been modified to enable 
+training ASR systems on GPU. I describe these modificaitons later. For now, I am just going to describe the MMI objective function.
+
+The MMI objective function is called MMI, because it can be derived from maximizing the mutual information between the input
+$$X$$, and output $$W$$ sequences. First the MMI objective function is
+
+$$F_{MMI} = \sum{r = 1}^N \log \left(\frac{p\left(X | W\right)p\left(W\right)}{\sum_{W} p\left(X | W\right)p\left(W\right)}\right)$$
+
+This objective function can be shown to be equivalent to maximizing the mutual information over the parameter space between the input and output sequences.
+
+$$ arg\max_\theta I_\theta \left(X; W\right) = arg\max_\theta H\left(W\right) - H_\theta\left(W | X\right)$$
+
+In general since we are only trying to model the relationship between inputs and outputs, the only parameters we are able to optimize
+are those responsible for the conditional distribution $$p_\thta\left(W | X\right)$$. The distribution $$p\left(W\right)$$ is estimated
+from the trainin transcripts and is considered fixed. In the case of ASR, this simply corresponds to a language model.
+
+From this we see that the above optimization problem is equivalent to
+
+$$ arg\max_\theta H\left(W\right) - H_\theta\left(W | X\right) = arg\min_\theta H\left(W | X\right)$$
+
+Using the definition of conditional entropy we have that
+
+(1) $$H\left(W | X\right) = \mathbb{E}_{\left(X, W\right)} \[ - \log \left(p\left(W | X)\right)\right)\]$$
+
+(2) $$                    = \mathbb{E}_{\left(X, W\right)} \[ - \log \left(\frac{p\left(X | W) p\left(W\right)}{p\left(X\right)}\right)\right)\] $$
+
+(3) $$                    = \mathbb{E}_{\left(X, W\right)} \[ - \log \left(\frac{p\left(X | W) p\left(W\right)}{\sum_{W} p\left(X , W\right)}\right)\right)\] $$
+
+(4) $$                    = \mathbb{E}_{\left(X, W\right)} \[ - \log \left(\frac{p\left(X | W) p\left(W\right)}{\sum_{W} p\left(X | W\right) p\left(W\right)}\right)\right)\] $$
+
+Line (1) from above is the from the definition of conditional entropy. Line (2) uses Bayes rule to factorize the posterior distribution. Line (3)
+works by introducing a latent variable $$W$$ which we marginalize out. Line (4) simply factorizes the joint distribution $$p\left(X, W\right)$$
+into a product of the conditional and marginal distributions.
+
+Then, using the law of large numbers we note that ...
+
+$$ \mathbb{E}_{\left(X, W\right)} \[ - \log \left(\frac{p\left(X | W) p\left(W\right)}{\sum_{W} p\left(X | W\right) p\left(W\right)}\right)\right)\]  = \lim_{N \to \infty} \frac{-1}{N} \sum_{r=1}^N{\log \left(\frac{p\left(X | W) p\left(W\right)}{\sum_{W} p\left(X | W\right) p\left(W\right)}\right)\right)}$$
+
+So finally, by approximating this limit by using a finite sample size $$N$$ ...
+
+$$ \mathbb{E}_{\left(X, W\right)} \[ - \log \left(\frac{p\left(X | W) p\left(W\right)}{\sum_{W} p\left(X | W\right) p\left(W\right)}\right)\right)\]  \approx \frac{-1}{N} \sum_{r=1}^{N}{\log \left(\frac{p\left(X | W) p\left(W\right)}{\sum_{W} p\left(X | W\right) p\left(W\right)}\right)\right)}$$
+
+And we convert the minimization problem $$ arg\min_\theta H\left(W | X\right)$$ into a maximization problem by negating the entropy. This leaves us with the originally presented expression for the MMI objective function.
+
+expression for 
