@@ -128,11 +128,11 @@ $$\nabla_{\theta} \log{p_{\theta}\left(X_r, W\right)} = \nabla_{\theta} \log{\su
 
 $$ = \frac{1}{\sum_{\pi_W} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)} \cdot \nabla_{\theta} \sum_{\pi_W} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right) $$
 
-$$ = \frac{1}{\sum_{\pi_W} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)} \cdot \sum_{\pi_W} \nabla_{\theta} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right) $$
+$$ = \frac{1}{\sum_{\pi_W} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)} \cdot \sum_{\pi_W} \nabla_{\theta} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right) \tag{1} $$
 
 We will again use our gradient of logarithms identity and convert the logarithm of the product into a sum of logarithms, by using
 
-$$x\left(\theta\right) = \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)$$
+$$x_W\left(\theta\right) = \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)$$.
 
 Since 
 
@@ -142,9 +142,15 @@ $$ = \sum_{t=0}^{T-1} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)}$$
 
 We have that 
 
-$$\nabla_{\theta} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right) = \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right) \cdot \sum_{t=0}^{T-1} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)}$$
+$$\nabla_{\theta} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right) = \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right) \cdot \sum_{t=0}^{T-1} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)}$$
 
+We also note that $$ \sum_{\pi_W} x_W\left(\theta\right) \sum_{t=0}^{T-1} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)} = \sum_{\pi_W} \sum_{t=0}^{T-1} x_W\left(\theta\right) \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)} $$
 
+$$ = \sum_{t=0}^{T-1} \sum_{\pi_W} \log{p_{\theta}\left(x_t | s_t\right)} x_W\left(\theta\right)$$
+
+Substituting this into (1), we have 
+
+$$ \nabla_{\theta} \log{p_{\theta}\left(X_r, W\right)} = \frac{1}{\sum_{\pi_W} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)} \sum_{t=0}^{T-1} \sum_{\pi_W} \log{p_{\theta}\left(x_t | s_t\right)} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)$$
 
 
 
