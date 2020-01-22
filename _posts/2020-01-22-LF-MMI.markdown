@@ -82,7 +82,7 @@ There is also an identity using gradients of logarithms that will prove useful i
 \implies x\left(\theta\right) \cdot \nabla_{\theta} \log{x\left(\theta\right)} & = \nabla_{\theta} \ x\left(\theta\right)  
 \end{align}
 
-Equipped with this identity proceed to take the gradient ...
+Equipped with this identity I proceed to take the gradient ...
 
 $$\nabla_{\theta} F_{MMI} = \nabla_{\theta} \sum_{r=1}^N \log{\frac{p_{\theta}\left(X_r | W_r\right)p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right)p\left(W\right)}},$$
 
