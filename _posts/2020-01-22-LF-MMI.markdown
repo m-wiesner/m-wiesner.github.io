@@ -103,7 +103,8 @@ Now using our identity regarding gradients of logarithms, we see that
 $$\nabla_{\theta} p_{\theta}\left(X_r | W \right) = p_{\theta}\left(X_r | W \right) \nabla_{\theta} \log{p_{\theta}\left(X_r | W \right)}$$
 
 Making this substituion we have finally ...
-
-`$$\nabla_{\theta} F_{MMI} = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \frac{\sum_{W} p\left(W \right) p_{\theta}\left(X_r | W \right) \nabla_{\theta} \log{p_{\theta}\left(X_r | W \right)}}{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}\right]$$`
+---
+$$\nabla_{\theta} F_{MMI} = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \frac{\sum_{W} p\left(W \right) p_{\theta}\left(X_r | W \right) \nabla_{\theta} \log{p_{\theta}\left(X_r | W \right)}}{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}\right]$$
+---
 
 
