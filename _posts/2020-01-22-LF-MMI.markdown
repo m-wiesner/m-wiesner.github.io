@@ -79,10 +79,14 @@ The gradient can be computed as ...
 
 $$\nabla_{\theta} F_{MMI} = \nabla_{\theta} \sum_{r=1}^N \log{\frac{p_{\theta}\left(X_r | W_r\right)p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right)p\left(W\right)}},$$
 
-$$ = \sum_{r=1}^N \nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} + \nabla_{\theta} \log{p\left(W_r\right)} - \nabla_{\theta} \log{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}$$
+$$ = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} + \nabla_{\theta} \log{p\left(W_r\right)} - \nabla_{\theta} \log{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}\right]$$
 
 by linearity of the gradient and splitting up the log of products of distributions into a sum of log distributions. Since $$p\left(W_r\right)$$ is constant with respect to $$\theta$$, this term goes to $$0$$.
 
-$$ \implies \nabla_{\theta} F_{MMI} = \sum_{r=1}^N \nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \nabla_{\theta} \log{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}$$
+$$ \implies \nabla_{\theta} F_{MMI} = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \nabla_{\theta} \log{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}\right]$$
+
+
+
+Now note that $$\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} = \nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} + \nabla_{\theta} \log{p\left(W_r \right)} = \nabla_{\theta} \log{p_{\theta}\left(X_r, W_r \right)}$$ again since $$\nabla_{\theta} \log{p\left(W_r \right)} = 0$$. It happens to be simpler to derive the gradient for $$\nabla_{\theta} \log{p_{\theta}\left(X_r, W_r \right)}$$ so this is how we will proceed.
 
 
