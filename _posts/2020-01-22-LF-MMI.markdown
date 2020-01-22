@@ -132,7 +132,8 @@ $$ = \frac{1}{\sum_{\pi_W} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\
 
 We will again use our gradient of logarithms identity and convert the logarithm of the product into a sum of logarithms, by using
 
-$$x_W\left(\theta\right) = \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)$$.
+$$x_W\left(\theta\right) = \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t \right) p\left(s_t | s_{t-1} \right)$$
+.
 
 Since 
 
