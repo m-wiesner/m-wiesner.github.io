@@ -29,7 +29,7 @@ training ASR systems on GPU. I describe these modificaitons later. For now, I am
 The MMI objective function is called MMI, because it can be derived from maximizing the mutual information between the input
 $$X$$, and output $$W$$ sequences. First the MMI objective function is
 
-$$F_{MMI} = \sum_{r=1}^N \log \left(\frac{p_{\theta}\left(X_r | W_r\right)p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right)p\left(W\right)}\right)$$
+$$F_{MMI} = \sum_{r=1}^N \log{\frac{p_{\theta}\left(X_r | W_r\right)p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right)p\left(W\right)}}$$
 
 In this function, $$r$$ indexes the training examples (utterances or short chunks of audio), $$X_r$$ are the audio features corresponding to chunk $$r$$, and $$W_r$$ is the reference transcript. Probability density functions (PDFs) subscripted by $$\theta$$ are those parameterized with learnable parameters $$\theta$$. This objective function can be shown to be equivalent to maximizing the mutual information over the parameter space between the input and output sequences.
 
@@ -46,9 +46,9 @@ $$ arg\max_\theta H\left(W_r\right) - H_\theta\left(W_r | X_r\right) = arg\min_\
 Using the definition of conditional entropy we have that
 
 \begin{align}
-\mbox{ (1)   } H_{\theta}\left(W_r | X_r\right) &=& E_{p\left(X_r, W_r\right)} \left[ - \log \left(p_{\theta}\left(W_r | X_r\right)\right)\right] \\\
-\mbox{ (2)   } &=& E_{p\left(X_r, W_r\right)} \left[ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{p\left(X_r\right)}\right)\right] \\\
-\mbox{ (3)   } &=& E_{p\left(X_r, W_r\right)} \left[ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}\right)\right] 
+\mbox{ (1)   } H_{\theta}\left(W_r | X_r\right) &=& E_{p\left(X_r, W_r\right)} \left[ - \log{p_{\theta}\left(W_r | X_r\right)}\right] \\\
+\mbox{ (2)   } &=& E_{p\left(X_r, W_r\right)} \left[ - \log{\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{p\left(X_r\right)}}\right] \\\
+\mbox{ (3)   } &=& E_{p\left(X_r, W_r\right)} \left[ - \log{\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}}\right] 
 \end{align}
 
 Line (1) from above is the from the definition of conditional entropy. Line (2) uses Bayes rule to factorize the posterior distribution.  Line (4) simply factorizes the joint distribution $$p_{\theta}\left(X, W\right)$$
@@ -56,11 +56,11 @@ into a product of the conditional and marginal distributions.
 
 Then, using the law of large numbers we note that ...
 
-$$ E_{p\left(X_r, W_r\right)} \left[ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}\right)\right]  = \lim_{N \to \infty} \frac{-1}{N} \sum_{r=1}^N\log\left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}\right)$$
+$$ E_{p\left(X_r, W_r\right)} \left[ - \log{\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}}\right]  = \lim_{N \to \infty} \frac{-1}{N} \sum_{r=1}^N\log{\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}}$$
 
 So finally, by approximating this limit by using a finite sample size $$N$$ ...
 
-$$ E_{p\left(X_r, W_r\right)} \left[ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}\right)\right] \simeq \frac{-1}{N} \sum_{r=1}^{N}\log\left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}\right)$$
+$$ E_{p\left(X_r, W_r\right)} \left[ - \log{\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}}\right] \simeq \frac{-1}{N} \sum_{r=1}^{N}\log{\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}}$$
 
 And we convert the minimization problem
 
@@ -69,18 +69,16 @@ $$arg\min_{\theta} H_{\theta}\left(W_r | X_r\right) $$
 into a maximization problem by negating the conditional entropy. This leaves us with the originally presented expression for the MMI objective function.
 
 ## Gradient of MMI
-One way to train the parameters of $$p_{\theta}\left(X_r | W_r\right)$$ is by gradient descent. In practice, rather than working directly with $$p_{\theta}\left(X_r | W_r\right)$$ it is easier to work with $$log \left(p_{\theta}\left(X_r | W_r\right)\right)$$.
+One way to train the parameters of $$p_{\theta}\left(X_r | W_r\right)$$ is by gradient descent. In practice, rather than working directly with $$p_{\theta}\left(X_r | W_r\right)$$ it is easier to work with $$log{p_{\theta}\left(X_r | W_r\right)}$$.
 
 The gradient can be computed as ...
 
-$$\nabla_{\theta} F_{MMI} = \nabla_{\theta} \sum_{r=1}^N \log \left(\frac{p_{\theta}\left(X_r | W_r\right)p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right)p\left(W\right)}\right),$$
+$$\nabla_{\theta} F_{MMI} = \nabla_{\theta} \sum_{r=1}^N \log{\frac{p_{\theta}\left(X_r | W_r\right)p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right)p\left(W\right)}},$$
 
-$$ = \sum_{r=1}^N \nabla_{\theta} \log \left(\frac{p_{\theta}\left(X_r | W_r\right)p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right)p\left(W\right)}\right)$$
+$$ = \sum_{r=1}^N \nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} + \nabla_{\theta} \log{p\left(W_r\right)} - \nabla_{\thet    a} \log{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}$$
 
-by linearity of the gradient,
+by linearity of the gradient and splitting up the log of products of distributions into a sum of log distributions. Since $$p\left(W_r\right\)$$ is constant with respect to $$\theta$$, this term goes to $$0$$.
 
-$$ = \sum_{r=1}^N \nabla_{\theta} \log \left(p_{\theta}\left(X_r | W_r\right)\right) + \nabla_{\theta} log \left(p\left(W_r\right)- \nabla_{\theta} log \left(\sum_{W} p_{\theta}\left(X_r | W\right)p\left(W\right)}\right)
-$$
-
+$$ \implies \nabla_{\theta} F_{MMI} = \sum_{r=1}^N \nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \nabla_{\theta} \log{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}$$
 
 
