@@ -12,13 +12,14 @@ author: MatthewWiesner
 description: Bootstrap Sampling Tutorial and Example
 ---
 
-I'm writing this so to remember all of the details of MMI and LF-MMI. I probably missed a few things, but hopefully the main concepts are covered.
+I'm writing this to remember all of the details of MMI and LF-MMI. I probably missed a few things, but hopefully the main concepts are covered.
+
 __________________________________________________________________________
 
 The LF-MMI objective function is a particular discriminative objective function used especially in hybrid HMM-DNN ASR.
-Discriminative objective functions are of interest because they allow us to not only train models to make the correct output sequence
+Discriminative objective functions are of interest because they allow us not only to train models to make the correct output sequence
 more likely, but they also learn to make incorrect sequences less likely. In other words they are trained to maximize the separation
-between the correct and incorrect answers, or to discriminate between rather than simply assign high weights to the correct sequence.
+between the correct and incorrect answers, or to discriminate between correct and incorrect answers rather than simply assign high weights to the correct sequences.
 
 One such objective function is called the **Maximum Mutual Information** (MMI) objective function. It is also sometimes referred to as
 **Maximum Conditional Likelihood Estimation**. LF-MMI is essentially just the MMI objective function that has been modified to enable 
@@ -27,7 +28,7 @@ training ASR systems on GPU. I describe these modificaitons later. For now, I am
 The MMI objective function is called MMI, because it can be derived from maximizing the mutual information between the input
 $$X$$, and output $$W$$ sequences. First the MMI objective function is
 
-$$F_{MMI} = \sum{r = 1}^N \log \left(\frac{p\left(X | W\right)p\left(W\right)}{\sum_{W} p\left(X | W\right)p\left(W\right)}\right)$$
+$$F_{MMI} = \sum_{r=1}^N \log \left(\frac{p\left(X | W\right)p\left(W\right)}{\sum_{W} p\left(X | W\right)p\left(W\right)}\right)$$
 
 This objective function can be shown to be equivalent to maximizing the mutual information over the parameter space between the input and output sequences.
 
