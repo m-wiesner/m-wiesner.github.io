@@ -108,7 +108,7 @@ Making this substituion we have finally ...
 \nabla_{\theta} F_{MMI} = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \frac{\sum_{W} p\left(W \right) p_{\theta}\left(X_r | W \right) \nabla_{\theta} \log{p_{\theta}\left(X_r | W \right)}}{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}\right]
 \boxed
 
-## Gradient of $$\log{p_{\theta}\left(X_r | W \right)}$$
+## Gradient of $$\textbf{\log{p_{\theta}\left(X_r | W \right)}}$$
 We now must discuss how we have parameterized $$p_{\theta}\left(X_r | W \right)$$. First, note that 
 
 $$\nabla_{\theta} \log{p_{\theta}\left(X_r | W \right)} = \nabla_{\theta} \log{p_{\theta}\left(X_r | W \right)} + \nabla_{\theta} \log{p\left(W \right)} = \nabla_{\theta} \log{p_{\theta}\left(X_r, W \right)}$$
