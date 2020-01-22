@@ -44,7 +44,7 @@ $$ arg\max_\theta H\left(W_r\right) - H_\theta\left(W_r | X_r\right) = arg\min_\
 
 Using the definition of conditional entropy we have that
 
-(1) $$ H_{\theta}\left(W_r | X_r\right) $$
+$$ (1) H_{\theta}\left(W_r | X_r\right) $$
 
 $$= E_{p\left(X_r, W_r\right)} \[ - \log \left(p_{\theta}\left(W_r | X_r\right)\right)\]$$
 
