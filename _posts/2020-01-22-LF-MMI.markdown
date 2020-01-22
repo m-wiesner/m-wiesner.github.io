@@ -44,24 +44,25 @@ $$ arg\max_\theta H\left(W_r\right) - H_\theta\left(W_r | X_r\right) = arg\min_\
 
 Using the definition of conditional entropy we have that
 
-$
+$$
 \begin{align}
 \mbox{ (1)   } & H_{\theta}\left(W_r | X_r\right) =& E_{p\left(X_r, W_r\right)} \left[ - \log \left(p_{\theta}\left(W_r | X_r\right)\right)\right] \\\
 \mbox{ (2)   } & =& E_{p\left(X_r, W_r\right)} \left[ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{p\left(X_r\right)}\right)\right] \\\
 \mbox{ (3)   } & =& E_{p\left(X_r, W_r\right)} \left[ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r , W\right)}\right)\right] \\\
 \mbox{ (4)   } & =& E_{p\left(X_r, W_r\right)} \left[ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}\right)\right] 
 \end{align}
-$
+$$
+
 Line (1) from above is the from the definition of conditional entropy. Line (2) uses Bayes rule to factorize the posterior distribution. Line (3)
 works by introducing a latent variable $$W$$ which we marginalize out. Line (4) simply factorizes the joint distribution $$p_{\theta}\left(X, W\right)$$
 into a product of the conditional and marginal distributions.
 
 Then, using the law of large numbers we note that ...
 
-$$ E_{p\left(X_r, W_r\right)} \left[ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}\right)\right]  = \lim_{N \to \infty} \frac{-1}{N} \sum_{r=1}^N{\log \left(\frac{p_{\theta}\left(X_r | W_r) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}\right)}$$
+$$ E_{p\left(X_r, W_r\right)} \left[ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}\right)\right]  = \lim_{N \to \infty} \frac{-1}{N} \sum_{r=1}^N\log\left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}\right)$$
 
 So finally, by approximating this limit by using a finite sample size $$N$$ ...
 
-$$ E_{p\left(X_r, W_r\right)} \left[ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}\right)\right] \simeq \frac{-1}{N} \sum_{r=1}^{N}{\log \left(\frac{p_{\theta}\left(X_r | W_r) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}\right)}$$
+$$ E_{p\left(X_r, W_r\right)} \left[ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}\right)\right] \simeq \frac{-1}{N} \sum_{r=1}^{N}\log\left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}\right)$$
 
 And we convert the minimization problem $$ arg\min_\theta H_{\theta}\left(W_r | X_r\right)$$ into a maximization problem by negating the conditional entropy. This leaves us with the originally presented expression for the MMI objective function.
