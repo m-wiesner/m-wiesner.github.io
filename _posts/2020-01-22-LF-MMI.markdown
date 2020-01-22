@@ -35,7 +35,7 @@ This objective function can be shown to be equivalent to maximizing the mutual i
 $$ arg\max_\theta I_\theta \left(X_r; W_r\right) = arg\max_\theta H\left(W_r\right) - H_\theta\left(W_r | X_r\right)$$
 
 In general since we are only trying to model the relationship between inputs and outputs, the only parameters we are able to optimize
-are those responsible for the conditional distribution $$p_\thta\left(W | X\right)$$. The distribution $$p\left(W\right)$$ is estimated
+are those responsible for the conditional distribution $$p_\theta\left(W | X\right)$$. The distribution $$p\left(W\right)$$ is estimated
 from the trainin transcripts and is considered fixed. In the case of ASR, this simply corresponds to a language model.
 
 From this we see that the above optimization problem is equivalent to
