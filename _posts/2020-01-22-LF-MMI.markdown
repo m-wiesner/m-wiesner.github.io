@@ -73,7 +73,7 @@ $$arg\min_{\theta} H_{\theta}\left(W_r | X_r\right) $$
 into a maximization problem by negating the conditional entropy and dropping the constant $$N$$ which is just a scaling factor and won't change the optimal parameter values. This leaves us with the originally presented expression for the MMI objective function.
 
 ## Gradient of MMI
-One way to train the parameters of $$p_{\theta}\left(X_r | W_r\right)$$ is by gradient descent. In practice, rather than working directly with $$p_{\theta}\left(X_r | W_r\right)$$ it is easier to work with $$log{p_{\theta}\left(X_r | W_r\right)}$$.
+One way to train the parameters of $$p_{\theta}\left(X_r | W_r\right)$$ is by gradient descent. In practice, rather than working directly with $$p_{\theta}\left(X_r | W_r\right)$$ it is easier to work with $$\log{p_{\theta}\left(X_r | W_r\right)}$$.
 
 There is also an identity using gradients of logarithms that will prove useful in this derivation ...
 
