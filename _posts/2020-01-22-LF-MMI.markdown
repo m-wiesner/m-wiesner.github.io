@@ -144,13 +144,19 @@ We have that
 
 $$\nabla_{\theta} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right) = \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right) \cdot \sum_{t=0}^{T-1} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)}$$
 
-We also note that $$ \sum_{\pi_W} x_W\left(\theta\right) \sum_{t=0}^{T-1} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)} = \sum_{\pi_W} \sum_{t=0}^{T-1} x_W\left(\theta\right) \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)} $$
+We also note that 
 
-$$ = \sum_{t=0}^{T-1} \sum_{\pi_W} \log{p_{\theta}\left(x_t | s_t\right)} x_W\left(\theta\right)$$
+$$ \sum_{\pi_W} x_W\left(\theta\right) \sum_{t=0}^{T-1} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)} = \sum_{\pi_W} \sum_{t=0}^{T-1} x_W\left(\theta\right) \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t \right)} $$
+
+$$ = \sum_{t=0}^{T-1} \sum_{\pi_W} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)} x_W\left(\theta\right)$$
 
 Substituting this into (1), we have 
 
 $$ \nabla_{\theta} \log{p_{\theta}\left(X_r, W\right)} = \frac{1}{\sum_{\pi_W} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)} \sum_{t=0}^{T-1} \sum_{\pi_W} \log{p_{\theta}\left(x_t | s_t\right)} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)$$
+
+Finally pulling the denominator inside the first summation we have ...
+$$ \nabla_{\theta} \log{p_{\theta}\left(X_r, W\right)} = \sum_{t=0}^{T-1} \frac{\sum_{\pi_W} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)}{\sum_{\pi_W} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)}$$
+
 
 
 
