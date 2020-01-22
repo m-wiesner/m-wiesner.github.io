@@ -136,7 +136,7 @@ $$x\left(\theta\right) = \prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\le
 
 Since 
 
-$$ \nabla_{\theta} \log{\prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)} = \sum_{t=0}^{T-1} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)} + \nabla_{\theta} \log{p\left(s_t | s_{t-1}\right)}
+$$\nabla_{\theta} \log{\prod_{t=0}^{T-1} p_{\theta}\left(x_t | s_t\right) p\left(s_t | s_{t-1}\right)} = \sum_{t=0}^{T-1} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)} + \nabla_{\theta} \log{p\left(s_t | s_{t-1}\right)}$$
 
 $$ = \sum_{t=0}^{T-1} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)}$$
 
