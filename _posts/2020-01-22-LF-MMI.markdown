@@ -70,7 +70,7 @@ And we convert the minimization problem
 
 $$arg\min_{\theta} H_{\theta}\left(W_r | X_r\right) $$
 
-into a maximization problem by negating the conditional entropy. This leaves us with the originally presented expression for the MMI objective function.
+into a maximization problem by negating the conditional entropy and dropping the constant $$N$$ which is just a scaling factor and won't change the optimal parameter values. This leaves us with the originally presented expression for the MMI objective function.
 
 ## Gradient of MMI
 One way to train the parameters of $$p_{\theta}\left(X_r | W_r\right)$$ is by gradient descent. In practice, rather than working directly with $$p_{\theta}\left(X_r | W_r\right)$$ it is easier to work with $$log{p_{\theta}\left(X_r | W_r\right)}$$.
@@ -78,8 +78,8 @@ One way to train the parameters of $$p_{\theta}\left(X_r | W_r\right)$$ is by gr
 There is also an identity using gradients of logarithms that will prove useful in this derivation ...
 
 \begin{align}
-\nabla_{\theta} \log{x\left(\theta\right\)} & = \frac{1}{x\left(\theta\right)} \cdot \nabla_{\theta} x\left(\theta\right) \\\
-\implies x\left(\theta\right) \cdot \nabla_{\theta} \log{x\left(\theta\right)} & = \nabla_{\theta} x\left(\theta\right)  
+\nabla_{\theta} \log{x\left(\theta\right\)} & = \frac{1}{x\left(\theta\right)} \cdot \nabla_{\theta} \ x\left(\theta\right) \\\
+\implies x\left(\theta\right) \cdot \nabla_{\theta} \log{x\left(\theta\right)} & = \nabla_{\theta} \ x\left(\theta\right)  
 \end{align}
 
 Equipped with this identity proceed to take the gradient ...
@@ -92,9 +92,9 @@ by linearity of the gradient and splitting up the log of products of distributio
 
 $$ \implies \nabla_{\theta} F_{MMI} = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \nabla_{\theta} \log{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}\right]$$
 
-$$ = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \frac{\nabla_{\theta}\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}$$
+$$ = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \frac{\nabla_{\theta}\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}\right]$$
 
-$$ = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \frac{\nabla_{\theta}\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}$$
+$$ = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \frac{\nabla_{\theta}\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}\right]$$
 
 Now note that 
 
