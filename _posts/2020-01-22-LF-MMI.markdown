@@ -30,7 +30,7 @@ $$X$$, and output $$W$$ sequences. First the MMI objective function is
 
 $$F_{MMI} = \sum_{r=1}^N \log \left(\frac{p_{\theta}\left(X_r | W_r\right)p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right)p\left(W\right)}\right)$$
 
-In this function, $r$ indexes the training examples (utterances or short chunks of audio), $$X_r$$ are the audio features corresponding to chunk $r$, and $$W_r$$ is the reference transcript. Probability density functions (PDFs) subscripted by $$\theta$$ are those parameterized with learning parameters $$\theta$$. This objective function can be shown to be equivalent to maximizing the mutual information over the parameter space between the input and output sequences.
+In this function, $$r$$ indexes the training examples (utterances or short chunks of audio), $$X_r$$ are the audio features corresponding to chunk $$r$$, and $$W_r$$ is the reference transcript. Probability density functions (PDFs) subscripted by $$\theta$$ are those parameterized with learning parameters $$\theta$$. This objective function can be shown to be equivalent to maximizing the mutual information over the parameter space between the input and output sequences.
 
 $$ arg\max_\theta I_\theta \left(X_r; W_r\right) = arg\max_\theta H\left(W_r\right) - H_\theta\left(W_r | X_r\right)$$
 
