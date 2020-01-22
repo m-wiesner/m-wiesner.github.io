@@ -16,15 +16,6 @@ I'm writing this post to remind myself how bootstrap sampling works. There are
 no proofs, only intuition, some quick experiments, and some comments.
 
 __________________________________________________________________________
-I have often wondered by we don't include some sort of confidence estimates
-with results in ASR papers. People rarely train systems with multiple
-random seeds even if everyone probably knows this would be best. Most of the
-data sets on which papers report findings are well-curated and are fairly large,
-which at least ensures that reported improvements are relatively
-trustworthy. Sometimes though, we find ourselves working with very small
-datasets, especially development sets, on which we base system design decisions.
-Does it really make sense to use that one method that gave a 0.2% improvement on
-the development set when it is only < 1h of speech?
 
 One way to gauge the certainty of a reported result is to provide confidence
 estimates. This is something that bootstrap sampling can be used for, even
