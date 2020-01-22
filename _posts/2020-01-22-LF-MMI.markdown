@@ -5,11 +5,11 @@ date: 2020-01-22 10:27
 image: /assets/images/markdown.jpg
 headerImage: false
 tag:
-- Statistics
+- Machine Learning
 star: false
 category: blog
 author: MatthewWiesner
-description: Bootstrap Sampling Tutorial and Example
+description: Everything about LF-MMI
 ---
 
 I'm writing this to remember all of the details of MMI and LF-MMI. I probably missed a few things, but hopefully the main concepts are covered.
@@ -45,13 +45,9 @@ $$ arg\max_\theta H\left(W_r\right) - H_\theta\left(W_r | X_r\right) = arg\min_\
 Using the definition of conditional entropy we have that
 
 \begin{align}
-\mbox{ (1)   } H_{\theta}\left(W_r | X_r\right) & = E_{p\left(X_r, W_r\right)} [ - \log \left(p_{\theta}\left(W_r | X_r\right)\right)] \\\
-\mbox{ (2)   } & = E_{p\left(X_r, W_r\right)} [ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{p\left(X_r\right)}\right)] 
-\end{align}
-
-(2) $$                    = E_{p\left(X_r, W_r\right)} \[ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{p\left(X_r\right)}\right)\] $$
-
-(3) $$                    = E_{p\left(X_r, W_r\right)} \[ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W\right)}{\sum_{W} p_{\theta}\left(X , W\right)}\right)\] $$
+& \mbox{ (1)   } H_{\theta}\left(W_r | X_r\right) & = E_{p\left(X_r, W_r\right)} [ - \log \left(p_{\theta}\left(W_r | X_r\right)\right)] \\\
+& \mbox{ (2)   } & = E_{p\left(X_r, W_r\right)} [ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{p\left(X_r\right)}\right)] \\\
+& \mbox{ (3)   } & = E_{p\left(X_r, W_r\right)} [ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X , W\right)}\right)] $$
 
 (4) $$                    = E_{p\left(X_r, W_r\right)} \[ - \log \left(\frac{p_{\theta}\left(X_r | W_r\right) p\left(W\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}\right)\] $$
 
