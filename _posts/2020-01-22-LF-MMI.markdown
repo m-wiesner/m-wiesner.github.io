@@ -79,7 +79,7 @@ The gradient can be computed as ...
 
 $$\nabla_{\theta} F_{MMI} = \nabla_{\theta} \sum_{r=1}^N \log{\frac{p_{\theta}\left(X_r | W_r\right)p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right)p\left(W\right)}},$$
 
-$$ = \sum_{r=1}^N \nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} + \nabla_{\theta} \log{p\left(W_r\right)} - \nabla_{\thet    a} \log{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}$$
+$$ = \sum_{r=1}^N \nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} + \nabla_{\theta} \log{p\left(W_r\right)} - \nabla_{\theta} \log{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}$$
 
 by linearity of the gradient and splitting up the log of products of distributions into a sum of log distributions. Since $$p\left(W_r\right\)$$ is constant with respect to $$\theta$$, this term goes to $$0$$.
 
