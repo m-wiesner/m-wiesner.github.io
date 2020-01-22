@@ -96,10 +96,14 @@ $$ = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} 
 
 $$ = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \frac{\nabla_{\theta}\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}\right]$$
 
-Now note that 
+$$ = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \frac{\sum_{W} p\left(W \right) \nabla_{\theta} p_{\theta}\left(X_r | W \right)}{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}\right]$$
 
-$$\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} = \nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} + \nabla_{\theta} \log{p\left(W_r \right)} = \nabla_{\theta} \log{p_{\theta}\left(X_r, W_r \right)}$$
+Now using our identity regarding gradients of logarithms, we see that 
 
-again since $$\nabla_{\theta} \log{p\left(W_r \right)} = 0$$. It happens to be simpler to derive the gradient for $$\nabla_{\theta} \log{p_{\theta}\left(X_r, W_r \right)}$$ so this is how we will proceed.
+$$\nabla_{\theta} p_{\theta}\left(X_r | W \right) = p_{\theta}\left(X_r | W \right) \nabla_{\theta} \log{p_{\theta}\left(X_r | W \right)}$$
+
+Making this substituion we have finally ...
+
+$$\nabla_{\theta} F_{MMI} = \sum_{r=1}^N \left[\nabla_{\theta} \log{p_{\theta}\left(X_r | W_r \right)} - \frac{\sum_{W} p\left(W \right) p_{\theta}\left(X_r | W \right) \nabla_{\theta} \log{p_{\theta}\left(X_r | W \right)}}{\sum_{W} p_{\theta}\left(X_r | W \right) p\left(W \right)}\right]$$
 
 
