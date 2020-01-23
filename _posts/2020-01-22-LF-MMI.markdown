@@ -12,7 +12,7 @@ author: MatthewWiesner
 description: Everything about LF-MMI
 ---
 
-I'm writing this to remember all of the details of MMI and LF-MMI. I probably missed a few things, but hopefully the main concepts are covered. If you are reading this and you already know what MMI is and you are just looking for the details of LF-MMI, skip to the LF-MMI section.
+I'm writing this to remember all of the details of MMI and LF-MMI, especially the gradient computation that I worked through with [Desh Raj's page]. I probably missed a few things, but hopefully the main concepts are covered. If you are reading this and you already know what MMI is and you are just looking for the details of LF-MMI, skip to the LF-MMI section.
 
 tldr;
 
@@ -169,7 +169,6 @@ Substituting in these quantities we have ...
 \begin{align}
 \nabla_{\theta} \log{p_{\theta}\left(X_r, W\right)} &= \sum_{t=0}^{T-1} \sum_{\pi_W} p_{\theta}\left(\pi_W | X_r\right) \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)} \\\
 &= \sum_{\pi_W} \sum_{t=0}^{T-1} p_{\theta}\left(\pi_W | X_r\right) \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)}
-&= \sum_{s} \sum_{
 \end{align}
 
 Clearly summing over all sequences is not computationally feasible (exponential computational complexity). Instead we use the computationally efficient forward and backward algorithms to compute
