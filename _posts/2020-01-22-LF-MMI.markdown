@@ -161,13 +161,15 @@ First, enumerating the sapce of all possible word sequences is impossible. Inste
 
 ---
 
-\<s> my name is Matthew \</s>, \<s> Matthew is my name \</s>, \<s> is my name Matthew \</s>, \<s> is Matthew my name \</s>
+\<s> my name is Matthew \</s>,
+\<s> Matthew is my name \</s>,
+\<s> is my name Matthew \</s>,
+\<s> is Matthew my name \</s>
 
 ---
 
 I could train a bigram language model from which I should hopefully be able to generate the these word sequences.
 
----
 
 Given word "\<s>"
 ---
@@ -216,3 +218,30 @@ It is now clear how to generate the graph that encodes all possible word sequenc
 
 Even this graph may be too big to use in training, especially if higher order n-gram models are used. The main contribution of LF-MMI is how it approximates this graph in order to make the computation feasible and the graph of a manageable size.
 
+## LF-MMI
+
+In order to make this graph of a manageable size, the following ideas are introduce:
+1. The denominator graph uses a 4-gram phone language model instead of a word level language model. The space of phones is much smaller than the space of all words. Furthermore, the language model is not smoothed as this introduces many back-off states and edges which increases the size of the denominator graph.
+
+2. The HMM topology used is the one state topology described above (as opposed to the 3-state topology). Again this makes the denominator graph smaller, and speeds up the forward / backward computation.
+
+3. The DNN ooutput frame rate is also reduced from 1 frame/10ms to 1 frame/30ms for the same reasons.
+
+### Training with chunks
+In order to train on chunks that are smaller than a whole utterance, there are a number of other necessary changes as well.
+
+1. The utterance level HMMs, represented as finite state transducers (FSTs). A separate FST acceptor is constructed that enforces a chunk of audio to be roughly aligned with the single best state sequence. The FST is created by having 1 node per time step. Between each node are a set of edges representing the set of state-ids that are allowable at this time step. This set is constructed from looking at a user specified window around the single best path and allowing any of the pdfids in this window to be accepted at the specific time. By composing this FST with the utterance level HMM, we get back a lattice representing the set of all probable alignments of the audio to the HMM states. Alternate paths in the resulting lattice therefore correspond to alternative pronunciations or alternative alignments of the audio. In this way, each state in the lattice is associated with a particular time index, which allows us to chop the utterance level lattices into chunks.
+
+2. The denominator graph is created using a language model trained on full utterances. Since we are using chunks of audio, this means we could be both starting and ending in the middle of an utterance. Clearly, the initial and final probabilities of the initial denominator graph would be wrong if that were the case. To compensate for this we use modified initial and final probabilities. The final probability at every state is set to 1. This lets the utterance end at any arbitrary HMM state (not just at the end of the utterance). New initial probabilities are computed by creating the first 100 steps of the FST trellis. The state occupancy probabilities are averaged across all 100 steps. We use this average as our new initial probabilities for each state. This modified denominator graph is called the normalization fst.
+
+3. Finally, since the numerator and denominator graphs are created in different ways, we need to ensure that the set of paths in the numerator graph is a subset of those in the denominator graph. We do this by composing the numerator graph with the normalization fst. To avoid double counting the transition probabilities, they are actually omitted in the original numerator graph.
+
+### Regularization
+
+The LF-MMI objective was observed to overfit. 3 methods of regularizing the network are used to prevent overfitting.
+
+1. Multitask training with the cross-entropy objective. The forward probabilities at each time step in the numerator graph are used as soft targets instead of the usual hard targets.
+
+2. L-2 regularization on the network outputs. In otherwords, the network is trained using the objective.
+
+$$F_{LF-MMI} = F_MMI + \lambda \norm{y_s^t}_2^2 + \omega F_{x-ent}$$  
