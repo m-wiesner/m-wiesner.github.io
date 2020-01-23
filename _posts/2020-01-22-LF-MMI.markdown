@@ -132,8 +132,8 @@ The second term in our expression can be decomposed in the same way as the first
 Our expression for the gradient then becomes ...
 
 \begin{align}
-\frac{\delta F_{MMI}}{\delta y_s^{\tau}} &= \sum_{r} \left[ \frac{\alpha_r\left(s, \tau\right( \beta_r\left(s, \tau\right)}{\sum_{\sigma} \alpha_{r}\left(\sigma,\tau\right) \beta_{r}\left(\sigma, \tau\right)}  - \frac{alpha_{w^*}\left(s,\tau\right) \beta_{w^*}\left(s, \tau\right)}{\sum_{\sigma^\prime} \alpha_{w^*}\left(\sigma^\prime,\tau\right) \beta_{w^*}\left(\sigma^\prime, \tau\right)}\right] \\\
-&= \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^*}\left(s, \tau\right)\right]
+\frac{\delta F_{MMI}}{\delta y_s^{\tau}} &= \sum_{r} \left[ \frac{\alpha_r\left(s, \tau\right( \beta_r\left(s, \tau\right)}{\sum_{\sigma} \alpha_{r}\left(\sigma,\tau\right) \beta_{r}\left(\sigma, \tau\right)}  - \frac{\alpha_{w^*}\left(s,\tau\right) \beta_{w^*}\left(s, \tau\right)}{\sum_{\sigma^\prime} \alpha_{w^*}\left(\sigma^\prime,\tau\right) \beta_{w^*}\left(\sigma^\prime, \tau\right)}\right] \\\
+&= \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^*}\left(s, \tau\right)\right] \\\
 &\implies \delta F_{MMI} = \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^*}\left(s, \tau\right)\right] \delta y_s^{\tau}
 \end{align}
 
@@ -151,10 +151,11 @@ $$\alpha_{r}\left(s, t\right), \beta_{r}\left(s, t\right), \alpha_{w^{*}}\left(s
 
 5. Compute the gradient according to 
 
-$$ \delta F_{MMI} = \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^*}\left(s, \tau\right)\right] \delta y_s^{\tau} $$
+$$ \frac{\delta F_{MMI}}{\delta \theta} = \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^*}\left(s, \tau\right)\right] \frac{\delta y_s^{\tau}}{\delta \theta} $$
 
-### FST implementation of the algorithm
-Our algorithm has some major problems however. Most of these problems can be fixed using finite state transducers (FSTs). 
+where $$\theta$$ is some parameter in the neural network, and that gradient is just computed via autograd and backpropagation.
+
+Our algorithm has some major problems however, especially the way we proposed to generate the numerator and denominator graphs. Below are details explaining how in practice we can generate these graphs.
 
 #### Language Model
 First, enumerating the sapce of all possible word sequences is impossible. Instead, we could compactly encode the space of all word sequences by modeling them using an n-gram language model. For instance I might be interested in the space of all sentences
@@ -193,7 +194,7 @@ Given word "name"
 
 $$p\left(is | name \right) = \frac{c\left(is, name\right)}{c\left(name\right)} = 0.25$$
 
-$$p\left(\lt s\rangle\gt | name \right) = \frac{c\left(\lt s\rangle\gt, name\right)}{c\left(name\right)} = 0.5$$
+$$p\left(\lt /s\gt | name \right) = \frac{c\left(\lt /s\gt, name\right)}{c\left(name\right)} = 0.5$$
 
 $$p\left(Matthew | name \right) = \frac{c\left(Matthew, name\right)}{c\left(name\right)} = 0.25$$
 
@@ -212,7 +213,7 @@ $$p\left(is | Matthew \right) = \frac{c\left(is, Matthew\right)}{c\left(Matthew\
 
 $$p\left(my | Matthew \right) = \frac{c\left(my, Matthew\right)}{c\left(Matthew\right)} = 0.25$$
 
-$$p\left(\lt s\rangle\gt | Matthew \right) = \frac{c\left(\lt s\rangle\gt, Matthew\right)}{c\left(Matthew\right)} = 0.5$$
+$$p\left(\lt /s\gt | Matthew \right) = \frac{c\left(\lt /s\gt, Matthew\right)}{c\left(Matthew\right)} = 0.5$$
 
 
 ---
@@ -222,4 +223,4 @@ But this would assign non-zero probability to sequences such as "Matthew is Matt
 It is now clear how to generate the graph that encodes all possible word sequences. First, I string together the HMMs corresponding to the units making up all words in my vocabulary. Then I connect these word HMMs together using the n-gram probabilities learned in my language model. The graph below for instance is roughly the HMM corresponding to a 1-state HMM topology for each letter, where words are composed of letters, and the dashed edges between word HMMs, would have the corresponding n-gram probabilities shown above.
 
 
-![](/LF-MMI/graphviz (2).png){:height="50%" width="50%"}
+![](/LF-MMI/graphviz (2).png)
