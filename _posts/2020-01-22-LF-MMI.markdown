@@ -109,7 +109,11 @@ Now since we are modeling the emission probabilities using a neural network trai
 
 \begin{align}
 \frac{\delta F_{MMI}}{\delta y_s^{\tau}} &= \frac{\delta}{\delta y_s^{\tau}} \sum_{r} \left[ \log{p\left(w_r\right)}  + \log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}} - \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}} \right] \\\
-&=
+&= \sum_{r} \frac{\delta}{\delta y_s^{\tau}} \left[ \log{p\left(w_r\right)}  + \log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}} - \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}} \right] \\\
+&= \sum_{r} \frac{\delta}{\delta y_s^{\tau}} \left[\log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}} - \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}} \right] \\\
+&= \sum_{r} \left[ \frac{\delta}{\delta y_s^{\tau}} \log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}} - \frac{\delta}{\delta y_s^{\tau}} \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}} \right] \\\
+&= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}} \cdot \frac{\delta}{\delta y_s^{\tau}} \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}} \cdot \frac{\delta}{\delta y_s^{\tau}} \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t} \right] 
+\end{align}
 
 
 
