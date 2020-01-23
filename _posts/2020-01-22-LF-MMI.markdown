@@ -84,7 +84,10 @@ The HMM acoustic model is constructed as follows.
 
 ![](/LF-MMI/graphviz.png){:height="50%" width="50%"}
 
-* In an HMM we model $$p_{\theta}\left(X_r | W_r\right)$$ where $$X_r = \left{x_0, \ldots, x_{T-1} \right}$$ is a length $$T$$ sequence as ...
+* In an HMM we model
+$$p_{\theta}\left(X_r | W_r\right)$$
+where $$X_r = \{x_0, \ldots, x_{T-1} \}$$
+is a length $$T$$ sequence as ...
 
 $$ p_{\theta}\left(X_r | W_r \right) = \sum_{\pi_r} \prod_{t=0}^{T-1} p_{\theta}\left(x_t | \pi_r^t\right) p\left(\pi_r^t | \pi_r^{t-1} \right)$$
 
