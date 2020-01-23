@@ -159,6 +159,7 @@ Finally pulling the denominator inside the first summation we have ...
 
 $$ \nabla_{\theta} \log{p_{\theta}\left(X_r, W\right)} = \sum_{t=0}^{T-1} \frac{\sum_{\pi_W} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right)} \prod_{\tau^{\prime}=0}^{T-1} p_{\theta}\left(x_{\tau^{\prime}} | s_{\tau^{\prime}}\right) p\left(s_{\tau^{\prime}} | s_{\tau^{\prime}-1}\right)}{\sum_{\pi_W} \prod_{\tau=0}^{T-1} p_{\theta}\left(x_{\tau} | s_{\tau}\right) p\left(s_{\tau} | s_{\tau-1}\right)}$$
 
-
+Next we note that 
+$$ \prod_{\tau^{\prime}=0}^{T-1} p_{\theta}\left(x_{\tau^{\prime}} | s_{\tau^{\prime}}\right) p\left(s_{\tau^{\prime}} | s_{\tau^{\prime}-1}\right) = p_{\theta}\left(X_r, \pi_W \right)$$
 
 
