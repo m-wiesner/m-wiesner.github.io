@@ -82,7 +82,7 @@ The HMM acoustic model is constructed as follows.
 
 * For each of these units, there is an associated HMM. Traditionally this is a 3-state HMM, but for reasons I'll explain later, we tend to use a 1-state HMM instead. It would look something like this ...
 
-![](/LF-MMI/graphviz.png){:height="10%" width="10%"}
+![](/LF-MMI/graphviz.png){:height="25%" width="25%"}
 
 * In an HMM we model
 $$p_{\theta}\left(X_r | W_r\right)$$
@@ -94,10 +94,17 @@ $$ p_{\theta}\left(X_r | W_r \right) = \sum_{\pi_r} \prod_{t=0}^{T-1} p_{\theta}
 $$\pi_r$$ corresponds to one of the valid paths through the HMM for the word sequence $$w_r$$. $$\pi_r^t$$ is the state at time $$t$$ along the path $$\pi_r$$. 
 
 ## Gradient of MMI
-I am going to assume that the underlying acoustic model is an HMM. I am also going to assume that using a Hybrid HMM-DNN model, whereby the log emission probabilities for the $$D$$ states $$s_1, \ldots, s_D$$ in our HMM are modeled by the DNN output activations. We define $$y_s^t$$ to be the DNN activations at time $$t$$ for a state $$s$$. In other terms $$y_s^t = \log{p_\{theta}\left(x_t | s \right)$$
+I am going to assume that the underlying acoustic model is an HMM. I am also going to assume that using a Hybrid HMM-DNN model, whereby the log emission probabilities for the $$D$$ states $$s_1, \ldots, s_D$$ in our HMM are modeled by the DNN output activations. We define $$y_s^t$$ to be the DNN activations at time $$t$$ for a state $$s$$. In other terms $$y_s^t = \log{p_{\theta}\left(x_t | s \right)$$
+
+We also note that since the transition probabilities are not trained, we will just consider these to be a multiplicative weight associated with a particular path (i.e. $$ K_{\pi_r} = \prod_{t=0}^{T-1} p\left(\pi_r^t | \pi_r^{t-1}\right)$$).j
 
 Plugging this into the expression for $$F_{MMI}$$ we get
 
-$$F_{MMI} = \sum_{r} \log{\frac{\pi}{}}$$ 
+\begin{align}
+F_{MMI} &= \sum_{r} \log{\frac{p\left(w_r\right) \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}}{\sum_{w} p\left(w\right) \sum_{\pi_w}K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}}} \\\
+&= \sum_{r} \left[ \log{p\left(w_r\right)}  + \log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}} - \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}} \right]
+\end{align}
+
+
 
 
