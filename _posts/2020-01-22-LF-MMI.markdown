@@ -96,7 +96,8 @@ $$\pi_r$$ corresponds to one of the valid paths through the HMM for the word seq
 ## Gradient of MMI
 I am going to assume that the underlying acoustic model is an HMM. I am also going to assume that using a Hybrid HMM-DNN model, whereby the log emission probabilities for the $$D$$ states $$s_1, \ldots, s_D$$ in our HMM are modeled by the DNN output activations. We define $$y_s^t$$ to be the DNN activations at time $$t$$ for a state $$s$$. In other terms $$y_s^t = \log{p_{\theta}\left(x_t | s \right)}$$
 
-We also note that since the transition probabilities are not trained, we will just consider these to be a multiplicative weight associated with a particular path (i.e. $$ K_{\pi_r} = \prod_{t=0}^{T-1} p\left(\pi_r^t | \pi_r^{t-1}\right)$$).j
+We also note that since the transition probabilities are not trained, we will just consider these to be a multiplicative weight associated with a particular path
+(i.e. $$ K_{\pi_r} = \prod_{t=0}^{T-1} p\left(\pi_r^t | \pi_r^{t-1}\right)$$).
 
 Plugging this into the expression for $$F_{MMI}$$ and converting the logarithm of a product into the sum of the logartihms we get
 
@@ -115,8 +116,16 @@ Now since we are modeling the emission probabilities using a neural network trai
 &= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}} \cdot \frac{\delta}{\delta y_s^{\tau}} \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}} \cdot \frac{\delta}{\delta y_s^{\tau}} \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t} \right] \\\
 &= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}} \cdot \sum_{\pi_r}K_{\pi_r} \frac{\delta}{\delta y_s^{\tau}} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}} \cdot \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} \frac{\delta}{\delta y_s^{\tau}} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t} \right] \\\
 &= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}} \cdot \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t} \frac{\delta}{\delta y_s^{\tau}} \sum_{t=0}^{T-1}y_{\pi_r}^t  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}} \cdot \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t} \frac{\delta}{\delta y_s^{\tau}} \sum_{t=0}^{T-1}y_{\pi_w}^t \right] \\\
-&= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}} \cdot \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t} \mathbb{1}\left(\pi_r^\tau = s \right)  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}} \cdot \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t} \mathbb{1}\left(\pi_w^\tau = s \right) \right]
+&= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}} \cdot \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t} \mathbb{1}_s\left(\pi_r^\tau\right)  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}} \cdot \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t} \mathbb{1}_s\left(\pi_w^\tau\right) \right]
 \end{align}
+
+Here we introduced the indicator function
+
+\begin{align}
+\mathbb{1}_s\left(\pi_r^\tau\right) = \begin{cases} 1 & \pi_r^\tau = s \\\ 0 & \pi_r^\tau \neq s \end{cases}
+\end{align}
+
+We are almost done now. We note that the numerator of the first term in our expression corresponds to the joint probability of the acoustic sequence $$X_r$$ going through **any** path for which $$\pi_r^{\tau} = s$$. Using the forward and backward probabilities at each time step we can write this as $$p\left(X_r, \pi_r^\tau = s\right) = \alpha_s^\tau \beta_s^\tau$$. In the denominator we can partition the set of paths into the set of all paths that use a state $$s$$ at time $$\tau$$. In this way when we sum over all of the states at time $$\tau$$ we are in fact summing over all paths. Hence we can rewrite the denominator as $$\sum_{\sigma} \alpha_{\sigma}^\tau \beta_{\sigma}^\tau$$. Our expression for the gradient then becomes ...
 
 
 
