@@ -82,7 +82,7 @@ The HMM acoustic model is constructed as follows.
 
 * For each of these units, there is an associated HMM. Traditionally this is a 3-state HMM, but for reasons I'll explain later, we tend to use a 1-state HMM instead. It would look something like this ...
 
-![](/LF-MMI/graphviz.png){:height="50%" width="50%"}
+![](/LF-MMI/graphviz.png){:height="10%" width="10%"}
 
 * In an HMM we model
 $$p_{\theta}\left(X_r | W_r\right)$$
