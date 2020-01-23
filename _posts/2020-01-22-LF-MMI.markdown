@@ -162,4 +162,14 @@ $$ \nabla_{\theta} \log{p_{\theta}\left(X_r, W\right)} = \sum_{t=0}^{T-1} \frac{
 Next we note that 
 $$ \prod_{\tau^{\prime}=0}^{T-1} p_{\theta}\left(x_{\tau^{\prime}} | s_{\tau^{\prime}}\right) p\left(s_{\tau^{\prime}} | s_{\tau^{\prime}-1}\right) = p_{\theta}\left(X_r, \pi_W \right)$$
 
+and therefore $$ \sum_{\pi_W} p_{\theta}\left(X_r, \pi_W \right) = p_{\theta}\left(X_r \right) $$.
+
+Substituting in these quantities we have ...
+
+$$ \nabla_{\theta} \log{p_{\theta}\left(X_r, W\right)} = \sum_{t=0}^{T-1} \sum_{\pi_W} \nabla_{\theta} \log{p_{\theta}\left(x_t | s_t\right) p_{\theta}\left(\pi_W | X_r\right)$$
+
+$$ \sum_{\pi_W} \prod_{\tau^{\prime}=0}^{T-1} p_{\theta}\left(x_{\tau^{\prime}} | s_{\tau^{\prime}}\right) p\left(s_{\tau^{\prime}} | s_{\tau^{\prime}-1}\right) = p_{\theta}\left(X_r, \pi_W \right)$$
+
+
+
 
