@@ -170,44 +170,41 @@ I could train a bigram language model from which I should hopefully be able to g
 ---
 
 Given word "\<s>"
-
-$$p\left(my | \lt s\gt \right) = \frac{c\left(my, \lt s\gt \right)}{c\left(\lt s\gt\right)} = 0.25$$
-  
-$$p\left(Matthew | \lt s\gt \right) = \frac{c\left(Matthew, \lt s\gt \right)}{c\left(\lt s\gt\right)} = 0.25$$
-  
-$$p\left(is | \lt s\gt \right) = \frac{c\left(\lt s\gt, is\right)}{c\left(\lt s\gt\right)} = 0.5$$
-
+---
+\begin{align}
+p\left(my | \lt s\gt \right) &= \frac{c\left(my, \lt s\gt \right)}{c\left(\lt s\gt\right)} &= 0.25 \\\
+p\left(Matthew | \lt s\gt \right) &= \frac{c\left(Matthew, \lt s\gt \right)}{c\left(\lt s\gt\right)} &= 0.25 \\\
+p\left(is | \lt s\gt \right) &= \frac{c\left(\lt s\gt, is\right)}{c\left(\lt s\gt\right)} &= 0.5
+\end{align}
 
 Given word "my"
-
+---
 $$p\left(name | my \right) = \frac{c\left(name, my\right)}{c\left(my\right)} = 1.0$$
 
-
 Given word "name"
-
-$$p\left(is | name \right) = \frac{c\left(is, name\right)}{c\left(name\right)} = 0.25$$
-
-$$p\left(\lt /s\gt | name \right) = \frac{c\left(\lt /s\gt, name\right)}{c\left(name\right)} = 0.5$$
-
-$$p\left(Matthew | name \right) = \frac{c\left(Matthew, name\right)}{c\left(name\right)} = 0.25$$
+---
+\begin{align}
+p\left(is | name \right) &= \frac{c\left(is, name\right)}{c\left(name\right)} &= 0.25 \\\
+p\left(\lt /s\gt | name \right) &= \frac{c\left(\lt /s\gt, name\right)}{c\left(name\right)} &= 0.5 \\\
+p\left(Matthew | name \right) &= \frac{c\left(Matthew, name\right)}{c\left(name\right)} &= 0.25
+end{align}
 
 
 Given word "is"
-
-
-$$p\left(Matthew | is \right) = \frac{c\left(Matthew, is\right)}{c\left(is\right)} = 0.5$$
-
-$$p\left(my | is \right) = \frac{c\left(my, is\right)}{c\left(is\right)} = 0.5$$
+---
+\begin{align}
+p\left(Matthew | is \right) &= \frac{c\left(Matthew, is\right)}{c\left(is\right)} &= 0.5 \\\
+p\left(my | is \right) &= \frac{c\left(my, is\right)}{c\left(is\right)} &= 0.5
+\end{align}
 
 
 Given word "Matthew"
-
-$$p\left(is | Matthew \right) = \frac{c\left(is, Matthew\right)}{c\left(Matthew\right)} = 0.25$$
-
-$$p\left(my | Matthew \right) = \frac{c\left(my, Matthew\right)}{c\left(Matthew\right)} = 0.25$$
-
-$$p\left(\lt /s\gt | Matthew \right) = \frac{c\left(\lt /s\gt, Matthew\right)}{c\left(Matthew\right)} = 0.5$$
-
+---
+\begin{align}
+p\left(is | Matthew \right) &= \frac{c\left(is, Matthew\right)}{c\left(Matthew\right)} &= 0.25 \\\
+p\left(my | Matthew \right) &= \frac{c\left(my, Matthew\right)}{c\left(Matthew\right)} &= 0.25 \\\
+p\left(\lt /s\gt | Matthew \right) &= \frac{c\left(\lt /s\gt, Matthew\right)}{c\left(Matthew\right)} &= 0.5
+\end{align}
 
 ---
 
@@ -215,5 +212,7 @@ But this would assign non-zero probability to sequences such as "Matthew is Matt
 
 It is now clear how to generate the graph that encodes all possible word sequences. First, I string together the HMMs corresponding to the units making up all words in my vocabulary. Then I connect these word HMMs together using the n-gram probabilities learned in my language model. The graph below for instance is roughly the HMM corresponding to a 1-state HMM topology for each letter, where words are composed of letters, and the dashed edges between word HMMs, would have the corresponding n-gram probabilities shown above.
 
-
 ![](/LF-MMI/graphviz (3).png)
+
+Even this graph may be too big to use in training, especially if higher order n-gram models are used. The main contribution of LF-MMI is how it approximates this graph in order to make the computation feasible and the graph of a manageable size.
+
