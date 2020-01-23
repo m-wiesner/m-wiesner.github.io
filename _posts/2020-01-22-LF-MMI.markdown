@@ -133,8 +133,7 @@ Our expression for the gradient then becomes ...
 
 \begin{align}
 \frac{\delta F_{MMI}}{\delta y_s^{\tau}} &= \sum_{r} \left[ \frac{\alpha_r\left(s, \tau\right( \beta_r\left(s, \tau\right)}{\sum_{\sigma} \alpha_{r}\left(\sigma,\tau\right) \beta_{r}\left(\sigma, \tau\right)}  - \frac{\alpha_{w^*}\left(s,\tau\right) \beta_{w^*}\left(s, \tau\right)}{\sum_{\sigma^\prime} \alpha_{w^*}\left(\sigma^\prime,\tau\right) \beta_{w^*}\left(\sigma^\prime, \tau\right)}\right] \\\
-&= \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^*}\left(s, \tau\right)\right] \\\
-&\implies \delta F_{MMI} = \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^*}\left(s, \tau\right)\right] \delta y_s^{\tau}
+&= \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^*}\left(s, \tau\right)\right]
 \end{align}
 
 ## Algorithm
@@ -162,13 +161,7 @@ First, enumerating the sapce of all possible word sequences is impossible. Inste
 
 ---
 
-\<s> my name is Matthew \</s>
-
-\<s> Matthew is my name \</s>
-
-\<s> is my name Matthew \</s>
-
-\<s> is Matthew my name \</s>
+\<s> my name is Matthew \</s>, \<s> Matthew is my name \</s>, \<s> is my name Matthew \</s>, \<s> is Matthew my name \</s>
 
 ---
 
@@ -223,4 +216,4 @@ But this would assign non-zero probability to sequences such as "Matthew is Matt
 It is now clear how to generate the graph that encodes all possible word sequences. First, I string together the HMMs corresponding to the units making up all words in my vocabulary. Then I connect these word HMMs together using the n-gram probabilities learned in my language model. The graph below for instance is roughly the HMM corresponding to a 1-state HMM topology for each letter, where words are composed of letters, and the dashed edges between word HMMs, would have the corresponding n-gram probabilities shown above.
 
 
-![](/LF-MMI/graphviz (2).png)
+![](/LF-MMI/graphviz (3).png)
