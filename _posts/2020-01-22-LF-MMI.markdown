@@ -12,7 +12,7 @@ author: MatthewWiesner
 description: Everything about LF-MMI
 ---
 
-I'm writing this to remember all of the details of MMI and LF-MMI, especially the gradient computation that I worked through with [Desh Raj's page]. I probably missed a few things, but hopefully the main concepts are covered. If you are reading this and you already know what MMI is and you are just looking for the details of LF-MMI, skip to the LF-MMI section.
+I'm writing this to remember all of the details of MMI and LF-MMI, especially the gradient computation that I worked through with [Desh Raj's page]. I probably missed a few things, but hopefully the main concepts are covered. If you are reading this and you already know what MMI is and you are just looking for the details of LF-MMI, skip to the LF-MMI section. I added some very basic information about ASR with HMMs just for the sake of completeness.
 
 tldr;
 
@@ -116,18 +116,110 @@ Now since we are modeling the emission probabilities using a neural network trai
 &= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}} \cdot \frac{\delta}{\delta y_s^{\tau}} \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}} \cdot \frac{\delta}{\delta y_s^{\tau}} \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t} \right] \\\
 &= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}} \cdot \sum_{\pi_r}K_{\pi_r} \frac{\delta}{\delta y_s^{\tau}} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}} \cdot \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} \frac{\delta}{\delta y_s^{\tau}} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t} \right] \\\
 &= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}} \cdot \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t} \frac{\delta}{\delta y_s^{\tau}} \sum_{t=0}^{T-1}y_{\pi_r}^t  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}} \cdot \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t} \frac{\delta}{\delta y_s^{\tau}} \sum_{t=0}^{T-1}y_{\pi_w}^t \right] \\\
-&= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}} \cdot \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t} \mathbb{1}_s\left(\pi_r^\tau\right)  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}} \cdot \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t} \mathbb{1}_s\left(\pi_w^\tau\right) \right]
+&= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t}} \cdot \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t} \mathbb{1}\left(\pi_r^\tau, s\right)  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t}} \cdot \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w}^t} \mathbb{1}\left(\pi_r^\tau, s\right)\right]
 \end{align}
 
 Here we introduced the indicator function
 
 \begin{align}
-\mathbb{1}_s\left(\pi_r^\tau\right) = \begin{cases} 1 & \pi_r^\tau = s \\\ 0 & \pi_r^\tau \neq s \end{cases}
+\mathbb{1}\left(\pi_r^\tau, s\right) = \begin{cases} 1 & \pi_r^\tau = s \\\ 0 & \pi_r^\tau \neq s \end{cases}
 \end{align}
 
-We are almost done now. We note that the numerator of the first term in our expression corresponds to the joint probability of the acoustic sequence $$X_r$$ going through **any** path for which $$\pi_r^{\tau} = s$$. Using the forward and backward probabilities at each time step we can write this as $$p\left(X_r, \pi_r^\tau = s\right) = \alpha_s^\tau \beta_s^\tau$$. In the denominator we can partition the set of paths into the set of all paths that use a state $$s$$ at time $$\tau$$. In this way when we sum over all of the states at time $$\tau$$ we are in fact summing over all paths. Hence we can rewrite the denominator as $$\sum_{\sigma} \alpha_{\sigma}^\tau \beta_{\sigma}^\tau$$. Our expression for the gradient then becomes ...
+We are almost done now. We note that the numerator of the first term in our expression corresponds to the joint probability of the acoustic sequence $$X_r$$ going through **any** path for which $$\pi_r^{\tau} = s$$. Note that we have restricted the set of paths to be those that correspond to the word sequence $$W_r$$. Using the forward and backward probabilities at each time step we can write this as $$p\left(X_r, \pi_r^\tau = s\right) = \alpha_r\left(s, \tau\right) \beta_r\left(s, \tau\right)$$. In the denominator we can partition the set of paths into the set of all paths that use a state $$s$$ at time $$\tau$$. In this way when we sum over all of the states at time $$\tau$$ we are in fact summing over all paths. Hence we can rewrite the denominator as $$\sum_{\sigma} \alpha_r\left(\sigma, \tau \right) \beta_r\left(\sigma, \tau\right)$$. 
+
+The second term in our expression can be decomposed in the same way as the first term. The only difference is that the set of paths is now the set of paths that are valid for **any** possible word sequence. We can still represent this as an HMM where paths for different word sequences are weighted by the probability of those word sequences. The state space just happens to be much larger. We will name the forward and backward probabilities associated with the space of all possible words $$\alpha_{w^*}\left(s, \tau\right), \beta_{w^*}\left(s, \tau\right)$$.
+
+Our expression for the gradient then becomes ...
+
+\begin{align}
+\frac{\delta F_{MMI}}{\delta y_s^{\tau}} &= \sum_{r} \left[ \frac{\alpha_r\left(s, \tau\right( \beta_r\left(s, \tau\right)}{\sum_{\sigma} \alpha_{r}\left(\sigma,\tau\right) \beta_{r}\left(\sigma, \tau\right)}  - \frac{alpha_{w^*}\left(s,\tau\right) \beta_{w^*}\left(s, \tau\right)}{\sum_{\sigma^\prime} \alpha_{w^*}\left(\sigma^\prime,\tau\right) \beta_{w^*}\left(\sigma^\prime, \tau\right)}\right] \\\
+&= \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^*}\left(s, \tau\right)\right]
+&\implies \delta F_{MMI} = \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^*}\left(s, \tau\right)\right] \delta y_s^{\tau}
+\end{align}
+
+## Algorithm
+We now almost have an algorithm for computing the gradient with respect to a neural network output!
+1. Create a graph (HMM) representing the space of all possible word sequences. To do this you could imagine enumerating all possbile word sequences. You could then enumerate all possible pronunciations of each word sequences. Finally you would chain together the HMM models for the phonemes present in each of these pronunciations. Taking the union of all such HMM chains would correspond to the graph of all possible word sequences. We call this the denomiator graph as it corresponds to the denominator in the MMI objective function.
+
+2. For each audio chunk $$X_r$$, create a graph that corresponds to the reference word sequence. This corresponds to the union of all HMM chains that correspond to the ground truth word sequence for the audio chunk $$X_r$$. We call this the numerator graph as it corresponds to the numerator in the MMI objective function.
+
+3. Use the DNN to produce outputs $$y_s^t$$ for the audio chunk $$X_r$$.
+
+4. Using these outputs, run the forward and backward algorithm on both the numerator and denominator graph to generate 
+
+$$\alpha_{r}\left(s, t\right), \beta_{r}\left(s, t\right), \alpha_{w^{*}}\left(s, t\right), \beta_{w^*}\left(s, t\right)$$
+
+5. Compute the gradient according to 
+
+$$ \delta F_{MMI} = \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^*}\left(s, \tau\right)\right] \delta y_s^{\tau} $$
+
+### FST implementation of the algorithm
+Our algorithm has some major problems however. Most of these problems can be fixed using finite state transducers (FSTs). 
+
+#### Language Model
+First, enumerating the sapce of all possible word sequences is impossible. Instead, we could compactly encode the space of all word sequences by modeling them using an n-gram language model. For instance I might be interested in the space of all sentences
+
+---
+
+\<s> my name is Matthew \</s>
+
+\<s> Matthew is my name \</s>
+
+\<s> is my name Matthew \</s>
+
+\<s> is Matthew my name \</s>
+
+---
+
+I could train a bigram language model from which I should hopefully be able to generate the these word sequences.
+
+---
+
+Given word "\<s>"
+
+$$p\left(my | \lt s\gt \right) = \frac{c\left(my, \lt s\gt \right)}{c\left(\lt s\gt\right)} = 0.25$$
+  
+$$p\left(Matthew | \lt s\gt \right) = \frac{c\left(Matthew, \lt s\gt \right)}{c\left(\lt s\gt\right)} = 0.25$$
+  
+$$p\left(is | \lt s\gt \right) = \frac{c\left(\lt s\gt, is\right)}{c\left(\lt s\gt\right)} = 0.5$$
 
 
+Given word "my"
+
+$$p\left(name | my \right) = \frac{c\left(name, my\right)}{c\left(my\right)} = 1.0$$
 
 
+Given word "name"
 
+$$p\left(is | name \right) = \frac{c\left(is, name\right)}{c\left(name\right)} = 0.25$$
+
+$$p\left(\lt s\rangle\gt | name \right) = \frac{c\left(\lt s\rangle\gt, name\right)}{c\left(name\right)} = 0.5$$
+
+$$p\left(Matthew | name \right) = \frac{c\left(Matthew, name\right)}{c\left(name\right)} = 0.25$$
+
+
+Given word "is"
+
+
+$$p\left(Matthew | is \right) = \frac{c\left(Matthew, is\right)}{c\left(is\right)} = 0.5$$
+
+$$p\left(my | is \right) = \frac{c\left(my, is\right)}{c\left(is\right)} = 0.5$$
+
+
+Given word "Matthew"
+
+$$p\left(is | Matthew \right) = \frac{c\left(is, Matthew\right)}{c\left(Matthew\right)} = 0.25$$
+
+$$p\left(my | Matthew \right) = \frac{c\left(my, Matthew\right)}{c\left(Matthew\right)} = 0.25$$
+
+$$p\left(\lt s\rangle\gt | Matthew \right) = \frac{c\left(\lt s\rangle\gt, Matthew\right)}{c\left(Matthew\right)} = 0.5$$
+
+
+---
+
+But this would assign non-zero probability to sequences such as "Matthew is Matthew is Matthew", or "is my name is Matthew". So this language model has the capacity to generate the set of sentences I have transcripts for, but it also generates new sentences that I have not seen.
+
+It is now clear how to generate the graph that encodes all possible word sequences. First, I string together the HMMs corresponding to the units making up all words in my vocabulary. Then I connect these word HMMs together using the n-gram probabilities learned in my language model. The graph below for instance is roughly the HMM corresponding to a 1-state HMM topology for each letter, where words are composed of letters, and the dashed edges between word HMMs, would have the corresponding n-gram probabilities shown above.
+
+
+![](/LF-MMI/graphviz (2).png){:height="50%" width="50%"}
