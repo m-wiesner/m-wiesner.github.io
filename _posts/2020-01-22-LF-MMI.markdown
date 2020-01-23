@@ -80,8 +80,10 @@ EITHER --> IY - TH - ER
 EITHER --> AY - TH - ER
 
 
+* For each of these units, there is an associated HMM. Traditionally this is a 3-state HMM, but for reasons I'll explain later, we tend to use a 1-state HMM instead. It would look something like this ...
 
-* For each of these units, there is an associated HMM. Traditionally this is a 3-state HMM, but for reasons I'll explain later, we tend to use a 2-state HMM instead.
+![](/LF-MMI/graphviz.png)
+
 * p(X_r | W_r)
 
 ## Gradient of MMI
