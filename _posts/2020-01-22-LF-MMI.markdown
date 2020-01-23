@@ -76,18 +76,19 @@ into a maximization problem by negating the conditional entropy and dropping the
 The HMM acoustic model is constructed as follows.
 * Words are modeled as a sequence of units. In traditional ASR these are triphones, but even just a sequence of letters would probably work fine. A single word could corresponding to different allowable sequences of units.
 
-EITHER --> IY - TH - ER
-EITHER --> AY - TH - ER
+>EITHER --> IY - TH - ER
 
+>EITHER --> AY - TH - ER
 
 * For each of these units, there is an associated HMM. Traditionally this is a 3-state HMM, but for reasons I'll explain later, we tend to use a 1-state HMM instead. It would look something like this ...
 
 ![](/LF-MMI/graphviz.png)
 
-* p(X_r | W_r)
+* In an HMM we model $$p_{\theta}\left(X_r | W_r\right)$$ where $$X_r = \{x_0, \ldots, x_{T-1} \}$$ is a length $$T$$ sequence as ...
+
+$$ p_{\theta}\left(X_r | W_r \right) = \sum_{\pi_r} \prod_{t=0}^{T-1} p_{\theta}{\left(x_t | \pi_r^t\right) p\left{\pi_r^t | \pi_r^{t-1} \right)$$
 
 ## Gradient of MMI
-I am going to assume that the underlying acoustic model is an HMM. This means that we are modeling $$p_{\theta}\left(X_r | W_r\right)$$ as the sum of 
+I am going to assume that the underlying acoustic model is an HMM. I am also going to assume that using a Hybrid HMM-DNN model, whereby the log emission probabilities for the $$D$$ states $$s_1, \ldots, s_D$$ in our HMM are modeled by the DNN output activations. We define $$y_s^t$$ to be the DNN activations at time $t$ for a state $$s$$. In other terms $$y_s^t = \log{p_\{theta}\left(x_t | s \right)$$   
 
-$$ p_{\theta}\left(X_r | W_r\right) = \prod_{t=0}^{T
 
