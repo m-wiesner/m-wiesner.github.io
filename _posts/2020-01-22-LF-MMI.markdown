@@ -12,7 +12,7 @@ author: MatthewWiesner
 description: Everything about LF-MMI
 ---
 
-I'm writing this to remember all of the details of MMI and LF-MMI, especially the gradient computation that I worked through with [Desh Raj's page](https://desh2608.github.io/2019-05-21-chain/). I probably missed a few things, but hopefully the main concepts are covered. If you are reading this and you already know what MMI is and you are just looking for the details of LF-MMI, skip to the LF-MMI section. I added some very basic information about ASR with HMMs just for the sake of completeness.
+I'm writing this to remember all of the details of MMI and LF-MMI, especially the gradient computation that I worked through with [Desh Raj's](https://desh2608.github.io/2019-05-21-chain/). I probably missed a few things, but hopefully the main concepts are covered. If you are reading this and you already know what MMI is and you are just looking for the details of LF-MMI, skip to the LF-MMI section. I added some very basic information about ASR with HMMs just for the sake of completeness. The original paper is [here](http://www.danielpovey.com/files/2016_interspeech_mmi.pdf).
 
 tldr;
 
