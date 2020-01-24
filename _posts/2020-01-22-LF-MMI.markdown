@@ -127,13 +127,13 @@ Here we introduced the indicator function
 
 We are almost done now. We note that the numerator of the first term in our expression corresponds to the joint probability of the acoustic sequence $$X_r$$ going through **any** path for which $$\pi_r^{\tau} = s$$. Note that we have restricted the set of paths to be those that correspond to the word sequence $$W_r$$. Using the forward and backward probabilities at each time step we can write this as $$p\left(X_r, \pi_r^\tau = s\right) = \alpha_r\left(s, \tau\right) \beta_r\left(s, \tau\right)$$. In the denominator we can partition the set of paths into the set of all paths that use a state $$s$$ at time $$\tau$$. In this way when we sum over all of the states at time $$\tau$$ we are in fact summing over all paths. Hence we can rewrite the denominator as $$\sum_{\sigma} \alpha_r\left(\sigma, \tau \right) \beta_r\left(\sigma, \tau\right)$$. 
 
-The second term in our expression can be decomposed in the same way as the first term. The only difference is that the set of paths is now the set of paths that are valid for **any** possible word sequence. We can still represent this as an HMM where paths for different word sequences are weighted by the probability of those word sequences. The state space just happens to be much larger. We will name the forward and backward probabilities associated with the space of all possible words $$\alpha_{w^\*}\left(s, \tau\right), \beta_{w^\*}\left(s, \tau\right)$$.
+The second term in our expression can be decomposed in the same way as the first term. The only difference is that the set of paths is now the set of paths that are valid for **any** possible word sequence. We can still represent this as an HMM where paths for different word sequences are weighted by the probability of those word sequences. The state space just happens to be much larger. We will name the forward and backward probabilities associated with the space of all possible words $$\alpha_{w^\ast}\left(s, \tau\right), \beta_{w^\ast}\left(s, \tau\right)$$.
 
 Our expression for the gradient then becomes ...
 
 \begin{align}
-\frac{\delta F_{MMI}}{\delta y_s^{\tau}} &= \sum_{r} \left[ \frac{\alpha_r\left(s, \tau\right) \beta_r\left(s, \tau\right)}{\sum_{\sigma} \alpha_{r}\left(\sigma,\tau\right) \beta_{r}\left(\sigma, \tau\right)}  - \frac{\alpha_{w^\*}\left(s,\tau\right) \beta_{w^\*}\left(s, \tau\right)}{\sum_{\sigma^\prime} \alpha_{w^\*}\left(\sigma^\prime,\tau\right) \beta_{w^\*}\left(\sigma^\prime, \tau\right)}\right] \\\
-&= \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^\*}\left(s, \tau\right)\right]
+\frac{\delta F_{MMI}}{\delta y_s^{\tau}} &= \sum_{r} \left[ \frac{\alpha_r\left(s, \tau\right) \beta_r\left(s, \tau\right)}{\sum_{\sigma} \alpha_{r}\left(\sigma,\tau\right) \beta_{r}\left(\sigma, \tau\right)}  - \frac{\alpha_{w^\ast}\left(s,\tau\right) \beta_{w^\ast}\left(s, \tau\right)}{\sum_{\sigma^\prime} \alpha_{w^\ast}\left(\sigma^\prime,\tau\right) \beta_{w^\ast}\left(\sigma^\prime, \tau\right)}\right] \\\
+&= \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^\ast}\left(s, \tau\right)\right]
 \end{align}
 
 ## Algorithm
@@ -146,11 +146,11 @@ We now almost have an algorithm for computing the gradient with respect to a neu
 
 4. Using these outputs, run the forward and backward algorithm on both the numerator and denominator graph to generate 
 
-$$\alpha_{r}\left(s, t\right), \beta_{r}\left(s, t\right), \alpha_{w^{*}}\left(s, t\right), \beta_{w^*}\left(s, t\right)$$
+$$\alpha_{r}\left(s, t\right), \beta_{r}\left(s, t\right), \alpha_{w^{\ast}}\left(s, t\right), \beta_{w^\ast}\left(s, t\right)$$
 
 5. Compute the gradient according to 
 
-$$ \frac{\delta F_{MMI}}{\delta \theta} = \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^*}\left(s, \tau\right)\right] \frac{\delta y_s^{\tau}}{\delta \theta} $$
+$$ \frac{\delta F_{MMI}}{\delta \theta} = \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^\ast}\left(s, \tau\right)\right] \frac{\delta y_s^{\tau}}{\delta \theta} $$
 
 where $$\theta$$ is some parameter in the neural network, and that gradient is just computed via autograd and backpropagation.
 
@@ -190,3 +190,5 @@ The LF-MMI objective was observed to overfit. 3 methods of regularizing the netw
 2. L-2 regularization on the network outputs. In otherwords, the network is trained using the objective.
 
 $$F_{LF-MMI} = F_MMI + \lambda {\left\lVert y^t\right\rVert}_2^2 + \omega F_{xent}$$  
+
+3. A Leaky HMM is used. Here a small transition probability between any two states is allowed. This allows for gradual forgetting of context.
