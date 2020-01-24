@@ -144,8 +144,7 @@ We now almost have an algorithm for computing the gradient with respect to a neu
 
 3. Use the DNN to produce outputs $$y_s^t$$ for the audio chunk $$X_r$$.
 
-4. Using these outputs, run the forward and backward algorithm on both the numerator and denominator graph to generate 
-
+4. Using these outputs, run the forward and backward algorithm on both the numerator and denominator graph to generate
 $$\alpha_{r}\left(s, t\right), \beta_{r}\left(s, t\right), \alpha_{w^{\ast}}\left(s, t\right), \beta_{w^\ast}\left(s, t\right)$$
 
 5. Compute the gradient according to 
@@ -154,7 +153,7 @@ $$ \frac{\delta F_{MMI}}{\delta \theta} = \sum_{r} \left[ \gamma_{r}\left(s, \ta
 
 where $$\theta$$ is some parameter in the neural network, and that gradient is just computed via autograd and backpropagation.
 
-Our algorithm has some major problems however, especially the way we proposed to generate the numerator and denominator graphs. Below are details explaining how in practice we can generate these graphs. The main contribution of LF-MMI is how it approximates this graph in order to make the computation feasible and the graph of a manageable size.
+Our algorithm has some major problems however, especially the way we proposed to generate the numerator and denominator graphs. Below are details explaining how in practice we can generate these graphs. The main contribution of LF-MMI is how it approximates this graph in order to make the computation feasible and the graph of a manageable size. In practice this is all done using Finite State Transducers (FSTs), which enable us to compactly store the set of all possible sequences needed in (1.) for instance. I will be making another post about FSTs in ASR, specifically on the decoding graph and the components used to create in in a future post [HCLG](https://m-wiesner.github.io/HCLG/)
 
 ## LF-MMI
 
@@ -188,7 +187,6 @@ The LF-MMI objective was observed to overfit. 3 methods of regularizing the netw
 1. Multitask training with the cross-entropy objective. The forward probabilities at each time step in the numerator graph are used as soft targets instead of the usual hard targets.
 
 2. L-2 regularization on the network outputs. In otherwords, the network is trained using the objective.
-
 $$F_{LF-MMI} = F_MMI + \lambda {\left\lVert y^t\right\rVert}_2^2 + \omega F_{xent}$$  
 
 3. A Leaky HMM is used. Here a small transition probability between any two states is allowed. This allows for gradual forgetting of context.
