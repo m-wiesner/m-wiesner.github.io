@@ -94,7 +94,7 @@ $$ p_{\theta}\left(X_r | W_r \right) = \sum_{\pi_r} \prod_{t=0}^{T-1} p_{\theta}
 $$\pi_r$$ corresponds to one of the valid paths through the HMM for the word sequence $$w_r$$. $$\pi_r^t$$ is the state at time $$t$$ along the path $$\pi_r$$. 
 
 ## Gradient of MMI
-I am going to assume that the underlying acoustic model is an HMM. I am also going to assume that using a Hybrid HMM-DNN model, whereby the log emission probabilities for the $$D$$ states $$s_1, \ldots, s_D$$ in our HMM are modeled by the DNN output activations. We define $$y_s^t$$ to be the DNN activations at time $$t$$ for a state $$s$$. In other terms $$y_s^t = \log{p_{\theta}\left(x_t | s \right)}$$
+I am going to assume that the underlying acoustic model is an HMM. I assume we are using a Hybrid HMM-DNN model, where the DNN output activations are used to as log emission probabilities for the $$D$$ states $$s_1, \ldots, s_D$$ in our HMM. We define $$y_s^t$$ to be the DNN activations at time $$t$$ for a state $$s$$. In other terms $$y_s^t = \log{p_{\theta}\left(x_t | s \right)}$$
 
 We also note that since the transition probabilities are not trained, we will just consider these to be a multiplicative weight associated with a particular path
 (i.e. $$ K_{\pi_r} = \prod_{t=0}^{T-1} p\left(\pi_r^t | \pi_r^{t-1}\right)$$).
