@@ -1,0 +1,71 @@
+---
+title: "HCLG"
+layout: post
+date: 2020-01-23 10:27
+image: /assets/images/markdown.jpg
+headerImage: false
+tag:
+- Machine Learning
+star: false
+category: blog
+author: MatthewWiesner
+description: FSTs in ASR, and details for creating the ASR decoding graph.
+---
+First, enumerating the sapce of all possible word sequences is impossible. Instead, we could compactly encode the space of all word sequences by modeling them using an n-gram language model. For instance I might be interested in the space of all sentences
+
+---
+
+\<s> my name is Matthew \</s>,
+\<s> Matthew is my name \</s>,
+\<s> is my name Matthew \</s>,
+\<s> is Matthew my name \</s>
+
+---
+
+I could train a bigram language model from which I should hopefully be able to generate the these word sequences.
+
+
+Given word "\<s>"
+---
+\begin{align}
+p\left(my | \lt s\gt \right) &= \frac{c\left(my, \lt s\gt \right)}{c\left(\lt s\gt\right)} &= 0.25 \\\
+p\left(Matthew | \lt s\gt \right) &= \frac{c\left(Matthew, \lt s\gt \right)}{c\left(\lt s\gt\right)} &= 0.25 \\\
+p\left(is | \lt s\gt \right) &= \frac{c\left(\lt s\gt, is\right)}{c\left(\lt s\gt\right)} &= 0.5
+\end{align}
+
+Given word "my"
+---
+$$p\left(name | my \right) = \frac{c\left(name, my\right)}{c\left(my\right)} = 1.0$$
+
+Given word "name"
+---
+\begin{align}
+p\left(is | name \right) &= \frac{c\left(is, name\right)}{c\left(name\right)} &= 0.25 \\\
+p\left(\lt /s\gt | name \right) &= \frac{c\left(\lt /s\gt, name\right)}{c\left(name\right)} &= 0.5 \\\
+p\left(Matthew | name \right) &= \frac{c\left(Matthew, name\right)}{c\left(name\right)} &= 0.25
+end{align}
+
+
+Given word "is"
+---
+\begin{align}
+p\left(Matthew | is \right) &= \frac{c\left(Matthew, is\right)}{c\left(is\right)} &= 0.5 \\\
+p\left(my | is \right) &= \frac{c\left(my, is\right)}{c\left(is\right)} &= 0.5
+\end{align}
+
+
+Given word "Matthew"
+---
+\begin{align}
+p\left(is | Matthew \right) &= \frac{c\left(is, Matthew\right)}{c\left(Matthew\right)} &= 0.25 \\\
+p\left(my | Matthew \right) &= \frac{c\left(my, Matthew\right)}{c\left(Matthew\right)} &= 0.25 \\\
+p\left(\lt /s\gt | Matthew \right) &= \frac{c\left(\lt /s\gt, Matthew\right)}{c\left(Matthew\right)} &= 0.5
+\end{align}
+
+---
+
+But this would assign non-zero probability to sequences such as "Matthew is Matthew is Matthew", or "is my name is Matthew". So this language model has the capacity to generate the set of sentences I have transcripts for, but it also generates new sentences that I have not seen.
+
+It is now clear how to generate the graph that encodes all possible word sequences. First, I string together the HMMs corresponding to the units making up all words in my vocabulary. Then I connect these word HMMs together using the n-gram probabilities learned in my language model. The graph below for instance is roughly the HMM corresponding to a 1-state HMM topology for each letter, where words are composed of letters, and the dashed edges between word HMMs, would have the corresponding n-gram probabilities shown above.
+
+![](/LF-MMI/graphviz (3).png)
