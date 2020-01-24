@@ -12,7 +12,7 @@ author: MatthewWiesner
 description: Everything about LF-MMI
 ---
 
-I'm writing this to remember all of the details of MMI and LF-MMI, especially the gradient computation that I worked through with [Desh Raj's](https://desh2608.github.io/2019-05-21-chain/). I probably missed a few things, but hopefully the main concepts are covered. If you are reading this and you already know what MMI is and you are just looking for the details of LF-MMI, skip to the LF-MMI section. I added some very basic information about ASR with HMMs just for the sake of completeness. The original paper is [here](http://www.danielpovey.com/files/2016_interspeech_mmi.pdf).
+I'm writing this to remember all of the details of MMI and LF-MMI, especially the gradient computation that I worked through with [Desh Raj](https://desh2608.github.io/2019-05-21-chain/). I probably missed a few things, but hopefully the main concepts are covered. If you are reading this and you already know what MMI is and you are just looking for the details of LF-MMI, skip to the LF-MMI section. I added some very basic information about ASR with HMMs just for the sake of completeness. The original paper is [here](http://www.danielpovey.com/files/2016_interspeech_mmi.pdf).
 
 tldr;
 
@@ -94,7 +94,7 @@ $$ p_{\theta}\left(X_r | W_r \right) = \sum_{\pi_r} \prod_{t=0}^{T-1} p_{\theta}
 $$\pi_r$$ corresponds to one of the valid paths through the HMM for the word sequence $$w_r$$. $$\pi_r^t$$ is the state at time $$t$$ along the path $$\pi_r$$. 
 
 ## Gradient of MMI
-I am going to assume that the underlying acoustic model is an HMM. I assume we are using a Hybrid HMM-DNN model, where the DNN output activations are used to as log emission probabilities for the $$D$$ states $$s_1, \ldots, s_D$$ in our HMM. We define $$y_s^t$$ to be the DNN activations at time $$t$$ for a state $$s$$. In other terms $$y_s^t = \log{p_{\theta}\left(x_t | s \right)}$$
+I am going to assume that the underlying acoustic model is an HMM. I assume we are using a Hybrid HMM-DNN model, where the DNN output activations are used as log emission probabilities for the $$D$$ states $$s_1, \ldots, s_D$$ in our HMM. We define $$y_s^t$$ to be the DNN activations at time $$t$$ for a state $$s$$. In other terms $$y_s^t = \log{p_{\theta}\left(x_t | s \right)}$$
 
 We also note that since the transition probabilities are not trained, we will just consider these to be a multiplicative weight associated with a particular path
 (i.e. $$ K_{\pi_r} = \prod_{t=0}^{T-1} p\left(\pi_r^t | \pi_r^{t-1}\right)$$).
@@ -153,21 +153,21 @@ $$ \frac{\delta F_{MMI}}{\delta \theta} = \sum_{r} \left[ \gamma_{r}\left(s, \ta
 
 where $$\theta$$ is some parameter in the neural network, and that gradient is just computed via autograd and backpropagation.
 
-Our algorithm has some major problems however, especially the way we proposed to generate the numerator and denominator graphs. Below are details explaining how in practice we can generate these graphs. The main contribution of LF-MMI is how it approximates this graph in order to make the computation feasible and the graph of a manageable size. In practice this is all done using Finite State Transducers (FSTs), which enable us to compactly store the set of all possible sequences needed in (1.) for instance. I will be making another post about FSTs in ASR, specifically on the decoding graph and the components used to create in in a future post [HCLG](https://m-wiesner.github.io/HCLG/)
+Our algorithm has some major problems however, especially the way we proposed to generate the numerator and denominator graphs. Below are details explaining how in practice we can generate these graphs. The main contribution of LF-MMI is how it approximates this graph in order to make the computation feasible and the graph of a manageable size. In practice this is all done using Finite State Transducers (FSTs), which enable us to compactly store the set of all possible sequences needed in (1.) for instance. I will be making another post about FSTs in ASR, specifically on the decoding graph and the components used to create it in a future post [HCLG](https://m-wiesner.github.io/HCLG/)
 
 ## LF-MMI
 
-In order to make this graph of a manageable size, the following ideas are introduce:
-1. The denominator graph uses a 4-gram phone language model instead of a word level language model. The space of phones is much smaller than the space of all words. Furthermore, the language model is not smoothed as this introduces many back-off states and edges which increases the size of the denominator graph.
+In order to make the denominator graph a manageable size, the following modifications are made to the denominator graph:
+1. The denominator graph uses a 4-gram phone language model instead of a word level language model. The space of phones is much smaller than the space of all words. Furthermore, the language model is not smoothed; smoothing introduces many back-off states and edges which increases the size of the denominator graph.
 
 2. The HMM topology used is the one state topology described above (as opposed to the 3-state topology). Again this makes the denominator graph smaller, and speeds up the forward / backward computation.
 
-3. The DNN ooutput frame rate is also reduced from 1 frame/10ms to 1 frame/30ms for the same reasons.
+3. The DNN output frame rate is also reduced from 1 frame/10ms to 1 frame/30ms for the same reasons.
 
 ### Training with chunks
 In order to train on chunks that are smaller than a whole utterance, there are a number of other necessary changes as well.
 
-1. The utterance level HMMs are represented as finite state transducers (FSTs). A separate FST acceptor is constructed that enforces a chunk of audio to be roughly aligned with the single best state sequence. The FST is created by having 1 node per time step. Between each node are a set of edges representing the set of state-ids that are allowable at this time step. This set is constructed from looking at a user specified window around the single best path and allowing any of the pdfids in this window to be accepted at the specific time. By composing this FST with the utterance level HMM, we get back a lattice representing the set of all probable alignments of the audio to the HMM states. Alternate paths in the resulting lattice therefore correspond to alternative pronunciations or alternative alignments of the audio. In this way, each state in the lattice is associated with a particular time index, which allows us to chop the utterance level lattices into chunks. Note that since we use state-tied parameters in ASR HMM, we actually align to pdf-ids (which could be shared across state), rather than on state id.
+* The utterance level HMMs are represented as finite state transducers (FSTs). A separate FST acceptor is constructed that enforces a chunk of audio to be roughly aligned with the single best state sequence. The FST is created by having 1 node per time step. Between each node are a set of edges representing the set of state-ids that are allowable at this time step. This set is constructed from looking at a user specified window around the single best path and allowing any of the pdfids in this window to be accepted at the specific time. By composing this FST with the utterance level HMM, we get back a lattice representing the set of all probable alignments of the audio to the HMM states. Alternate paths in the resulting lattice therefore correspond to alternative pronunciations or alternative alignments of the audio. In this way, each state in the lattice is associated with a particular time index, which allows us to chop the utterance level lattices into chunks. Note that since we use state-tied parameters for HMMs in ASR, we actually align to pdf-ids (which could be shared across state), rather than on state id.
 
 The time enforcer FST looks like the FST shown below. For more information on the time enforcement, read [Improving LF-MMI Using Unconstrained Supervisions for ASR](https://ieeexplore.ieee.org/abstract/document/8639684), which is where the image below comes from.
 
@@ -176,9 +176,9 @@ The time enforcer FST looks like the FST shown below. For more information on th
 where $$\{\alpha_t^k | k \in \left[0, N-1\right]\}$$
 is the set of $$N$$ distinct pdf-ids allowed at time $$t$$.
 
-2. The denominator graph is created using a language model trained on full utterances. Since we are using chunks of audio, this means we could be both starting and ending in the middle of an utterance. Clearly, the initial and final probabilities of the initial denominator graph would be wrong if that were the case. To compensate for this we use modified initial and final probabilities. The final probability at every state is set to 1. This lets the utterance end at any arbitrary HMM state (not just at the end of the utterance). New initial probabilities are computed by creating the first 100 steps of the FST trellis. The state occupancy probabilities are averaged across all 100 time steps. We use this average as our new initial probabilities for each state. This modified denominator graph is called the **normalization fst**.
+* The denominator graph is created using a language model trained on full utterances. Since we are using chunks of audio, this means we could be both starting and ending in the middle of an utterance. Clearly, the initial and final probabilities of the initial denominator graph would be wrong if that were the case. To compensate for this we use modified initial and final probabilities. The final probability at every state is set to 1. This lets the utterance end at any arbitrary HMM state (not just at the end of the utterance). New initial probabilities are computed by creating the first 100 steps of the FST trellis. The state occupancy probabilities are averaged across all 100 time steps. We use this average as our new initial probabilities for each state. This modified denominator graph is called the **normalization fst**.
 
-3. Finally, since the numerator and denominator graphs are created in different ways, we need to ensure that the set of paths in the numerator graph is a subset of those in the denominator graph. We do this by composing the numerator graph with the normalization fst. To avoid double counting the transition probabilities, they are actually omitted in the original numerator graph.
+* Finally, since the numerator and denominator graphs are created in different ways, we need to ensure that the set of paths in the numerator graph is a subset of those in the denominator graph. We do this by composing the numerator graph with the normalization fst. To avoid double counting the transition probabilities, they are actually omitted in the original numerator graph.
 
 ### Regularization
 
