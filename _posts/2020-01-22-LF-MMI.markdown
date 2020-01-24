@@ -187,6 +187,6 @@ The LF-MMI objective was observed to overfit. 3 methods of regularizing the netw
 1. Multitask training with the cross-entropy objective. The forward probabilities at each time step in the numerator graph are used as soft targets instead of the usual hard targets.
 
 2. L-2 regularization on the network outputs. In otherwords, the network is trained using the objective.
-$$F_{LF-MMI} = F_MMI + \lambda {\left\lVert y^t\right\rVert}_2^2 + \omega F_{xent}$$  
+$$F_{LF-MMI} = F_{MMI} + \lambda {\left\lVert y^t\right\rVert}_2^2 + \omega F_{xent}$$  
 
 3. A Leaky HMM is used. Here a small transition probability between any two states is allowed. This allows for gradual forgetting of context.
