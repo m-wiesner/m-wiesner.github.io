@@ -170,11 +170,12 @@ In order to train on chunks that are smaller than a whole utterance, there are a
 
 1. The utterance level HMMs are represented as finite state transducers (FSTs). A separate FST acceptor is constructed that enforces a chunk of audio to be roughly aligned with the single best state sequence. The FST is created by having 1 node per time step. Between each node are a set of edges representing the set of state-ids that are allowable at this time step. This set is constructed from looking at a user specified window around the single best path and allowing any of the pdfids in this window to be accepted at the specific time. By composing this FST with the utterance level HMM, we get back a lattice representing the set of all probable alignments of the audio to the HMM states. Alternate paths in the resulting lattice therefore correspond to alternative pronunciations or alternative alignments of the audio. In this way, each state in the lattice is associated with a particular time index, which allows us to chop the utterance level lattices into chunks. Note that since we use state-tied parameters in ASR HMM, we actually align to pdf-ids (which could be shared across state), rather than on state id.
 
-The time enforcer FST looks like ...
+The time enforcer FST looks like the FST shown below. For more information on the time enforcement, read [Improving LF-MMI Using Unconstrained Supervisions for ASR](https://ieeexplore.ieee.org/abstract/document/8639684), which is where the image below comes from.
 
 ![](/LF-MMI/Screen Shot 2020-01-23 at 9.29.32 PM.png){:height="50%" width="50%"}
 
-where $$\{\alpha_t^k | k \in \left[0, N-1\right]\}$$ is the set of $$N$$ distinct pdf-ids allowed at time $$t$$.
+where $$\{\alpha_t^k | k \in \left[0, N-1\right]\}$$
+is the set of $$N$$ distinct pdf-ids allowed at time $$t$$.
 
 2. The denominator graph is created using a language model trained on full utterances. Since we are using chunks of audio, this means we could be both starting and ending in the middle of an utterance. Clearly, the initial and final probabilities of the initial denominator graph would be wrong if that were the case. To compensate for this we use modified initial and final probabilities. The final probability at every state is set to 1. This lets the utterance end at any arbitrary HMM state (not just at the end of the utterance). New initial probabilities are computed by creating the first 100 steps of the FST trellis. The state occupancy probabilities are averaged across all 100 time steps. We use this average as our new initial probabilities for each state. This modified denominator graph is called the **normalization fst**.
 
@@ -188,4 +189,4 @@ The LF-MMI objective was observed to overfit. 3 methods of regularizing the netw
 
 2. L-2 regularization on the network outputs. In otherwords, the network is trained using the objective.
 
-$$F_{LF-MMI} = F_MMI + \lambda {\left\lVert y_s^t\right\rVert}_2^2 + \omega F_{x-ent}$$  
+$$F_{LF-MMI} = F_MMI + \lambda {\left\lVert y^t\right\rVert}_2^2 + \omega F_{x-ent}$$  
