@@ -188,4 +188,4 @@ The LF-MMI objective was observed to overfit. 3 methods of regularizing the netw
 
 2. L-2 regularization on the network outputs. In otherwords, the network is trained using the objective.
 
-$$F_{LF-MMI} = F_MMI + \lambda \norm{y_s^t}_2^2 + \omega F_{x-ent}$$  
+$$F_{LF-MMI} = F_MMI + \lambda {\left\lVert y_s^t\right\rVert}_2^2 + \omega F_{x-ent}$$  
