@@ -153,7 +153,7 @@ $$ \frac{\delta F_{MMI}}{\delta \theta} = \sum_{r} \left[ \gamma_{r}\left(s, \ta
 
 where $$\theta$$ is some parameter in the neural network, and that gradient is just computed via autograd and backpropagation.
 
-Our algorithm has some major problems however, especially the way we proposed to generate the numerator and denominator graphs. Below are details explaining how in practice we can generate these graphs. The main contribution of LF-MMI is how it approximates this graph in order to make the computation feasible and the graph of a manageable size. In practice this is all done using Finite State Transducers (FSTs), which enable us to compactly store the set of all possible sequences needed in (1.) for instance. I will be making another post about FSTs in ASR, specifically on the decoding graph and the components used to create it in a future post [HCLG](https://m-wiesner.github.io/HCLG/)
+Our algorithm has some major problems, however, especially the way we proposed to generate the numerator and denominator graphs. Below are details explaining how in practice we can generate these graphs. The main contribution of LF-MMI is how it approximates this graph in order to make the computation feasible and the graph of a manageable size. In practice this is all done using Finite State Transducers (FSTs), which enable us to compactly store the set of all possible sequences needed in (1.) for instance. I will be making another post about FSTs in ASR, specifically on the decoding graph and the components used to create it in a future post [HCLG](https://m-wiesner.github.io/HCLG/).
 
 ## LF-MMI
 
