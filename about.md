@@ -21,6 +21,9 @@ I spend most of my time making music and with my family.</p>
 
 <h2>Publications</h2>
 
+<p>Zero-Shot Pronunciation Lexicons for Cross-Language Acoustic Model Transfer Settings<br />
+<em style="font-size: 75%"><strong>Matthew Wiesner</strong>, Oliver Adams, David Yarowsky, Jan Trmal Sanjeev Khudanpur, ASRU 2019</em></p>
+
 <p><a href="https://arxiv.org/abs/1812.03919">Pretraining by Backtranslation for End-to-end ASR in Low-Resource Settings</a><br />
 <em style="font-size: 75%"><strong>Matthew Wiesner</strong>, Adithya Renduchintala, Shinji Watanabe, Chunxi Liu, Najim Dehak, Sanjeev Khudanpur, INTERSPEECH 2019</em></p>
 
