@@ -38,10 +38,10 @@ for our data. In spite of this, we will proceed to take gradients of this functi
 
 \begin{align}
 \nabla_{\theta} \log{p_{\theta}\left(x\right)} &= -E\left(x\right) - \log{Z\left(\theta\right)} \\\
-&= -\nabla_{\theta} E\left(x\right) - \frac{1}{Z\left(\theta\right)} \int_{x \in \mathcal{X}} e^{-E\left(x\right)} - \nabla_{\theta} dx \\\
-&= -\nabla_{\theta} E\left(x\right) + \int_{x \in \mathcal{X}} \frac{e^{-E\left(x\right)}}{Z\left(\theta\right)} \nabla_{\theta} dx \\\
-&= -\nabla_{\theta} E\left(x\right) + \int_{x \in \mathcal{X}} p_{\theta}\left(x\right) \nabla_{\theta} dx \\\
-&= \mathbb{E}_{p_{\theta}\left(x\right)} [\nabla_{\theta}] - \nabla_{\theta} E\left(x\right) 
+&= -\nabla_{\theta} E\left(x\right) - \frac{1}{Z\left(\theta\right)} \int_{x \in \mathcal{X}} e^{-E\left(x\right)} - \nabla_{\theta}E\left(x\right) dx \\\
+&= -\nabla_{\theta} E\left(x\right) + \int_{x \in \mathcal{X}} \frac{e^{-E\left(x\right)}}{Z\left(\theta\right)} \nabla_{\theta} E\left(x\right) dx \\\
+&= -\nabla_{\theta} E\left(x\right) + \int_{x \in \mathcal{X}} p_{\theta}\left(x\right) \nabla_{\theta} E\left(x\right) dx \\\
+&= \mathbb{E}_{p_{\theta}\left(x\right)} \left[\nabla_{\theta}E\left(x\right)\right] - \nabla_{\theta} E\left(x\right) 
 \end{align}
 
 So if we know how to compute the gradient with respect to $$E\left(x\right)$$, then we can approximate the expectation by sampling.
