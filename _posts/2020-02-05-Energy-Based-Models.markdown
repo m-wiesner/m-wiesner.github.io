@@ -29,7 +29,7 @@ The only restriction on this score is that it result in a finite integral over t
 from the energy.
 
 \begin{align}
-p_{\theta}\left(x\right) &= \frac{e^{-E\left(x\right)}}{\int_{x \in \mathcal{X} e^{-E\left(x\right)} dx} \
+p_{\theta}\left(x\right) &= \frac{e^{-E\left(x\right)}}{\int_{x \in \mathcal{X}} e^{-E\left(x\right)} dx} \\\
 &= \frac{e^{-E\left(x\right)}}{Z\left(\theta\right)}
 \end{align}
 
@@ -37,10 +37,10 @@ Here, $$Z\left(\theta\right)$$ is known as the partition function, and computing
 for our data. In spite of this, we will proceed to take gradients of this function as if we could perform gradient descent.
 
 \begin{align}
-\nabla_{theta} \log{p_{\theta}\left(x\right)} &= -E\left(x\right) - \log{Z\left(\theat\right)} \
-&= -\nabla_{\theta} E\left(x\right) - \frac{1}{Z\left(\theta\right)} \int_{x \in \mathcal{X} e^{-E\left(x\right)} - \nabla_{\theta} dx \
-&= -\nabla_{\theta} E\left(x\right) + \int_{x \in \mathcal{X} \frac{e^{-E\left(x\right)}}{Z\left(\theta\right)} \nabla_{\theta} dx \
-&= -\nabla_{\theta} E\left(x\right) + \int_{x \in \mathcal{X} p_{\theta}\left(x\right) \nabla_{\theta} dx \
+\nabla_{\theta} \log{p_{\theta}\left(x\right)} &= -E\left(x\right) - \log{Z\left(\theta\right)} \\\
+&= -\nabla_{\theta} E\left(x\right) - \frac{1}{Z\left(\theta\right)} \int_{x \in \mathcal{X}} e^{-E\left(x\right)} - \nabla_{\theta} dx \\\
+&= -\nabla_{\theta} E\left(x\right) + \int_{x \in \mathcal{X}} \frac{e^{-E\left(x\right)}}{Z\left(\theta\right)} \nabla_{\theta} dx \\\
+&= -\nabla_{\theta} E\left(x\right) + \int_{x \in \mathcal{X}} p_{\theta}\left(x\right) \nabla_{\theta} dx \\\
 &= \mathbb{E}_{p_{\theta}\left(x\right)} [\nabla_{\theta}] - \nabla_{\theta} E\left(x\right) 
 \end{align}
 
