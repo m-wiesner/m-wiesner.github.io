@@ -36,7 +36,15 @@ p_{\theta}\left(x\right) &= \frac{e^{-E\left(x\right)}}{\int_{x \in \mathcal{X}}
 Here, $$Z\left(\theta\right)$$ is known as the partition function, and computing it is impossible because we can never integrate over all possible value
 for our data. In spite of this, we will proceed to take gradients of this function as if we could perform gradient descent.
 
-$$\nabla_{\theta} \log{p_{\theta}\left(x\right)} &= -E\left(x\right) - \log{Z\left(\theta\right)}$$
+$$\nabla_{\theta} \log{p_{\theta}\left(x\right)} = -E\left(x\right) - \log{Z\left(\theta\right)}$$
+
+$$-\nabla_{\theta} E\left(x\right) - \frac{1}{Z\left(\theta\right)} \int_{x \in \mathcal{X}} e^{-E\left(x\right)} - \nabla_{\theta}E\left(x\right) dx$$
+
+$$-\nabla_{\theta} E\left(x\right) + \int_{x \in \mathcal{X}} \frac{e^{-E\left(x\right)}}{Z\left(\theta\right)} \nabla_{\theta} E\left(x\right) dx$$
+
+$$-\nabla_{\theta} E\left(x\right) + \int_{x \in \mathcal{X}} p_{\theta}\left(x\right) \nabla_{\theta} E\left(x\right) dx$$
+
+$$\mathbb{E}_{p_{\theta}\left(x\right)} \left[\nabla_{\theta}E\left(x\right)\right] - \nabla_{\theta} E\left(x\right)$$
 
 So if we know how to compute the gradient with respect to $$E\left(x\right)$$, then we can approximate the expectation by sampling.
 This sampling procedure therefore becomes crucial. One easy way of sampling is to use a technique known as Stochastic Gradient Langevin Dynamics (SGLD).
