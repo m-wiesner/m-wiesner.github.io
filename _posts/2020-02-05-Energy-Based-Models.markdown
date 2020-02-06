@@ -36,7 +36,7 @@ p_{\theta}\left(x\right) &= \frac{e^{-E\left(x\right)}}{\int_{x \in \mathcal{X}}
 Here, $$Z\left(\theta\right)$$ is known as the partition function, and computing it is impossible because we can never integrate over all possible value
 for our data. In spite of this, we will proceed to take gradients of this function as if we could perform gradient descent.
 
-$$\nabla_{\theta} \log{p_{\theta}\left(x\right)} &= -E\left(x\right) - \log{Z\left(\theta\right)} $$
+$$\nabla_{\theta} \log{p_{\theta}\left(x\right)} = -E\left(x\right) - \log{Z\left(\theta\right)} $$
 
 $$= -\nabla_{\theta} E\left(x\right) - \frac{1}{Z\left(\theta\right)} \int_{x \in \mathcal{X}} e^{-E\left(x\right)} - \nabla_{\theta}E\left(x\right) dx$$
 
