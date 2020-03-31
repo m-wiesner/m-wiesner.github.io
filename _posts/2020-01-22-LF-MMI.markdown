@@ -109,13 +109,13 @@ F_{MMI} &= \sum_{r} \log{\frac{p\left(w_r\right) \sum_{\pi_r}K_{\pi_r} e^{\sum_{
 Now since we are modeling the emission probabilities using a neural network trained using backpropagation and automatic differentiation, we really only need the partial gradient with respect to the output activations of the neural network $$y_s^t$$.
 
 \begin{align}
-\frac{\delta F_{MMI}}{\delta y_s^{\tau}} &= \frac{\delta}{\delta y_s^{\tau}} \sum_{r} \left[ \log{p\left(w_r\right)}  + \log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} - \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \right] \\\
-&= \sum_{r} \frac{\delta}{\delta y_s^{\tau}} \left[ \log{p\left(w_r\right)}  + \log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} - \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \right] \\\
-&= \sum_{r} \frac{\delta}{\delta y_s^{\tau}} \left[\log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} - \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \right] \\\
-&= \sum_{r} \left[ \frac{\delta}{\delta y_s^{\tau}} \log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} - \frac{\delta}{\delta y_s^{\tau}} \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \right] \\\
-&= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} \cdot \frac{\delta}{\delta y_s^{\tau}} \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \cdot \frac{\delta}{\delta y_s^{\tau}} \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t} \right] \\\
-&= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} \cdot \sum_{\pi_r}K_{\pi_r} \frac{\delta}{\delta y_s^{\tau}} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \cdot \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} \frac{\delta}{\delta y_s^{\tau}} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t} \right] \\\
-&= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} \cdot \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t} \frac{\delta}{\delta y_s^{\tau}} \sum_{t=0}^{T-1}y_{\pi_r^t}^t  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \cdot \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t} \frac{\delta}{\delta y_s^{\tau}} \sum_{t=0}^{T-1}y_{\pi_w^t}^t \right] \\\
+\frac{\partial F_{MMI}}{\partial y_s^{\tau}} &= \frac{\partial}{\partial y_s^{\tau}} \sum_{r} \left[ \log{p\left(w_r\right)}  + \log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} - \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \right] \\\
+&= \sum_{r} \frac{\partial}{\partial y_s^{\tau}} \left[ \log{p\left(w_r\right)}  + \log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} - \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \right] \\\
+&= \sum_{r} \frac{\partial}{\partial y_s^{\tau}} \left[\log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} - \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \right] \\\
+&= \sum_{r} \left[ \frac{\partial}{\partial y_s^{\tau}} \log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} - \frac{\partial}{\partial y_s^{\tau}} \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \right] \\\
+&= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} \cdot \frac{\partial}{\partial y_s^{\tau}} \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \cdot \frac{\partial}{\partial y_s^{\tau}} \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t} \right] \\\
+&= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} \cdot \sum_{\pi_r}K_{\pi_r} \frac{\partial}{\partial y_s^{\tau}} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \cdot \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} \frac{\partial}{\partial y_s^{\tau}} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t} \right] \\\
+&= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} \cdot \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t} \frac{\partial}{\partialy_s^{\tau}} \sum_{t=0}^{T-1}y_{\pi_r^t}^t  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \cdot \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t} \frac{\partial}{\partial y_s^{\tau}} \sum_{t=0}^{T-1}y_{\pi_w^t}^t \right] \\\
 &= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} \cdot \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t} \mathbb{1}\left(\pi_r^\tau, s\right)  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \cdot \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t} \mathbb{1}\left(\pi_r^\tau, s\right)\right]
 \end{align}
 
@@ -132,7 +132,7 @@ The second term in our expression can be decomposed in the same way as the first
 Our expression for the gradient then becomes ...
 
 \begin{align}
-\frac{\delta F_{MMI}}{\delta y_s^{\tau}} &= \sum_{r} \left[ \frac{\alpha_r\left(s, \tau\right) \beta_r\left(s, \tau\right)}{\sum_{\sigma} \alpha_{r}\left(\sigma,\tau\right) \beta_{r}\left(\sigma, \tau\right)}  - \frac{\alpha_{w^\ast}\left(s,\tau\right) \beta_{w^\ast}\left(s, \tau\right)}{\sum_{\sigma^\prime} \alpha_{w^\ast}\left(\sigma^\prime,\tau\right) \beta_{w^\ast}\left(\sigma^\prime, \tau\right)}\right] \\\
+\frac{\partial F_{MMI}}{\partial y_s^{\tau}} &= \sum_{r} \left[ \frac{\alpha_r\left(s, \tau\right) \beta_r\left(s, \tau\right)}{\sum_{\sigma} \alpha_{r}\left(\sigma,\tau\right) \beta_{r}\left(\sigma, \tau\right)}  - \frac{\alpha_{w^\ast}\left(s,\tau\right) \beta_{w^\ast}\left(s, \tau\right)}{\sum_{\sigma^\prime} \alpha_{w^\ast}\left(\sigma^\prime,\tau\right) \beta_{w^\ast}\left(\sigma^\prime, \tau\right)}\right] \\\
 &= \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^\ast}\left(s, \tau\right)\right]
 \end{align}
 
@@ -149,7 +149,7 @@ $$\alpha_{r}\left(s, t\right), \beta_{r}\left(s, t\right), \alpha_{w^{\ast}}\lef
 
 5. Compute the gradient according to 
 
-$$ \frac{\delta F_{MMI}}{\delta \theta} = \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^\ast}\left(s, \tau\right)\right] \frac{\delta y_s^{\tau}}{\delta \theta} $$
+$$ \frac{\partial F_{MMI}}{\partial \theta} = \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^\ast}\left(s, \tau\right)\right] \frac{\partial y_s^{\tau}}{\partial \theta} $$
 
 where $$\theta$$ is some parameter in the neural network, and that gradient is just computed via autograd and backpropagation.
 
