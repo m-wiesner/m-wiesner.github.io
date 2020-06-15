@@ -1,5 +1,5 @@
 ---
-title: "Noise Contrastive Estimation"
+title: "(Info) Noise Contrastive Estimation"
 layout: post
 date: 2020-06-14 13:35
 image: /assets/images/markdown.jpg
@@ -10,11 +10,11 @@ star: false
 category: blog
 author: MatthewWiesner
 published: true
-description: Noise Contrastive Estimation
+description: (Info) Noise Contrastive Estimation
 ---
 
 
-I'm writing this to summarize what I know about Noise Contrastive Estimation (NCE). I just want it written down in a way that makes sense to me. I'm mostly basing this off of this paper https://arxiv.org/pdf/1206.6426.pdf, by Andriy Mnih, and Yee Whye Teh though it was originally proposed by Gutmann and Hyvärinen http://proceedings.mlr.press/v9/gutmann10a/gutmann10a.pdf.
+I'm writing this to summarize what I know about Noise Contrastive Estimation (NCE), and the more recently proposed InfoNCE. I just want it written down in a way that makes sense to me. I'm mostly basing this off of this paper https://arxiv.org/pdf/1206.6426.pdf, by Andriy Mnih, and Yee Whye Teh though it was originally proposed by Gutmann and Hyvärinen http://proceedings.mlr.press/v9/gutmann10a/gutmann10a.pdf. InfoNCE is proposed by van den Oord https://arxiv.org/pdf/1807.03748.pdf
 ________________________________________________________________________________________________________________________________________
 
 ## Estimating $$p_\theta\left(x\right)$$
@@ -29,7 +29,7 @@ When the model is bad --- at the start of training for instance --- the model-ge
 ## Simplifying training
 In the above scenario, learning every detail about the data $$x$$, may ultimately prove hard, especially when $$x$$ is high-dimensional data, and sampling the negative examples from the model is computationally expensive. NCE addresses both of these issues. Instead of sampling from the model distribution, we estimate from a fixed noise distribution that should somewhat approximate the empircal data distribution. Furthermore, instead of directly learning $$p\left(x\right)$$ (think all sequences of words) we instead focus on learning conditional probabilities $$p\left(x | \mbox{context}\left(x\right) \right)$$ (think single word given a context of other surrounding words). Even this task can be challenging. It turns out that we can actually train the model to perform a *different* taks that involves learning the *same* conditional density $$p\left(x | \mbox{context}\left(x\right) \right)$$. This different task involves introducing a latent variable representing the source of the data, and then predicting that source. For simplicity we will call $$ h\left(x\right) = \mbox{context}\left(x\right)$$. In other words we want to optimize the following objective function.
 
-$$\min \mathbb{E}_{\left(x, h\left(x\right)\right)}\left[-\log{p_\theta\left(D | x, \mbox{context}\left(x\right)\right)}\right]$$.
+$$\min \mathbb{E}_{\left(x, h\left(x\right)\right)}\left\[-\log{p_\theta\left(D | x, \mbox{context}\left(x\right)\right)}\right\]$$.
 
 
 
