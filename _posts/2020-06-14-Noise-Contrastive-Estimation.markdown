@@ -20,7 +20,7 @@ ________________________________________________________________________________
 ## Estimating $$p_\theta\left(x\right)$$
 In a previous post discussing energy-based models, we focused on the problem training a model for 
 
-$$p_\theta\left(x\right) = \frac{e^{-E_\theta\left(x\right)}}{\int_x e^{-E\left(x\right)}}$$
+$$p_\theta\left(x\right) = \frac{e^{-E_\theta\left(x\right)}}{\int_x e^{-E_\theta\left(x\right)}}$$
 
 We worked found that the gradient of the objective function $$\mathbb{E}_{p\left(x\right)}[-\log{p_\theta\left(x\right)}]$$ took the form of a difference of two expectations. One expectation is approximated by averaging over ground-truth examples of $$x$$, while the other examples came from the model distribution $$p_\theta\left(x\right)$$. The starting point for this post is to think about the model-generated samples as being negative examples against which the true examples are contrasted. 
 
@@ -29,7 +29,9 @@ When the model is bad --- at the start of training for instance --- the model-ge
 ## Simplifying training
 In the above scenario, learning every detail about the data $$x$$, may ultimately prove hard, especially when $$x$$ is high-dimensional data, and sampling the negative examples from the model is computationally expensive. NCE addresses both of these issues. Instead of sampling from the model distribution, we estimate from a fixed noise distribution that should somewhat approximate the empircal data distribution. Furthermore, instead of directly learning $$p\left(x\right)$$ (think all sequences of words) we instead focus on learning conditional probabilities $$p\left(x | \mbox{context}\left(x\right) \right)$$ (think single word given a context of other surrounding words). Even this task can be challenging. It turns out that we can actually train the model to perform a *different* taks that involves learning the *same* conditional density $$p\left(x | \mbox{context}\left(x\right) \right)$$. This different task involves introducing a latent variable representing the source of the data, and then predicting that source. For simplicity we will call $$ h\left(x\right) = \mbox{context}\left(x\right)$$. In other words we want to optimize the following objective function.
 
-$$\min_{\theta} \mathbb{E}_{\left(x, h\left(x\right)\right)} \left[-\log{p_{\theta}\left(D | x, \mbox{context}\left(x\right)\right)}\right]$$
+$$\min_{\theta} \mathbb{E}_{\left(x, h\left(x\right)\right)} \left[-\log{p_{\theta}\left(D | x, h\left(x\right)\right)}\right]$$
+
+
 
 
 
