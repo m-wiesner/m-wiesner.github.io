@@ -49,11 +49,13 @@ $$ arg\max_\theta H\left(W_r\right) - H_\theta\left(W_r | X_r\right) = arg\min_\
 
 Using the definition of conditional entropy we have that
 
+\[
 \begin{align}
-\mbox{ (1)   } H_{\theta}\left(W_r | X_r\right) &=& E_{p\left(X_r, W_r\right)} \left[ - \log{p_{\theta}\left(W_r | X_r\right)}\right] \\
-\mbox{ (2)   } &=& E_{p\left(X_r, W_r\right)} \left[ - \log{\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{p\left(X_r\right)}}\right] \\
+\mbox{ (1)   } H_{\theta}\left(W_r | X_r\right) &=& E_{p\left(X_r, W_r\right)} \left[ - \log{p_{\theta}\left(W_r | X_r\right)}\right] \\\
+\mbox{ (2)   } &=& E_{p\left(X_r, W_r\right)} \left[ - \log{\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{p\left(X_r\right)}}\right] \\\
 \mbox{ (3)   } &=& E_{p\left(X_r, W_r\right)} \left[ - \log{\frac{p_{\theta}\left(X_r | W_r\right) p\left(W_r\right)}{\sum_{W} p_{\theta}\left(X_r | W\right) p\left(W\right)}}\right] 
 \end{align}
+\]
 
 Line (1) from above is the from the definition of conditional entropy. Line (2) uses Bayes rule to factorize the posterior distribution.  Line (4) simply factorizes the joint distribution $$p_{\theta}\left(X, W\right)$$
 into a product of the conditional and marginal distributions.
