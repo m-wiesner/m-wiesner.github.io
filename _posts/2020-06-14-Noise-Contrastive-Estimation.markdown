@@ -9,7 +9,7 @@ tag:
 star: false
 category: blog
 author: MatthewWiesner
-published: true
+published: false
 description: (Info) Noise Contrastive Estimation
 ---
 
