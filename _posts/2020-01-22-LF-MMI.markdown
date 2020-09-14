@@ -102,14 +102,14 @@ We also note that since the transition probabilities are not trained, we will ju
 
 Plugging this into the expression for $$F_{MMI}$$ and converting the logarithm of a product into the sum of the logartihms we get
 
-\begin{align}
+$$\begin{align}
 F_{MMI} &= \sum_{r} \log{\frac{p\left(w_r\right) \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}}{\sum_{w} p\left(w\right) \sum_{\pi_w}K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}}} \\\
 &= \sum_{r} \left[ \log{p\left(w_r\right)}  + \log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} - \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \right]
-\end{align}
+\end{align}$$
 
 Now since we are modeling the emission probabilities using a neural network trained using backpropagation and automatic differentiation, we really only need the partial gradient with respect to the output activations of the neural network $$y_s^t$$.
 
-\begin{align}
+$$\begin{align}
 \frac{\partial F_{MMI}}{\partial y_s^{\tau}} &= \frac{\partial}{\partial y_s^{\tau}} \sum_{r} \left[ \log{p\left(w_r\right)}  + \log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} - \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \right] \\\
 &= \sum_{r} \frac{\partial}{\partial y_s^{\tau}} \left[ \log{p\left(w_r\right)}  + \log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} - \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \right] \\\
 &= \sum_{r} \frac{\partial}{\partial y_s^{\tau}} \left[\log{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} - \log{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \right] \\\
@@ -118,13 +118,13 @@ Now since we are modeling the emission probabilities using a neural network trai
 &= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} \cdot \sum_{\pi_r}K_{\pi_r} \frac{\partial}{\partial y_s^{\tau}} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \cdot \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} \frac{\partial}{\partial y_s^{\tau}} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t} \right] \\\
 &= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} \cdot \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r}^t} \frac{\partial}{\partial_s^{\tau}} \sum_{t=0}^{T-1}y_{\pi_r^t}^t  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \cdot \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t} \frac{\partial}{\partial y_s^{\tau}} \sum_{t=0}^{T-1}y_{\pi_w^t}^t \right] \\\
 &= \sum_{r} \left[ \frac{1}{\sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t}} \cdot \sum_{\pi_r}K_{\pi_r} e^{\sum_{t=0}^{T-1}y_{\pi_r^t}^t} \mathbb{1}\left(\pi_r^\tau, s\right)  - \frac{1}{\sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t}} \cdot \sum_{w, \pi_w} p\left(w\right) K_{\pi_w} e^{\sum_{t=0}^{T-1}y_{\pi_w^t}^t} \mathbb{1}\left(\pi_r^\tau, s\right)\right]
-\end{align}
+\end{align}$$
 
 Here we introduced the indicator function
 
-\begin{align}
+$$\begin{align}
 \mathbb{1}\left(\pi_r^\tau, s\right) = \begin{cases} 1 & \pi_r^\tau = s \\\ 0 & \pi_r^\tau \neq s \end{cases}
-\end{align}
+\end{align}$$
 
 We are almost done now. We note that the numerator of the first term in our expression corresponds to the joint probability of the acoustic sequence $$X_r$$ going through **any** path for which $$\pi_r^{\tau} = s$$. Note that we have restricted the set of paths to be those that correspond to the word sequence $$W_r$$. Using the forward and backward probabilities at each time step we can write this as $$p\left(X_r, \pi_r^\tau = s\right) = \alpha_r\left(s, \tau\right) \beta_r\left(s, \tau\right)$$. In the denominator we can partition the set of paths into the set of all paths that use a state $$s$$ at time $$\tau$$. In this way when we sum over all of the states at time $$\tau$$ we are in fact summing over all paths. Hence we can rewrite the denominator as $$\sum_{\sigma} \alpha_r\left(\sigma, \tau \right) \beta_r\left(\sigma, \tau\right)$$. 
 
@@ -132,10 +132,10 @@ The second term in our expression can be decomposed in the same way as the first
 
 Our expression for the gradient then becomes ...
 
-\begin{align}
+$$\begin{align}
 \frac{\partial F_{MMI}}{\partial y_s^{\tau}} &= \sum_{r} \left[ \frac{\alpha_r\left(s, \tau\right) \beta_r\left(s, \tau\right)}{\sum_{\sigma} \alpha_{r}\left(\sigma,\tau\right) \beta_{r}\left(\sigma, \tau\right)}  - \frac{\alpha_{w^\ast}\left(s,\tau\right) \beta_{w^\ast}\left(s, \tau\right)}{\sum_{\sigma^\prime} \alpha_{w^\ast}\left(\sigma^\prime,\tau\right) \beta_{w^\ast}\left(\sigma^\prime, \tau\right)}\right] \\\
 &= \sum_{r} \left[ \gamma_{r}\left(s, \tau\right)  - \gamma_{w^\ast}\left(s, \tau\right)\right]
-\end{align}
+\end{align}$$
 
 ## Algorithm
 We now almost have an algorithm for computing the gradient with respect to a neural network output!
