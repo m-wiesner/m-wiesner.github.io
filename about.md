@@ -21,7 +21,10 @@ I spend most of my time making music and with my family.</p>
 
 <h2>Publications</h2>
 
-<p>Zero-Shot Pronunciation Lexicons for Cross-Language Acoustic Model Transfer Settings<br />
+<p><a href="https://arxiv.org/pdf/2005.13962.pdf">A Corpus for Large-Scale Phonetic Typology</a><br />
+<em style="font-size: 75%">Elizabeth Salesky, Eleanor Chodroff, Tiago Pimentel, <strong>Matthew Wiesner</strong>, Ryan Cotterell, Alan W Black, Jason Eisner
+
+<p><h href="https://ieeexplore.ieee.org/abstract/document/9004019">Zero-Shot Pronunciation Lexicons for Cross-Language Acoustic Model Transfer Settings</a><br />
 <em style="font-size: 75%"><strong>Matthew Wiesner</strong>, Oliver Adams, David Yarowsky, Jan Trmal Sanjeev Khudanpur, ASRU 2019</em></p>
 
 <p><a href="https://arxiv.org/abs/1812.03919">Pretraining by Backtranslation for End-to-end ASR in Low-Resource Settings</a><br />
