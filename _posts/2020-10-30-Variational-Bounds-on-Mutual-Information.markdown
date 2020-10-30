@@ -63,7 +63,7 @@ In general, computing normalized distributions as well as the differential entro
 
 Let 
 
-$$q\left(X|Y\right) = \frac{p\left(X\right)e^{f\left(X, Y\right)}}{\mathbb{E}_{p\left(x\right)}e^{f(\left(X, Y\right)}}$$
+$$q\left(X|Y\right) = \frac{p\left(X\right)e^{f\left(X, Y\right)}}{\mathbb{E}_{p\left(x\right)}\left[e^{f(\left(X, Y\right)}\right]}$$
 
 We then have that 
 $$\begin{align}
