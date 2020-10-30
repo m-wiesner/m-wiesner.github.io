@@ -39,17 +39,32 @@ And now we have our first bound!
 
 $$I\left(X; Y\right) \leq \mathbb{E}_{p\left(X\right)}\left[D_{KL}\left(p\left(Y|X\right) || q\left(Y\right)\right)\right]$$
 
-This term can be thought of as a regularizer\: in an overfit model $$p\left(Y|X\right)$$ will be too confident in its predictions, and we can smooth these predictions by making them look more like the prior distribution over $$p\left(Y\right)$$. 
+This term can be thought of as a regularizer. In an overfit model $$p\left(Y|X\right)$$ will be too confident in its predictions, and we can smooth these predictions by making them look more like the prior distribution over $$p\left(Y\right)$$. 
 
 
 ## Lower Bound on Mutual Information
 To lower bound the mutual information, we factor in the opposite direction $$p\left(X, Y\right) = p\left(X | Y\right)p\left(Y\right)$$, introduce a third distribution $$q\left(X | Y\right)$$ and use the non-negativity of the KL-divergence as well as the differential entropy of a random variable to arrive at our lower bound. 
 
 $$\begin{align}
-I\left(X; Y\right) &= \mathbb{E}_{p\left(X, Y\right)}\left[\frac{p\left(X|Y\right)q\left(X | Y\right)}{p\left(X\right)q\left(X|Y\right)}\right] \\
-&= \mathbb{E}_{p\left(X, Y\right)}\left[\frac{q\left(X | Y\right)}{p\left(X\right)}\right] + \mathbb{E}_{p\left(y\right)}\left[D_{KL}\left(p\left(X|Y\right) || q\left(X|Y\right)\right)\right] \\
-&\geq \mathbb{E}_{p\left(X, Y\right)}\left[\frac{q\left(X | Y\right)}{p\left(X\right)}\right] \mbox{due to the non-negativity of KL-divergence} \\
-&= \mathbb{E}_{p\left(X, Y\right)}\left[q\left(X | Y\right)\right] - \mathbb{E}_{p\left(X\right)}\left[\log{p\left(X\right)}\right] \\
-&= \mathbb{E}_{p\left(X, Y\right)}\left[q\left(X | Y\right)\right] + h\left(X\right) \\
+I\left(X; Y\right) &= \mathbb{E}_{p\left(X, Y\right)}\left[\log{\frac{p\left(X|Y\right)q\left(X | Y\right)}{p\left(X\right)q\left(X|Y\right)}}\right] \\
+&= \mathbb{E}_{p\left(X, Y\right)}\left[\log{\frac{q\left(X | Y\right)}{p\left(X\right)}}\right] + \mathbb{E}_{p\left(y\right)}\left[D_{KL}\left(p\left(X|Y\right) || q\left(X|Y\right)\right)\right] \\
+&\geq \mathbb{E}_{p\left(X, Y\right)}\left[\log{\frac{q\left(X | Y\right)}{p\left(X\right)}}\right] \mbox{due to the non-negativity of KL-divergence} \\
+&= \mathbb{E}_{p\left(X, Y\right)}\left[\log{q\left(X | Y\right)}\right] - \mathbb{E}_{p\left(X\right)}\left[\log{p\left(X\right)}\right] \\
+&= \mathbb{E}_{p\left(X, Y\right)}\left[\log{q\left(X | Y\right)}\right] + h\left(X\right) \\
+\end{align}$$
+
+And now we have our second bound!
+
+$$I\left(X; Y\right) \geq \mathbb{E}_{p\left(X, Y\right)}\left[q\left(X | Y\right)\right] + h\left(X\right)$$
+
+## Lower Bound on Mutual Information estimated with unormalized distributions
+
+In general, computing normalized distributions as well as the differential entropy are intractable. For this reason it is important to find bounds of un-normalized distributions. By chosing a specific form for our un-normalized distribution and plugging it into the expresesion in our third-to-last step in our derivation for the lower bound on mutual information, we arrive at the following bound for un-normalized distributions.
+
+Let $$q\left(X|Y\right) = \frac{p\left(X\right)e^{f\left(X, Y\right)}}{\mathbb{E}_{p\left(x\right)}e^{f(\left(X, Y\right)}}$$.
+
+We then have that 
+$$\begin{align}
+\mathbb{E}_{p\left(X, Y\right)}\left[\log{\frac{q\left(X | Y\right)}{p\left(X\right)}}\right] &= \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[\log{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]}\right]
 \end{align}$$
 
