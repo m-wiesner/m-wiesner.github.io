@@ -47,6 +47,9 @@ To lower bound the mutual information, we factor in the opposite direction $$p\l
 
 $$\begin{align}
 I\left(X; Y\right) &= \mathbb{E}_{p\left(X, Y\right)}\left[\frac{p\left(X|Y\right)q\left(X | Y\right)}{p\left(X\right)q\left(X|\Y\right)}\right] \\
-&= \mathbb{E}_{p\left(X, Y\right)}\left[\frac{q\left(X | Y\right)}{}\right]
+&= \mathbb{E}_{p\left(X, Y\right)}\left[\frac{q\left(X | Y\right)}{p\left(X\right)}\right] + \mathbb{E}_{p\left(y\right)}\left[D_{KL}\left(p\left(X|Y\right) || q\left(X|Y\right)\right)\right] \\
+&\geq \mathbb{E}_{p\left(X, Y\right)}\left[\frac{q\left(X | Y\right)}{p\left(X\right)}\right] \mbox{due to the non-negativity of KL-divergence} \\
+&= \mathbb{E}_{p\left(X, Y\right)}\left[q\left(X | Y\right)\right] - \mathbb{E}_{p\left(X\right)}\left[\log{p\left(X\right)}\right] \\
+&= \mathbb{E}_{p\left(X, Y\right)}\left[q\left(X | Y\right)\right] + h\left(X\right) \\
 \end{align}$$
 
