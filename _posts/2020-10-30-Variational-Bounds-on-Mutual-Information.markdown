@@ -20,12 +20,22 @@ which when coupled with a specific neural architecture was called [Contrastive P
 In general estimating the mutual information between two variables is difficult. In practice, the best we can really do is to estimate bounds on the mutual information. In this review
 as well as in the paper we are describing, the mutual information is viewed in terms of the KL-divergence
 
-$$I\left(p\left(X\right); p\left(Y\right)\right) = D_{KL}\left(p\left(X, Y\right) || p\left(X\right)p\left(Y\right)\right)$$
+$$I\left(X; Y\right) = I\left(p\left(X\right); p\left(Y\right)\right) = D_{KL}\left(p\left(X, Y\right) || p\left(X\right)p\left(Y\right)\right)$$
 
 Recall that KL-divergence can be viewed as the expected log ratio of the joint distribution over two random variables to the product of their marginal distributions.
-If the joint distribution is the same as the product of the marginal distributions, i.e., the random variables are independent, then the mutual information is 0, meaning that $$X$$
-is completely independent of $$Y$$. If $$p\left(X, Y\right).
+If the joint distribution is the same as the product of the marginal distributions, i.e., the random variables are independent, then the mutual information is 0, meaning that $$X$$ is completely independent of $$Y$$.
+
+## Upper Bound on Mutual Information
+To upper bound the mutual information, we express the KL-divergence as an expectation, introduce a third distribution, $$q\left(Y\right)$$ and factor the joint distribution as $$p\left(X, Y\right) = p\left(Y|X\right)p\left(Y\right)$$.
+
+$$\begin{align}
+I\left(X; Y\right) &= \mathbb{E}_{p\left(X, Y\right)}\left[\log{\frac{p\left(Y|X\right)}{p\left(Y\right)}}\right] \\
+&= \mathbb{E}_{p\left(X, Y\right)}\left[\log{\frac{p\left(Y|X\right)q\left(Y\right)}{p\left(Y\right)q\left(Y\right)}}\right] \\
+&= \mathbb{E}_{p\left(X, Y\right)}\left[\log{\frac{p\left(Y|X\right)}{q\left(Y\right)}}\right] + D_{KL}\left(p\left(y\right) || q\left(y\right)\right)
+\end{align}$$
+
+
 
 ## Lower Bound on Mutual Information
-To lower
+To lower bound the mutual information, we factor the 
 
