@@ -63,7 +63,7 @@ In general, computing normalized distributions as well as the differential entro
 
 Let 
 
-$$q\left(X|Y\right) = \frac{p\left(X\right)e^{f\left(X, Y\right)}}{\mathbb{E}_{p\left(x\right)}\left[e^{f(\left(X, Y\right)}\right]}$$
+$$q\left(X|Y\right) = \frac{p\left(X\right)e^{f\left(X, Y\right)}}{\mathbb{E}_{p\left(x\right)}\left[e^{f\left(X, Y\right)}\right]}$$
 
 We then have that 
 $$\begin{align}
@@ -72,9 +72,16 @@ $$\begin{align}
 
 So finally we have our third bound!!
 
-$$I\left(X; Y\right) \geq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[\log{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]}\right]
+$$I\left(X; Y\right) \geq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[\log{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]}\right]$$
 
 ## Donsker-Varadhan Bound on Mutual Information
 
-I
+The Donsker-Varadhan lower bound on mutual information is a well known bound that can be recovered by applying Jensen's Inequality on the expectation in the second term of the bound 
 
+$$I\left(X; Y\right) \geq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[\log{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]}\right]$$
+
+
+$$\begin{align}
+\mathbb{E}_{p\left(Y\right)}\left[\log{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]}\right] &\leq \log{\mathbb{E}_{p\left(Y\right)}\left[\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]\right]} \\
+&\implies \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[\log{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]}\right] \geq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \log{\mathbb{E}_{p\left(Y\right)}\left[\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]\right]} \\
+\end{align}$$
