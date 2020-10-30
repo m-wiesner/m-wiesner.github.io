@@ -45,3 +45,7 @@ This term can be thought of as a regularizer: in an overfit model $$p\left(Y|X\r
 ## Lower Bound on Mutual Information
 To lower bound the mutual information, we factor in the opposite direction $$p\left(X, Y\right) = p\left(X | Y\right)p\left(Y\right)$$, introduce a third distribution $$q\left(X | Y\right)$$ and use the non-negativity of the KL-divergence as well as the differential entropy of a random variable to arrive at our lower bound. 
 
+$$\begin{align}
+I\left(X; Y\right) = \mathbb{E}_{p\left(X, Y\right)}\left[\frac{p\left(X|Y\right)q\left(X | Y\right)}{p\left(X\right)q\left(X|\Y\right)}\right]
+\end{align}$$
+
