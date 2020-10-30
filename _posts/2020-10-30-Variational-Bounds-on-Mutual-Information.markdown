@@ -37,15 +37,15 @@ I\left(X; Y\right) &= \mathbb{E}_{p\left(X, Y\right)}\left[\log{\frac{p\left(Y|X
 
 And now we have our first bound!
 
-$$I\left(X; Y\right) \leq \mathbb{E}_{p\left(X\right)}\left[D_{KL}\left(p\left(Y|X\right)} || {q\left(Y\right)\right)\right]$$
+$$I\left(X; Y\right) \leq \mathbb{E}_{p\left(X\right)}\left[D_{KL}\left(p\left(Y|X\right) || q\left(Y\right)\right)\right]$$
 
-This term can be thought of as a regularizer: in an overfit model $$p\left(Y|X\right)$$ will be too confident in its predictions, and we can smooth these predictions by making them look more like the prior distribution over $$Y$$. 
+This term can be thought of as a regularizer: in an overfit model $$p\left(Y|X\right)$$ will be too confident in its predictions, and we can smooth these predictions by making them look more like the prior distribution over $$p\left(Y\right)$$. 
 
 
 ## Lower Bound on Mutual Information
 To lower bound the mutual information, we factor in the opposite direction $$p\left(X, Y\right) = p\left(X | Y\right)p\left(Y\right)$$, introduce a third distribution $$q\left(X | Y\right)$$ and use the non-negativity of the KL-divergence as well as the differential entropy of a random variable to arrive at our lower bound. 
 
 $$\begin{align}
-I\left(X; Y\right) = \mathbb{E}_{p\left(X, Y\right)}\left[\frac{p\left(X|Y\right)q\left(X | Y\right)}{p\left(X\right)q\left(X|\Y\right)}\right]
+I\left(X; Y\right) &= \mathbb{E}_{p\left(X, Y\right)}\left[\frac{p\left(X|Y\right)q\left(X | Y\right)}{p\left(X\right)q\left(X|\Y\right)}\right] \\
 \end{align}$$
 
