@@ -14,8 +14,7 @@ description: Review of [On Variational Bounds on Mutual Information](https://arx
 ---
 
 There has been incredible success using InfoNCE as a constrastive unsupervised pretraining objective for ASR in the past year. The original paper that introduced this training objective,
-which when coupled with a specific neural architecture was called [Contrastive Predictive Coding (CPC)](https://arxiv.org/pdf/1807.03748.pdf), is very useful, but a subsequent [paper
-](https://arxiv.org/pdf/1905.06922.pdf) I think more thoroughly explores the training objecgive InfoNCE, and provides some better theoretical underpinnings for why this objective works.
+which when coupled with a specific neural architecture was called [Contrastive Predictive Coding (CPC)](https://arxiv.org/pdf/1807.03748.pdf), is very useful, but a subsequent [paper](https://arxiv.org/pdf/1905.06922.pdf) I think more thoroughly explores the training objective InfoNCE, and provides some better theoretical underpinnings for why this objective works.
 
 In general estimating the mutual information between two variables is difficult. In practice, the best we can really do is to estimate bounds on the mutual information. In this review
 as well as in the paper we are describing, the mutual information is viewed in terms of the KL-divergence
