@@ -42,7 +42,6 @@ $$I\left(X; Y\right) \leq \mathbb{E}_{p\left(X\right)}\left[D_{KL}\left(p\left(Y
 This term can be thought of as a regularizer: in an overfit model $$p\left(Y|X\right)$$ will be too confident in its predictions, and we can smooth these predictions by making them look more like the prior distribution over $$Y$$. 
 
 
-
 ## Lower Bound on Mutual Information
-To lower bound the mutual information, we factor the 
+To lower bound the mutual information, we factor in the opposite direction $$p\left(X, Y\right) = p\left(X | Y\right)p\left(Y\right)$$, introduce a third distribution $$q\left(X | Y\right)$$ and use the non-negativity of the KL-divergence as well as the differential entropy of a random variable to arrive at our lower bound. 
 
