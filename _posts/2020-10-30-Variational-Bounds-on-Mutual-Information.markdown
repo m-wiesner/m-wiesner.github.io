@@ -39,7 +39,7 @@ And now we have our first bound!
 
 $$I\left(X; Y\right) \leq \mathbb{E}_{p\left(X\right)}\left[D_{KL}\left(p\left(Y|X\right) || q\left(Y\right)\right)\right]$$
 
-This term can be thought of as a regularizer.
+This term can be thought of as a regularizer. Overfitting is reduced by forcing overconfident predictions to be smoothed with the prior distribution.
 
 
 ## Lower Bound on Mutual Information
@@ -69,4 +69,12 @@ We then have that
 $$\begin{align}
 \mathbb{E}_{p\left(X, Y\right)}\left[\log{\frac{q\left(X | Y\right)}{p\left(X\right)}}\right] &= \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[\log{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]}\right]
 \end{align}$$
+
+So finally we have our third bound!!
+
+$$I\left(X; Y\right) \geq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[\log{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]}\right]
+
+## Donsker-Varadhan Bound on Mutual Information
+
+I
 
