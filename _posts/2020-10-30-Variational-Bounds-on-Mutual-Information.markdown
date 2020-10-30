@@ -39,7 +39,7 @@ And now we have our first bound!
 
 $$I\left(X; Y\right) \leq \mathbb{E}_{p\left(X\right)}\left[D_{KL}\left(p\left(Y|X\right) || q\left(Y\right)\right)\right]$$
 
-This term can be thought of as a regularizer. In an overfit model \(p\left(Y|X\right)\) will be too confident in its predictions, and we can smooth these predictions by making them look more like the prior distribution over \(p\left(Y\right)\). 
+This term can be thought of as a regularizer. In an overfit model $$p\left(Y|X\right)$$ will be too confident in its predictions, and we can smooth these predictions by making them look more like the prior distribution over $$p\left(Y\right)$$. 
 
 
 ## Lower Bound on Mutual Information
@@ -61,7 +61,7 @@ $$I\left(X; Y\right) \geq \mathbb{E}_{p\left(X, Y\right)}\left[q\left(X | Y\righ
 
 In general, computing normalized distributions as well as the differential entropy are intractable. For this reason it is important to find bounds of un-normalized distributions. By chosing a specific form for our un-normalized distribution and plugging it into the expresesion in our third-to-last step in our derivation for the lower bound on mutual information, we arrive at the following bound for un-normalized distributions.
 
-Let \(q\left(X|Y\right) = \frac{p\left(X\right)e^{f\left(X, Y\right)}}{\mathbb{E}_{p\left(x\right)}e^{f(\left(X, Y\right)}}\).
+Let $$q\left(X|Y\right) = \frac{p\left(X\right)e^{f\left(X, Y\right)}}{\mathbb{E}_{p\left(x\right)}e^{f(\left(X, Y\right)}}$$.
 
 We then have that 
 $$\begin{align}
