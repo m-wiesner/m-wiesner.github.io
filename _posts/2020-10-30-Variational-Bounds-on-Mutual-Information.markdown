@@ -190,7 +190,13 @@ The final step to get to the InfoNCE objective is to use the Monte-Carlo approxi
 $$\begin{align}
 a\left(Y; Z\right) &= \frac{1}{K} \sum_{k=1}^K e^{f\left(X, Y\right)} \\
 \mathbb{E}_{p\left(Y\right)p\left(X\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; Z\right)}\right] &= \mathbb{E}_{p\left(Y\right)}\left[\frac{1}{K}\sum_{j=1}^{K}\frac{e^{f\left(X, Y\right)}}{a\left(Y; Z\right)}\right] \\
-&= \mathbb{E}_{p\left(Y\right)}\left[1\right] &= 1 \\
-&\implies I_{TUBA} = \mathbb{E}_{p\left(X,Y\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{a\left(Y; Z\right)}}\right] \\
+&= \mathbb{E}_{p\left(Y\right)}\left[1\right] = 1 \\
+&\implies I_{TUBA} = I_{NCE} = \mathbb{E}_{p\left(X,Y\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{a\left(Y; Z\right)}}\right] \\
+\end{align}$$
+
+The constant one cancels out with the 1 in $$I_{TUBA}$$ and only the first expectation remains.
+
+$$\begin{align}
+I_{NCE} = \mathbb{E}_{p\left(Y\right)}\left[\frac{1}{K}\sum_{k=1}^K \log{\frac{e^{f\left(X, Y\right)}}{\frac{1}{K}\sum_{j=1}^K e^{f\left(X, Y\right)}}}\right]
 \end{align}$$
 
