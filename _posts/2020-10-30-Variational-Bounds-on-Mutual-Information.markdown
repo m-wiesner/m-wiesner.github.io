@@ -91,13 +91,17 @@ In Summary we have derived an upper bound and three lower bounds (or estimators)
 $$R \geq I\left(X; Y\right) \geq I_{BA} \geq I_{UBA} \geq I_{DV}$$
 
 ## The [MINE](https://arxiv.org/pdf/1801.04062.pdf) Estimator for Mutual Information
-MINE is an estimator for the mutual information parameterized by a neural network that is almost identical to InfoNCE. A critical part of the MINE objective was to note that the gradient update using $$I_{DV}$$
+MINE is an estimator for the mutual information parameterized by a neural network that is almost identical to InfoNCE. It uses the $$I_{DV}$$ bound from above and replaces the expectations with Monte-Carlo Estimates from minibatches of data.
 
-$$\nabla_{\theta} I_{DV} = \mathbb{E}_{p\left(X, Y\right)}\left[\nabla_{\theta}f\left(X, Y\right)\right] - \frac{\mathbb{E}_{p\left(Y\right)}\left[\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)} \nabla_{\theta}f\left(X, Y\right)\right\]\right]}{\mathbb{E}_{p\left(Y\right)}\left[\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]\right]}$$
+<!--
+Note when the minibatch consists of a single element,
 
-is biased. This is because the denominator in the second term is approximated by only those elements in a particular minibatch of data. To get around this problem, the denominator is replaced with an exponential moving average, or effectively,
+$$\begin{align}\mathbb{E}_{p\left(Y\right)}\left[\log{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]}\right] &= \mathbb{E}_{p\left(Y\right)}\left[\log{e^{f\left(X, Y\right)}}\right] \\
+&= \mathbb{E}_{p\left(Y\right)}\left[f\left(X, Y\right)\right] \\
+&= \mathbb{E}_{p\left(Y\right)}\left[\mathbb{E}_{p\left(X\right)}\left[f\left(X, Y\right)\right]\right]
+\end{align}$$
 
-$$$$
+In other words, 
 
 
 The MINE objective can also be obtained by using Jensen's Inequatlity on the second term of the $$I_{UBA}$$ bound, but on the inner expectation over $$p\left(X\right)$$.
@@ -115,6 +119,7 @@ I_{MINE} &\geq I_{UBA} \\
 I\left(X; Y\right) &\lessgtr I_{MINE} \\ 
 \end{align}$$
 
+-->
 
 
 
