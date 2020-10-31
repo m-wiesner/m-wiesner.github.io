@@ -175,6 +175,7 @@ In InfoNCE the RV $$Z=\{X_2^{\prime} \ldots X_N^{\prime}\}$$ are $$N-1$$ samples
 $$\begin{align}
 f^{\prime}\left(X, Y\right) &= 1 + \log{\frac{e^{f\left(X,  Y\right)}}{a\left(Y; X, Z\right)}} \\
 &\implies I_{TUBA} = 1 + \mathbb{E}_{p\left(X,Y\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}}\right] - \mathbb{E}_{p\left(Y\right)p\left(X\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}\right] \\
+&=  1 + \mathbb{E}_{p\left(X,Y,Z\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}}\right] - \mathbb{E}_{p\left(Y\right)p\left(X\right)p\left(Z\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}\right]
 \end{align}$$
 
 Note that the optimal critic for $$I_{UBA}$$ is 
