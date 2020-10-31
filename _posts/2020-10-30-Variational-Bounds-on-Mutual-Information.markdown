@@ -197,6 +197,7 @@ a\left(Y; Z\right) &= \frac{1}{K} \sum_{k=1}^K e^{f\left(X, Y\right)} \\
 The constant one cancels out with the 1 in $$I_{TUBA}$$ and only the first expectation remains.
 
 $$\begin{align}
-I_{NCE} = \mathbb{E}_{p\left(Y\right)}\left[\frac{1}{K}\sum_{k=1}^K \log{\frac{e^{f\left(X, Y\right)}}{\frac{1}{K}\sum_{j=1}^K e^{f\left(X, Y\right)}}}\right]
+I_{NCE} &= \mathbb{E}_{p\left(Y\right)}\left[\frac{1}{K}\sum_{k=1}^K \log{\frac{e^{f\left(X_k, Y\right)}}{\frac{1}{K}\sum_{j=1}^K e^{f\left(X_j, Y\right)}}}\right] \\
 \end{align}$$
 
+In the original CPC paper, the outer expectation was omitted because the join expectation was factored as $$p\left(X, Y\right) = p\left(Y | X) p\left(X\right) = p\left(X\right)$$ since the latent variable $$Y$$ was a deterministic function of $$X$$.
