@@ -148,7 +148,8 @@ $$\begin{align}
 Since this relationship holds true for all values of $$a\left(y\right)$$, we can set $$a\left(y\right) = e \ \forall \ y$$ at the expense of having a slightly looser bound on the mutual information. This gives us the bound 
 
 $$\begin{align}
-I\left(X, Y\right) \geq I_{TUBA} &\geq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[e^{-1}\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)\right]\right] \\
+I\left(X, Y\right) &\geq I_{TUBA} \\
+&\geq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[e^{-1}\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)\right]\right] \\
 &= I_{NJW}
 \end{align}$$
 
@@ -159,3 +160,4 @@ To summarize all of the bounds we've seen again
 $$R \geq I\left(X; Y\right) \geq I_BA \geq I_{UBA} = F_{MMI} - \E_{p\left(X\right)}\left[\log{p\left(Y\right)}\right] \geq I_{TUBA} \geq I_{NJW}\$$
 
 ## Mutlisample Un-normalized Lower Bounds
+
