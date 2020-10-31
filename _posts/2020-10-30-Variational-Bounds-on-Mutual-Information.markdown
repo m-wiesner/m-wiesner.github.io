@@ -91,7 +91,20 @@ In Summary we have derived an upper bound and three lower bounds (or estimators)
 $$R \geq I\left(X; Y\right) \geq I_{BA} \geq I_{UBA} \geq I_{DV}$$
 
 ## The [MINE](https://arxiv.org/pdf/1801.04062.pdf) Estimator for Mutual Information
-MINE is an estimator for the mutual information parameterized by a neural network that is almost identical to InfoNCE. The MINE objective can be obtained  
+MINE is an estimator for the mutual information parameterized by a neural network that is almost identical to InfoNCE. The MINE objective can also be obtained by using Jensen's Inequatlity on the second term of the $$I_{UBA}$$ bound, but on the inner expectation over $$p\left(X\right)$$.
+
+$$\begin{align}
+\mathbb{E}_{p\left(Y\right)}\left[\log{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]}\right] &\geq \mathbb{E}_{p\left(Y\right)}\left[\mathbb{E}_{p\left(X\right)}\left[f\left(X, Y\right)\right]\right] \
+&\implies I_{UBA} \leq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[\mathbb{E}_{p\left(X\right)}\left[f\left(X, Y\right)\right]\right] = I_{MINE}\\
+\end{align}$$
+
+So finally we have that 
+
+$$begin{align}
+I\left(X; Y\right) &\geq I_{UBA} \\
+I_{MINE} &\geq I_{UBA} \\
+I\left(X; Y\right) &\lessgtr I_{MINE} \\ 
+\end{align}$$
 
 
 
