@@ -122,4 +122,14 @@ I\left(X; Y\right) &\lessgtr I_{MINE} \\
 -->
 
 
+## Maximum Mutual Information and Pseudo-Labeling
 
+In a [previous post](https://m-wiesner.github.io/LF-MMI) I gave a somewhat wrong explanation of why the MMI objective function actually did maximize the mutual information between random variables. Here is a better explanation for the particular case where we are working with an un-normalized neural estimator $$f\left(X, Y\right)$$.
+
+$$\begin{align}
+I\left(X; Y\right) &\geq I_{UBA} \\
+&= \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(X\right)}\left[\log{\mathbb{E}_{p\left(Y\right)}\left[e^{f\left(X, Y\right)}\right]}\right] \\
+&= \mathbb{E}_{p\left(X, Y\right)}\left[\log{\frac{e^{f\left(x, y\right)}}{\mathbb{E}_{p\left(y\right)}e^{f\left(x, y\right)}}}\right] \\
+\end{align}$$
+
+This is exactly the MMI objective, where the $$\log{p\left(y\right)}$$ in the numerator gets removed.
