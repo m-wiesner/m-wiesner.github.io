@@ -181,8 +181,7 @@ Note that the optimal critic for $$I_{UBA}$$ is
 $$f\left(X, Y\right) = 1 + \log{\frac{p\left(Y|X\right)}{p\left(Y\right)}}$$
 
 So we are simply replacing 
-$$p\left(Y|X\right) \to e^{f\left(X, Y\right)}$$
-$$p\left(Y\right) \to a\left(Y\right)$$
+$$\frac{p\left(Y|X\right)}{p\left(Y\right)} \to \frac{e^{f\left(X, Y\right)}}{a\left(Y\right)}$$
 
 which are learned parameters and if trained to convergence we should recover the optimal critic. 
 
@@ -190,7 +189,7 @@ The final step to get to the InfoNCE objective is to use the Monte-Carlo approxi
 
 $$\begin{align}
 a\left(Y; Z\right) &= \frac{1}{K} \sum_{k=1}^K e^{f\left(X, Y\right)} \\
-\mathbb{E}_{p\left(Y\right)p\left(X\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; Z\right)}\right] &= \mathbb{E}_{p\left(Y\right)}\left[\frac{1}{K}\sum_{j=1}^{K}\frac{e^{f\left(X, Y\right)}{a\left(Y; Z\right)}}\right] \\
+\mathbb{E}_{p\left(Y\right)p\left(X\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; Z\right)}\right] &= \mathbb{E}_{p\left(Y\right)}\left[\frac{1}{K}\sum_{j=1}^{K}\frac{e^{f\left(X, Y\right)}}{a\left(Y; Z\right)}\right] \\
 &= \mathbb{E}_{p\left(Y\right)}\left[1\right] &= 1 \\
 &\implies I_{TUBA} = \mathbb{E}_{p\left(X,Y\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{a\left(Y; Z\right)}}\right] \\
 \end{align}$$
