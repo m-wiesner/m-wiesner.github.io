@@ -173,11 +173,18 @@ $$I\left(X, Z; Y\right) = \mathbb{E}_{p\left(Z\right)}\left[I\left(X; Y\right)\r
 In InfoNCE the RV $$Z=\{X_2^{\prime} \ldots X_N^{\prime}\}$$ are $$N-1$$ samples from some other distribution over $$X$$, which we treat as negative examples of $$X$$. Often the neural network is called the critic in this literature as it is tasked with compared inputs $$X$$ to outputs $$Y$$. Setting the critic to 
 
 $$\begin{align}
-f^{\prime}\left(X, Y\right) &= 1 + \log{\frac{e^{f\left(X,  Y\right)}}{a\left(Y, X, Z\right)}} \\
-&\implies I_{TUBA} = 1 + \mathbb{E}_{p\left(X,Y\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{a\left(Y; Z\right)}}\right] - \mathbb{E}_{p\left(Y\right)p\left(X\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; Z\right)}\right] \\
+f^{\prime}\left(X, Y\right) &= 1 + \log{\frac{e^{f\left(X,  Y\right)}}{a\left(Y; X, Z\right)}} \\
+&\implies I_{TUBA} = 1 + \mathbb{E}_{p\left(X,Y\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}}\right] - \mathbb{E}_{p\left(Y\right)p\left(X\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}\right] \\
 \end{align}$$
 
-Note that the optimal critic for $$I_{UBA}$$ is $$f\left(X, Y\right) = 1 + \log{\frac{p\left(Y|X\right)}{p\left(Y\right)}}$$. So we are simply replacing $$p\left(Y|X\right)$$ with $$e^{f\left(X, Y\right)}$$ and $$p\left(Y\right)$$ with $$a\left(Y\right)$$, which are learned parameters and if trained to convergence we should recover the optimal critic. 
+Note that the optimal critic for $$I_{UBA}$$ is 
+$$f\left(X, Y\right) = 1 + \log{\frac{p\left(Y|X\right)}{p\left(Y\right)}}$$
+
+So we are simply replacing 
+$$p\left(Y|X\right) \to e^{f\left(X, Y\right)}$$
+$$p\left(Y\right) \to a\left(Y\right)$$
+
+which are learned parameters and if trained to convergence we should recover the optimal critic. 
 
 The final step to get to the InfoNCE objective is to use the Monte-Carlo approximation of the expectation in a few places. First we will use a Monte-Carlo approximation for $$a\left(Y; Z\right)$$. We know that optimally, this term is $$a\left(Y; Z\right) = \mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]$$ so we approximate this as well as the outer expectation in the last term of the above expression for $$I_{TUBA}$$ with 
 
