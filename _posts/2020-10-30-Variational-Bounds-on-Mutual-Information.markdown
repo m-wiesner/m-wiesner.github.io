@@ -134,8 +134,6 @@ I\left(X; Y\right) &\geq I_{UBA} \\
 
 This is exactly the MMI objective, where the $$\log{p\left(y\right)}$$ in the numerator gets removed. Since we do not optimize with respect to a fixed $$p\left(Y\right)$$ optimizing either objective is clearly the same as optimizing a lower-bound on the mutual information.
 
-We can understand pseudo-labeling as factoring the expectation in the first term as 
-
-$$p\left(x, y\right) = p\left(y|x\right)p\left(x\right)$$.
+We can understand pseudo-labeling as factoring the expectation in the first term as $$p\left(X, Y\right) = p\left(Y|X\right) p\left(X\right)$$.
 
 In this way you first sample unlabeled data, estimate a posterior distribution over output sequences, by producing a hypothesis lattice for instance, and then using this lattice for marginalization to compute the expectation of $$p\left(y|x\right)$$. 
