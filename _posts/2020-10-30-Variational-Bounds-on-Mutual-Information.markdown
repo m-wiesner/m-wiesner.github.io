@@ -175,7 +175,7 @@ In InfoNCE the RV $$Z=\{X_2^{\prime} \ldots X_N^{\prime}\}$$ are $$N-1$$ samples
 $$\begin{align}
 f^{\prime}\left(X, Y\right) &= 1 + \log{\frac{e^{f\left(X,  Y\right)}}{a\left(Y; X, Z\right)}} \\
 &\implies I_{TUBA} = 1 + \mathbb{E}_{p\left(X,Y\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}}\right] - \mathbb{E}_{p\left(Y\right)p\left(X\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}\right] \\
-&=  1 + \mathbb{E}_{p\left(X,Y,Z\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}}\right] - \mathbb{E}_{p\left(Y\right)p\left(X\right)p\left(Z\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}\right]
+&=  1 + \mathbb{E}_{p\left(X,Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}}\right] - \mathbb{E}_{p\left(Y\right)p\left(X\right)p\left(Z\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}\right]
 \end{align}$$
 
 Note that the optimal critic for $$I_{UBA}$$ is 
@@ -186,11 +186,11 @@ $$\frac{p\left(Y|X\right)}{p\left(Y\right)} \to \frac{e^{f\left(X, Y\right)}}{a\
 
 which are learned parameters and if trained to convergence we should recover the optimal critic. 
 
-The final step to get to the InfoNCE objective is to use the Monte-Carlo approximation of the expectation in a few places. First we will use a Monte-Carlo approximation for $$a\left(Y; Z\right)$$. We know that optimally, this term is $$a\left(Y; Z\right) = \mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]$$ so we approximate this as well as the outer expectation in the last term of the above expression for $$I_{TUBA}$$ with 
+The final step to get to the InfoNCE objective is to use the Monte-Carlo approximation of the expectation in a few places. First we will use a Monte-Carlo approximation for $$a\left(Y; Z\right)$$ using additional samples from $$p\left(Z\right)$$. We know that optimally, this term is $$a\left(Y; Z\right) = \mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]$$ so we approximate this as well as the outer expectation in the last term of the above expression for $$I_{TUBA}$$ with 
 
 $$\begin{align}
-a\left(Y; Z\right) &= \frac{1}{K} \sum_{k=1}^K e^{f\left(X, Y\right)} \\
-\mathbb{E}_{p\left(Y\right)p\left(X\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; Z\right)}\right] &= \mathbb{E}_{p\left(Y\right)}\left[\frac{1}{K}\sum_{j=1}^{K}\frac{e^{f\left(X, Y\right)}}{a\left(Y; Z\right)}\right] \\
+a\left(Y; Z\right) &= \frac{1}{K} \left[e^{f\left(X, Y\right)} + \sum_{k=1}^K e^{f\left(Z_k, Y\right)} \right]\\
+\mathbb{E}_{p\left(Y\right)p\left(X\right)p\left(Z\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; Z\right)}\right] &= \mathbb{E}_{p\left(Y\right)}\left[\frac{\frac{1}{K}\left[e^{f\left(X, Y\right)} + \sum_{j=1}^{K}e^{f\left(Z, Y\right)}\right]}{a\left(Y; Z\right)}\right] \\
 &= \mathbb{E}_{p\left(Y\right)}\left[1\right] = 1 \\
 &\implies I_{TUBA} = I_{NCE} = \mathbb{E}_{p\left(X,Y\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{a\left(Y; Z\right)}}\right] \\
 \end{align}$$
