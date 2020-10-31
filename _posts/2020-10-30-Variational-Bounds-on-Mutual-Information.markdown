@@ -150,12 +150,15 @@ Since this relationship holds true for all values of $$a\left(y\right)$$, we can
 $$\begin{align}
 I\left(X, Y\right) &\geq I_{TUBA} \\
 &\geq \mathbb{E}_{p\left(X, Y\right)} \left[ f\left(X, Y\right) \right] - \mathbb{E}_{p\left(Y\right)} \left[e^{-1} \mathbb{E}_{p\left(X\right)} \left[e^{f\left(X, Y\right)}\right]\right] \\
+&\geq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[e^{-1}\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]\right] \\
+&= I_{NJW} \\
 \end{align}$$
 <!--
 &\geq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[e^{-1}\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)\right]\right] \\
 &= I_{NJW} \\
 \end{align}$$
 -->
+
 This is the bound used in the f-MINE variant of the MINE objective.
 
 To summarize all of the bounds we've seen again
