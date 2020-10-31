@@ -13,16 +13,11 @@ published: true
 description: Review of [On Variational Bounds on Mutual Information](https://arxiv.org/pdf/1905.06922.pdf)
 ---
 
-There has been incredible success using InfoNCE as a constrastive unsupervised pretraining objective for ASR in the past year. The original paper that introduced this training objective,
-which when coupled with a specific neural architecture was called [Contrastive Predictive Coding (CPC)](https://arxiv.org/pdf/1807.03748.pdf), is very useful, but a subsequent [paper](https://arxiv.org/pdf/1905.06922.pdf) I think more thoroughly explores the training objective InfoNCE, and provides some better theoretical underpinnings for why this objective works.
+There has been incredible success using InfoNCE as a constrastive unsupervised pretraining objective for ASR in the past year. The technique, [Contrastive Predictive Coding (CPC)](https://arxiv.org/pdf/1807.03748.pdf), was described more theoretically in a subsequent [paper](https://arxiv.org/pdf/1905.06922.pdf).
 
-In general estimating the mutual information between two variables is difficult. In practice, the best we can really do is to estimate bounds on the mutual information. In this review
-as well as in the paper we are describing, the mutual information is viewed in terms of the KL-divergence
+In general estimating the mutual information between two variables is difficult. Training objectives that aim to maximize the mutual information between various quantities in sequence-to-sequence prediction tasks can be formulated by constructing lower bounds on the mutual information and maximizing them. Most of these bounds come from viewing the mutual information is viewed in terms of the KL-divergence
 
 $$I\left(X; Y\right) = I\left(p\left(X\right); p\left(Y\right)\right) = D_{KL}\left(p\left(X, Y\right) || p\left(X\right)p\left(Y\right)\right)$$
-
-Recall that KL-divergence can be viewed as the expected log ratio of the joint distribution over two random variables to the product of their marginal distributions.
-If the joint distribution is the same as the product of the marginal distributions, i.e., the random variables are independent, then the mutual information is 0, meaning that $$X$$ is completely independent of $$Y$$.
 
 ## Upper Bound on Mutual Information
 To upper bound the mutual information, we express the KL-divergence as an expectation, introduce a third distribution, $$q\left(Y\right)$$ and factor the joint distribution as $$p\left(X, Y\right) = p\left(Y|X\right)p\left(Y\right)$$.
@@ -37,10 +32,10 @@ I\left(X; Y\right) &= \mathbb{E}_{p\left(X, Y\right)}\left[\log{\frac{p\left(Y|X
 
 And now we have our first bound!
 
-$$I\left(X; Y\right) \leq \mathbb{E}_{p\left(X\right)}\left[D_{KL}\left(p\left(Y|X\right) || q\left(Y\right)\right)\right]$$
+$$I\left(X; Y\right) \leq \mathbb{E}_{p\left(X\right)}\left[D_{KL}\left(p\left(Y|X\right) || q\left(Y\right)\right)\right] = R$$
 
-This term can be thought of as a regularizer. Overfitting is reduced by forcing overconfident predictions to be smoothed with the prior distribution.
-
+This term can be thought of as a regularizer. Overfitting is reduced by forcing overconfident predictions to be smoothed with the prior distribution. 
+$$R$$ stands for the rate of a model and is the limit to how much information about the output $$Y$$ is transmitted through the model transmit from the input $$X$$.
 
 ## Lower Bound on Mutual Information
 To lower bound the mutual information, we factor in the opposite direction $$p\left(X, Y\right) = p\left(X | Y\right)p\left(Y\right)$$, introduce a third distribution $$q\left(X | Y\right)$$ and use the non-negativity of the KL-divergence as well as the differential entropy of a random variable to arrive at our lower bound. 
@@ -55,7 +50,7 @@ I\left(X; Y\right) &= \mathbb{E}_{p\left(X, Y\right)}\left[\log{\frac{p\left(X|Y
 
 And now we have our second bound!
 
-$$I\left(X; Y\right) \geq \mathbb{E}_{p\left(X, Y\right)}\left[q\left(X | Y\right)\right] + h\left(X\right)$$
+$$I\left(X; Y\right) \geq \mathbb{E}_{p\left(X, Y\right)}\left[q\left(X | Y\right)\right] + h\left(X\right) = I_{BA}$$
 
 ## Lower Bound on Mutual Information estimated with unormalized distributions
 
@@ -72,7 +67,7 @@ $$\begin{align}
 
 So finally we have our third bound!!
 
-$$I\left(X; Y\right) \geq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[\log{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]}\right]$$
+$$I\left(X; Y\right) \geq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[\log{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]}\right] = I_{UBA}$$
 
 ## Donsker-Varadhan Bound on Mutual Information
 
@@ -89,5 +84,15 @@ $$\begin{align}
 
 This is our fourth bound!!
 
-$$I\left(X; Y\right) \geq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \log{\mathbb{E}_{p\left(Y\right)}\left[\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]\right]}$$
+$$I\left(X; Y\right) \geq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \log{\mathbb{E}_{p\left(Y\right)}\left[\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]\right]} = I_{DV}$$
+
+In Summary we have derived an upper bound and three lower bounds (or estimators) of Mutual Information. Their relationship is as follows.
+
+$$R \geq I\left(X; Y\right) \geq I_{BA} \geq I_{UBA} \geq I_{DV}$$
+
+## The [MINE](https://arxiv.org/pdf/1801.04062.pdf) Estimator for Mutual Information
+MINE is an estimator for the mutual information parameterized by a neural network that is almost identical to InfoNCE. The MINE objective can be obtained  
+
+
+
 
