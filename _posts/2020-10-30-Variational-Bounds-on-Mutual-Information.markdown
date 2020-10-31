@@ -133,3 +133,5 @@ I\left(X; Y\right) &\geq I_{UBA} \\
 \end{align}$$
 
 This is exactly the MMI objective, where the $$\log{p\left(y\right)}$$ in the numerator gets removed.
+
+We can understand pseudo-labeling as factoring the expectation in the first as $$p\left(y|x\right)p\left(x\right)$$. In this way you first sample unlabeled data, estimate a posterior distribution over output sequences, by producing a hypothesis lattice for instance, and then using this lattice for marginalization to compute the expectation of $$p\left(y|x\right)$$.  
