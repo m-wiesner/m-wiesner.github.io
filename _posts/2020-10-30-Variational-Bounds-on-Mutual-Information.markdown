@@ -144,3 +144,7 @@ $$\begin{align}
 \log{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]} &\leq \frac{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]}{a\left(y\right)} + \log{a\left(y\right)} + 1 \\
 &\implies I_{UBA} \geq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[\frac{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]}{a\left(y\right)} + \log{a\left(y\right)} + 1\right] = I_{TUBA} \\
 \end{align}$$ 
+
+Since this relationship holds true for all values of $$a\left(y\right)$$, we can set $$a\left(y\right) = e \ \forall \ y$$ at the expense of having a slightly looser bound on the mutual information. This gives us the bound 
+
+$$I\left(X, Y\right) \geq I_{TUBA} \geq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[ e^{-1}\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)\right]I_{NJW}$$
