@@ -134,4 +134,13 @@ I\left(X; Y\right) &\geq I_{UBA} \\
 
 This is exactly the MMI objective, where the $$\log{p\left(y\right)}$$ in the numerator gets removed. Since we do not optimize with respect to a fixed $$p\left(Y\right)$$ optimizing either objective is clearly the same as optimizing a lower-bound on the mutual information.
 
-We can understand pseudo-labeling as factoring the expectation in the first term in terms of the posterior and marginal data likelihood. In this way you first sample unlabeled data, estimate a posterior distribution over output sequences, by producing a hypothesis lattice for instance, and then using this lattice for marginalization to compute the expectation of $$p\left(y|x\right)$$
+We can understand pseudo-labeling as factoring the expectation in the first term in terms of the posterior and marginal data likelihood. In this way you first sample unlabeled data, estimate a posterior distribution over output sequences, by producing a hypothesis lattice for instance, and then using this lattice for marginalization to compute the expectation over the posterior.
+
+## Tractable Lower Bound
+
+An easier to compute lower bound comes from the identity $$\log{x} \leq \frac{x}{a} + \log{a} + 1$$. Thereforethe
+
+$$\begin{align}
+\log{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]} &\leq \frac{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]}{a\left(y\right)} + \log{a\left(y\right)} + 1 \\
+&\implies I_{UBA} \geq \mathbb{E}_{p\left(X, Y\right)}\left[f\left(X, Y\right)\right] - \mathbb{E}_{p\left(Y\right)}\left[\frac{\mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]}{a\left(y\right)} + \log{a\left(y\right)} + 1\right] = I_{TUBA} \\
+\end{align}$$ 
