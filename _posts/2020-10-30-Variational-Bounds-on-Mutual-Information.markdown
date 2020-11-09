@@ -184,33 +184,34 @@ $$f\left(X, Y\right) = 1 + \log{\frac{p\left(Y|X\right)}{p\left(Y\right)}}$$
 So we are simply replacing 
 $$\frac{p\left(Y|X\right)}{p\left(Y\right)} \to \frac{e^{f\left(X, Y\right)}}{a\left(Y\right)}$$
 
-which are learned parameters and if trained to convergence we should recover the optimal critic. 
+which are learned parameters and if trained to convergence we should recover the optimal critic. $$a\left(Y\right)$$ should optimally be the partition function for $$Y$$.
 
-There are two final steps to get the InfoNCE objective. First we will use a Monte-Carlo approximation for $$a\left(Y; Z\right)$$ using additional samples from $$p\left(Z\right)$$ since optimally, this term is $$a\left(Y; Z\right) = \mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]$$. The inner two expectations of the last term of the above expression for $$I_{TUBA}$$ can be rewritten as 
+There are two final steps to get the InfoNCE objective. The inner two expectations of the last term of the above expression for $$I_{TUBA}$$ can be rewritten as 
 
 $$\begin{align}
-\mathbb{E}_{p\left(Y\right)p\left(X\right)p\left(Z\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}\right] &= \mathbb{E}_{p\left(y\right)}\left[\frac{1}{K}\sum_{i=1}^K \mathbb{E}_{p\left(X_i\right)p\left(Z\right)}\left[\frac{e^{f\left(X_i, Y\right)}}{a\left(X_i, Y, Z\right)}\right]\right] \\
+\mathbb{E}_{p\left(Y\right)p\left(X\right)p\left(Z\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}\right] &= \mathbb{E}_{p\left(Y\right)}\left[\frac{1}{K}\sum_{i=1}^K \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(X, Y, Z\right)}\right]\right] \\
+&= \mathbb{E}_{p\left(Y\right)} \left[\mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{1}{K}\sum_{i=1}^K \frac{e^{f\left(X, Y\right)}{a\left(X, Y, Z\right)}\right]\right] \\
 \end{align}$$
-<!--
-&= \mathbb{E}_{p\left(y\right)}\left[\mathbb{E}_{p\left(X_i\right)p\left(Z\right)}\left[\frac{1}{K}\sum_{i=1}^K \frac{e^{f\left(X_i, Y\right)}}{a\left(X_i, Y, Z\right)}\right]\right] \\
-&= \mathbb{E}_{p\left(y\right)}\left[\mathbb{E}_{p\left(X_i\right)p\left(Z\right)}\left[\frac{1}{K}\sum_{i=1}^K \frac{e^{f\left(X_i, Y\right)}}{\frac{1}{K}\sum_{k=1}^K e^{f\left(X_k, Y\right)}\right]\right] \\
+
+In other words, we can just rewrite the expectation in terms $$K$$ replicas of the expectation. How do we get $$K$$ replicas of the data? Since $$Z$$ are other examples inputs examples drawn *independently*, each example can also be considered as a draw from $$X$$. So we can simply swap one of the $$K-1$$ examples in $$Z$$ with the original example from $$p\left(X\right)$$. Since there are $$K-1$$ examples in $$Z$$ we can repeat this swapping procedure $$K-1$$ times, which in addition to using the original value $$X$$ drawn from $$p\left(X\right)$$ gives us $$K$$ replicas. In expectation this sum will be the same as the sum of the expectations.
+
+The second step is to use $$Z$$ to form a Monte-Carlo approximation for the partition function which we will use as $$a\left(Y; X, Z\right).
+
+$$$$a\left(Y; X, Z\right) = \frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} e^{\left(X\right)}\right)$$. 
+
+Therefore ... 
+
+$$\begin{align}
+\mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{1}{K}\sum_{i=1}^K \frac{e^{f\left(X, Y\right)}{a\left(X, Y, Z\right)}\right] &=  \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{1}{K}\left(e^{f\left(X, Y\right)\right) + \sum_{i=2}^K \frac{e^{f\left(Z_i, Y\right)\right)}{a\left(X, Y, Z\right)}\right] \\
+&= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{1}{K}\left(e^{f\left(X, Y\right)\right) + \sum_{i=2}^K \frac{e^{f\left(Z_i, Y\right)\right)}{\frac{1}{K}\left(e^{f\left(X, Y\right)\right) + \sum_{i=2}^K \frac{e^{f\left(Z_i, Y\right)\right)}\right] \\
+&= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[1\right] \\
 &= 1 \\
-\end{align}$$
--->
-
-<!-- Essentially, we sampled $$K$$ data points to use as a Monte Carlo estimate of the Expectation in the denominator. We can reuse each of these examples in the numerator to compute the average 
-
-$$\begin{align}
-a\left(Y; Z\right) &= \frac{1}{K} \left[e^{f\left(X, Y\right)} + \sum_{k=1}^K e^{f\left(Z_k, Y\right)} \right]\\
-\mathbb{E}_{p\left(Y\right)p\left(X\right)p\left(Z\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; Z\right)}\right] \\
-&= \mathbb{E}_{p\left(Y\right)\left[\mathbb{E}_{p\left(X, Z\right)}\left[\frac{e^{f\left(X, Y\right)}{a\left(Y; Z}\right]\right]
-&= \mathbb{E}_{p\left(Y\right)}\left[1\right] = 1 \\
-&\implies I_{TUBA} = I_{NCE} = \mathbb{E}_{p\left(X,Y\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{a\left(Y; Z\right)}}\right] \\
+&\implies I_{TUBA} = I_{NCE} = \mathbb{E}_{p\left(X,Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}}\right]
 \end{align}$$
 
-The constant one cancels out with the 1 in $$I_{TUBA}$$ and only the first expectation remains.
+Since the second term in the bound is now a constant $$1$$ it cancels with the 1 in $$I_{TUBA}$$ and only the first expectation remains.
 
-$$\begin{align}
+<!-- $$\begin{align}
 I_{NCE} &= \mathbb{E}_{p\left(Y\right)}\left[\frac{1}{K}\sum_{k=1}^K \log{\frac{e^{f\left(X_k, Y\right)}}{\frac{1}{J}\sum_{j=1}^J e^{f\left(X_j, Y\right)}}}\right] \\
 &= 
 \end{align}$$
