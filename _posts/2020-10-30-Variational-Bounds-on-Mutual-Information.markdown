@@ -186,7 +186,17 @@ $$\frac{p\left(Y|X\right)}{p\left(Y\right)} \to \frac{e^{f\left(X, Y\right)}}{a\
 
 which are learned parameters and if trained to convergence we should recover the optimal critic. 
 
-The final step to get to the InfoNCE objective is to use the Monte-Carlo approximation of the expectation in a few places. First we will use a Monte-Carlo approximation for $$a\left(Y; Z\right)$$ using additional samples from $$p\left(Z\right)$$. We know that optimally, this term is $$a\left(Y; Z\right) = \mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]$$ so we approximate this as well as the outer expectation in the last term of the above expression for $$I_{TUBA}$$ with 
+There are two final steps to get the InfoNCE objective. First we will use a Monte-Carlo approximation for $$a\left(Y; Z\right)$$ using additional samples from $$p\left(Z\right)$$ since optimally, this term is $$a\left(Y; Z\right) = \mathbb{E}_{p\left(X\right)}\left[e^{f\left(X, Y\right)}\right]$$. The two inner two expectations of the last term of the above expression for $$I_{TUBA}$$ can be rewritten as 
+
+$$\begin{align}
+\mathbb{E}_{p\left(Y\right)p\left(X\right)p\left(Z\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}\right] &= \mathbb{E}_{p\left(y\right)}\left[\frac{1}{K}\sum_{i=1}^K \mathbb{E}_{p\left(X_i\right)p\left(Z\right)}\left[\frac{e^{f\left(X_i, Y\right)}}{a\left(X_i, Y, Z\right)}\right]\right] \\
+&= \mathbb{E}_{p\left(y\right)}\left[\mathbb{E}_{p\left(X_i\right)p\left(Z\right)}\left[\frac{1}{K}\sum_{i=1}^K \frac{e^{f\left(X_i, Y\right)}}{a\left(X_i, Y, Z\right)}\right]\right] \\
+&= \mathbb{E}_{p\left(y\right)}\left[\mathbb{E}_{p\left(X_i\right)p\left(Z\right)}\left[\frac{1}{K}\sum_{i=1}^K \frac{e^{f\left(X_i, Y\right)}}{\frac{1}{K}\sum_{k=1}^K e^{f\left(X_k, Y\right)}\right]\right] \\
+&= 1 \\
+\end{align}$$
+
+
+<!-- Essentially, we sampled $$K$$ data points to use as a Monte Carlo estimate of the Expectation in the denominator. We can reuse each of these examples in the numerator to compute the average 
 
 $$\begin{align}
 a\left(Y; Z\right) &= \frac{1}{K} \left[e^{f\left(X, Y\right)} + \sum_{k=1}^K e^{f\left(Z_k, Y\right)} \right]\\
@@ -207,3 +217,4 @@ In the original CPC paper, the outer expectation was omitted because the join ex
 $$p\left(X, Y\right) = p\left(Y | X) p\left(X\right) = p\left(X\right)$$ 
 
 since the latent variable $$Y$$ was a deterministic function of $$X$$.
+-->
