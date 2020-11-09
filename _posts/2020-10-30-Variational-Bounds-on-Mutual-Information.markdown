@@ -197,9 +197,9 @@ $$\begin{align}
 
 In other words, we can just rewrite the expectation in terms $$K$$ replicas of the expectation. How do we get $$K$$ replicas of the data? Since $$Z$$ are other examples inputs examples drawn *independently*, each example can also be considered as a draw from $$X$$. So we can simply swap one of the $$K-1$$ examples in $$Z$$ with the original example from $$p\left(X\right)$$. Since there are $$K-1$$ examples in $$Z$$ we can repeat this swapping procedure $$K-1$$ times, which in addition to using the original value $$X$$ drawn from $$p\left(X\right)$$ gives us $$K$$ replicas. In expectation this sum will be the same as the sum of the expectations.
 
-The second step is to use $$Z$$ to form a Monte-Carlo approximation for the partition function which we will use as $$a\left(Y; X, Z\right).
+The second step is to use $$Z$$ to form a Monte-Carlo approximation for $$a\left(Y; X, Z\right)$$, which can also be viewed as approximating the partition function.
 
-$$$$a\left(Y; X, Z\right) = \frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} e^{\left(X\right)}\right)$$. 
+$$a\left(Y; X, Z\right) = \frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} e^{\left(X\right)}\right)$$. 
 
 Therefore ... 
 
@@ -208,6 +208,7 @@ $$\begin{align}
 &= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{1}{K}\left(e^{f\left(X, Y\right)\right) + \sum_{i=2}^K \frac{e^{f\left(Z_i, Y\right)\right)}{\frac{1}{K}\left(e^{f\left(X, Y\right)\right) + \sum_{i=2}^K \frac{e^{f\left(Z_i, Y\right)\right)}\right] \\
 &= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[1\right] \\
 &= 1 \\
+\end{align}$$
 &\implies I_{TUBA} = I_{NCE} = \mathbb{E}_{p\left(X,Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}}\right]
 \end{align}$$
 
