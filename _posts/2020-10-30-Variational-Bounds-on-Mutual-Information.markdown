@@ -206,8 +206,8 @@ Therefore ...
 $$\begin{align}
 \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{1}{K}\sum_{i=1}^K \frac{e^{f\left(X, Y\right)}{a\left(X, Y, Z\right)}\right] &=  \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{1}{K}\left(e^{f\left(X, Y\right)\right) + \sum_{i=2}^K \frac{e^{f\left(Z_i, Y\right)\right)}{a\left(X, Y, Z\right)}\right] \\
 &= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{1}{K}\left(e^{f\left(X, Y\right)\right) + \sum_{i=2}^K \frac{e^{f\left(Z_i, Y\right)\right)}{\frac{1}{K}\left(e^{f\left(X, Y\right)\right) + \sum_{i=2}^K \frac{e^{f\left(Z_i, Y\right)\right)}\right] \\
-&= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[1\right] \\
 \end{align}$$
+&= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[1\right] \\
 &= 1 \\
 &\implies I_{TUBA} = I_{NCE} = \mathbb{E}_{p\left(X,Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}}\right]
 \end{align}$$
