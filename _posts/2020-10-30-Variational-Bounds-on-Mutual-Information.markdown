@@ -189,7 +189,7 @@ which are learned parameters and if trained to convergence we should recover the
 There are two final steps to get the InfoNCE objective. The inner two expectations of the last term of the above expression for $$I_{TUBA}$$ can be rewritten as 
 
 $$\begin{align}
-\mathbb{E}_{p\left(Y\right)p\left(X\right)p\left(Z\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}\right] &= \mathbb{E}_{p\left(Y\right)}\left[\frac{1}{K}\sum_{i=1}^K \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(X, Y, Z\right)}\right]\right] \\
+\mathbb{E}_{p\left(Y\right)p\left(X\right)p\left(Z\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}\right] &= \mathbb{E}_{p\left(Y\right)}\left[\frac{1}{K}\sum_{i=1}^K \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}\right]\right] \\
 \end{align}$$
 
 <!--&= \mathbb{E}_{p\left(Y\right)}\left[\mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{1}{K}\sum_{i=1}^K \frac{e^{f\left(X, Y\right)}{a\left(Y; X, Z\right)}\right]\right] \\
@@ -199,7 +199,7 @@ In other words, we can just rewrite the expectation in terms $$K$$ replicas of t
 
 The second step is to use $$Z$$ to form a Monte-Carlo approximation for $$a\left(Y; X, Z\right)$$, which can also be viewed as approximating the partition function.
 
-$$a\left(Y; X, Z\right) = \frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} e^{\left(X\right)}\right)$$. 
+$$a\left(Y; X, Z\right) = \frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} e^{f\left(Z_i, Y\right)}\right)$$. 
 
 Therefore ... 
 
@@ -207,8 +207,8 @@ $$\begin{align}
 \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{1}{K}\sum_{i=1}^K \frac{e^{f\left(X, Y\right)}{a\left(X, Y, Z\right)}\right] &=  \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{1}{K}\left(e^{f\left(X, Y\right)\right) + \sum_{i=2}^K \frac{e^{f\left(Z_i, Y\right)\right)}{a\left(X, Y, Z\right)}\right] \\
 &= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{1}{K}\left(e^{f\left(X, Y\right)\right) + \sum_{i=2}^K \frac{e^{f\left(Z_i, Y\right)\right)}{\frac{1}{K}\left(e^{f\left(X, Y\right)\right) + \sum_{i=2}^K \frac{e^{f\left(Z_i, Y\right)\right)}\right] \\
 &= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[1\right] \\
-&= 1 \\
 \end{align}$$
+&= 1 \\
 &\implies I_{TUBA} = I_{NCE} = \mathbb{E}_{p\left(X,Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}}\right]
 \end{align}$$
 
