@@ -213,13 +213,21 @@ $$\begin{align}
 
 Since the second term in the bound is now a constant $$1$$ it cancels with the 1 in $$I_{TUBA}$$ and only the first expectation remains.
 
-<!-- $$\begin{align}
-I_{NCE} &= \mathbb{E}_{p\left(Y\right)}\left[\frac{1}{K}\sum_{k=1}^K \log{\frac{e^{f\left(X_k, Y\right)}}{\frac{1}{J}\sum_{j=1}^J e^{f\left(X_j, Y\right)}}}\right] \\
-&= 
+Approximating the expectation over $$p\left(X, Y\right)p\left(Z\right)$$ can be handled in many ways. In the original CPC paper, $$X$$ and $$Y$$ are particular values called $$ z_{t+k}, c_t$$ which correspond to learned latent, local encodings of speech frames, and a global context vector learned over these encodings. The are both deterministic functions of the *same* input $X=\{x_1, x_2, \ldots, x_N \}$. The expecation is then approximated with the Monte-Carlo estimate using the neural network outputs corresponding to a minibatch of inputs.
+
+## Alternative Factorizations of the Expecation
+We could factor the expectation in multiple ways. Let 
+
+$$\begin{align}
+I_{NCE} &= \mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{\frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} e^{f\left(Z_i, Y\right)}\right)}}\right] \\
+&= \mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[L_{NCE}\right] \\
+&= \sum_Z p\left(Z\right) \sum_Y p\left(Y\right) \int_X p\left(X | Y\right) L_{NCE} \\
+&\approx \sum_Y p\left(Y\right) \sum_Z p\left(Z\right)  \sum_X p\left(X|Y\right) L_{NCE} \\
+&= \sum_Y p\left(Y\right) \mathbb{E}_{p\left(Z\right)p\left(X|Y\right)} \left[L_{NCE}\right] \\
+&= \mathbb{E}_{p\left(Z\right)p\left(X|Y\right)}\left[\sum_Y p\left(Y\right)L_{NCE}\right] \\
+&\leq \mathbb{E}_{p\left(Z\right)p\left(X|Y\right)}\left[\log{\sum_Y p\left(Y\right) \frac{e^{f\left(X, Y\right)}}{\frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} e^{f\left(Z_i, Y\right)}\right)}}\right] \\
 \end{align}$$
 
-In the original CPC paper, the outer expectation was omitted because the join expectation was factored as 
 $$p\left(X, Y\right) = p\left(Y | X) p\left(X\right) = p\left(X\right)$$ 
 
 since the latent variable $$Y$$ was a deterministic function of $$X$$.
--->
