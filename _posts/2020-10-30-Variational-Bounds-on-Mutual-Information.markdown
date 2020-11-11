@@ -213,7 +213,7 @@ $$\begin{align}
 
 Since the second term in the bound is now a constant $$1$$ it cancels with the 1 in $$I_{TUBA}$$ and only the first expectation remains.
 
-Approximating the expectation over $$p\left(X, Y\right)p\left(Z\right)$$ can be handled in many ways. In the original CPC paper, $$X$$ and $$Y$$ are particular values called $$ z_{t+k}, c_t$$ which correspond to learned latent, local encodings of speech frames, and a global context vector learned over these encodings. The are both deterministic functions of the *same* input $X=\{x_1, x_2, \ldots, x_N \}$. The expecation is then approximated with the Monte-Carlo estimate using the neural network outputs corresponding to a minibatch of inputs.
+Approximating the expectation over $$p\left(X, Y\right)p\left(Z\right)$$ can be handled in many ways. In the original CPC paper, $$X$$ and $$Y$$ are particular values called $$ z_{t+k}, c_t$$ which correspond to learned latent, local encodings of speech frames, and a global context vector learned over these encodings. The are both deterministic functions of the *same* input $$X=\{x_1, x_2, \ldots, x_N \}$$. The expecation is then approximated with the Monte-Carlo estimate using the neural network outputs corresponding to a minibatch of inputs.
 
 ## Alternative Factorizations of the Expecation
 We could factor the expectation in multiple ways. Let 
@@ -225,4 +225,5 @@ I_{NCE} &= \mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\l
 &= \sum_Y p\left(Y|X\right) \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[L_{NCE}\right] \\
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right)  L_{NCE}\right] \\
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right) \log{\frac{e^{f\left(X, Y\right)}}{\frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} e^{f\left(Z_i, Y\right)}\right)}} \right] \\
+&\approx \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y \frac{p\left(Y\right)e^{f\left(X, Y\right)}}{\mathbb{E}_{p\left(Y\right)} \left[e^{f\left(X, Y\right)}\right]} \log{\frac{e^{f\left(X, Y\right)}}{\frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} e^{f\left(Z_i, Y\right)}\right)}} \right] 
 \end{align}$$
