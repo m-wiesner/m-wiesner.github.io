@@ -224,7 +224,7 @@ I_{NCE} &= \mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\l
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right) \left( f\left(X, Y\right) - f^{*} \right)\right] \\
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y \frac{p\left(Y\right)e^{f\left(X, Y\right)}}{\mathbb{E}_{p\left(Y\right)}\left[e^{f\left(X, Y\right)}\right]} \left( f\left(X, Y\right) - f^{*} \right)\right] \\
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\frac{\sum_Y p\left(Y\right)e^{f\left(X, Y\right)}\left( f\left(X, Y\right) - f^{*} \right)}{\mathbb{E}_{p\left(Y\right)}\left[e^{f\left(X, Y\right)}\right]}\right] \\
-&= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\frac{\sum_Y e^{f\left(X, Y\right) + \log{\left(f\left(X, Y\right) - f^{*}\right)} + \log{p\left(Y\right)}}{\mathbb{E}_{p\left(Y\right)}\left[e^{f\left(X, Y\right)}\right]}\right]
+&= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\frac{\sum_Y e^{f\left(X, Y\right) + \log{\left(f\left(X, Y\right) - f^{*}\right)} + \log{p\left(Y\right)}}}{\mathbb{E}_{p\left(Y\right)}\left[e^{f\left(X, Y\right)}\right]}\right] \\
 \end{align}$$
 
 <!--
