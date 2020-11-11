@@ -192,9 +192,6 @@ $$\begin{align}
 \mathbb{E}_{p\left(Y\right)p\left(X\right)p\left(Z\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}\right] &= \mathbb{E}_{p\left(Y\right)}\left[\frac{1}{K}\sum_{i=1}^K \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{e^{f\left(X, Y\right)}}{a\left(Y; X, Z\right)}\right]\right] \\
 \end{align}$$
 
-<!--&= \mathbb{E}_{p\left(Y\right)}\left[\mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\frac{1}{K}\sum_{i=1}^K \frac{e^{f\left(X, Y\right)}{a\left(Y; X, Z\right)}\right]\right] \\
--->
-
 In other words, we can just rewrite the expectation in terms $$K$$ replicas of the expectation. How do we get $$K$$ replicas of the data? Since $$Z$$ are other examples inputs examples drawn *independently*, each example can also be considered as a draw from $$X$$. So we can simply swap one of the $$K-1$$ examples in $$Z$$ with the original example from $$p\left(X\right)$$. Since there are $$K-1$$ examples in $$Z$$ we can repeat this swapping procedure $$K-1$$ times, which in addition to using the original value $$X$$ drawn from $$p\left(X\right)$$ gives us $$K$$ replicas. In expectation this sum will be the same as the sum of the expectations.
 
 The second step is to use $$Z$$ to form a Monte-Carlo approximation for $$a\left(Y; X, Z\right)$$, which can also be viewed as approximating the partition function.
@@ -224,7 +221,8 @@ I_{NCE} &= \mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\l
 &= \sum_Z p\left(Z\right) \sum_Y p\left(Y\right) \int_X p\left(X | Y\right) L_{NCE} dX \\
 &= \sum_Y p\left(Y|X\right) \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[L_{NCE}\right] \\
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right) L_{NCE}\right] \\
-\end{align}
+\end{align}$$
+
 <!--
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right) \log{\frac{e^{f\left(X, Y\right)}}{\frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} e^{f\left(Z_i, Y\right)}\right)}} \right] \\
 \end{align}$$
