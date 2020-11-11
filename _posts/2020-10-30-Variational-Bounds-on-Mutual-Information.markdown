@@ -220,6 +220,7 @@ I_{NCE} &= \mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\l
 &= \mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[L_{NCE}\right] \\
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right) L_{NCE}\right] \\
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right) \log{\frac{e^{f\left(X, Y\right)}}{\frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} e^{f\left(Z_i, Y\right)}\right)}} \right] \\
+&= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right) \left(f\left(X, Y\right) - \log{\frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} e^{f\left(Z_i, Y\right)} \right)} \right] \\
 \end{align}$$
 
 <!--
