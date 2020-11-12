@@ -227,6 +227,13 @@ I_{NCE} &= \mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\l
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\frac{\sum_Y e^{f\left(X, Y\right) + \log{\left(f\left(X, Y\right) - f^{*}\right)} + \log{p\left(Y\right)}}}{\mathbb{E}_{p\left(Y\right)}\left[e^{f\left(X, Y\right)}\right]}\right] \\
 \end{align}$$
 
+What if we did have labeled data and did not have to marginalize over all possible outputs $$Y$$? Then the above equation becomes 
+
+$$\begin{align}
+I_{NCE} &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\frac{p\left(Y\right)e^{f\left(X, Y\right)}\left( f\left(X, Y\right) - f^{*} \right)}{\mathbb{E}_{p\left(Y\right)}\left[e^{f\left(X, Y\right)}\right]}\right]
+\end{align}$$
+
+This is exactly the MMI objective scaled by the term $$\left( f\left(X, Y\right) - f^{*} \right)$$. We therefore see that under this objective function, a good $$f\left(X, Y\right)$$ is one that learns to discriminate between the correct *output* and competing outputs, as well ensuring that different *inputs* result in different outputs.
 <!--
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right) \left(f\left(X, Y\right) - \log{\frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} 
 e^{f\left(Z_i, Y\right)}\right)} \right] \\
