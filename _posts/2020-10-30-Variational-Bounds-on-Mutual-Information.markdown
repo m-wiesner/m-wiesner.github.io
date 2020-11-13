@@ -162,7 +162,7 @@ This is the bound used in the f-MINE variant of the MINE objective. When $$a\lef
 
 To summarize all of the bounds we've seen again
 
-$$R \geq I\left(X; Y\right) \geq I_{BA} \geq I_{UBA} = F_{MMI} - \mathbb{E}_{p\left(X\right)}\left[\log{p\left(Y\right)}\right] \geq I_{TUBA} \geq I_{NJW}$$
+$$R \geq I\left(X; Y\right) \geq I_{BA} \geq I_{UBA} = F_{MMI} - \mathbb{E}_{p\left(Y\right)}\left[\log{p\left(Y\right)}\right] = F_{MMI} + H\left(Y\right) \geq I_{TUBA} \geq I_{NJW}$$
 
 ## InfoNCE
 
