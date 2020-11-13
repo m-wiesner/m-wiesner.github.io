@@ -210,6 +210,16 @@ $$\begin{align}
 
 Since the second term in the bound is now a constant $$1$$ it cancels with the 1 in $$I_{TUBA}$$ and only the first expectation remains.
 
+Also note that this lower bound is itself upper bounded by $$\log{K}$$.
+
+$$ I_{NCE} = \log{K} + \mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{e^{f\left(X, Y\right)} + \sum_{i=2}^{K} e^{f\left(Z_i, Y\right)}}}\right] $$
+
+And $$\mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{e^{f\left(X, Y\right)} + \sum_{i=2}^{K} e^{f\left(Z_i, Y\right)}}}\right]$$ is guaranteed to be negative, since the denominator is a sum of non-negative values that includes the numerator. Therefore, the smallest value this can take is $$0$$ leaving ...
+
+$$I_{NCE} \leq \log{K}$$.
+
+Therefore, if $$I\left(X; Y\right) \geq \log{K}$$ this estimator will drastically underestimate the mutual information. It also shows that it is critical to use a large number of negative samples to accurately estimate the mutual information. 
+
 Approximating the expectation over $$p\left(X, Y\right)p\left(Z\right)$$ can be handled in many ways. In the original CPC paper, $$X$$ and $$Y$$ are particular values called $$ z_{t+k}, c_t$$ which correspond to learned latent, local encodings of speech frames, and a global context vector learned over these encodings. The are both deterministic functions of the *same* input $$X=\{x_1, x_2, \ldots, x_N \}$$. The expecation is then approximated with the Monte-Carlo estimate using the neural network outputs corresponding to a minibatch of inputs.
 
 ## Alternative Factorizations of the Expecation
