@@ -252,7 +252,7 @@ The above objective leaves us with a catch-22. We are trying to estimate a poste
 $$\begin{align}
 \frac{\partial I_{NCE}}{\partial y_s^{\tau}} &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \left(\frac{\partial f\left(X, Y\right)}{\partial y_s^{\tau}} - \frac{\partial f^{*}}{\partial y_s^{\tau}}\right)\right] \\
 &= \mathbb{E}_{p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{\partial f\left(X, Y\right)}{\partial y_s^{\tau}} \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{\sum_{i=1}^K e^{f\left(X_i, Y\right)} \frac{\partial f\left(X_i, Y\right)}{\partial y_s^{\tau}}}{\sum_{i=1}^K e^{f\left(X_i, Y\right)}}\right] \\
-&= \mathbb{E}_{p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \mathbb{1}\left(Y_\{tau}, s\right) \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{\sum_{i=1}^K e^{f\left(X_i, Y\right)} \mathbb{1}\left(Y_\{tau}, s\right)}{\sum_{i=1}^K e^{f\left(X_i, Y\right)}}\right]
+&= \mathbb{E}_{p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) 1\left(Y_{\tau}, s\right) \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{\sum_{i=1}^K e^{f\left(X_i, Y\right)} 1\left(Y_{\tau}, s\right)}{\sum_{i=1}^K e^{f\left(X_i, Y\right)}}\right]
 \end{align}$$
 <!--
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right) \left(f\left(X, Y\right) - \log{\frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} 
