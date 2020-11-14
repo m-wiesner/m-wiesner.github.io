@@ -251,7 +251,7 @@ The above objective leaves us with a catch-22. We are trying to estimate a poste
 
 $$\begin{align}
 \frac{\partial I_{NCE}}{\partial y_s^{\tau}} &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \left(\frac{\partial f\left(X, Y\right)}{\partial y_s^{\tau}} - \frac{\partial f^{*}\right)}{\partial y_s^{\tau}}\right] \\
-\end{align}&&
+\end{align}$$
 
 &= \mathbb{E}_{p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{\partial f\left(X, Y\right)}{\partial y_s^{\tau}} \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{\sum_{i=1}^K e^{f\left(X_i, Y\right)} \frac{\partial f\left(X_i, Y\right)}{\partial y_s^{\tau}}}{\sum_{i=1}^K e^{f\left(X_i, Y\right)}}\right] \\
 \end{align}$$
