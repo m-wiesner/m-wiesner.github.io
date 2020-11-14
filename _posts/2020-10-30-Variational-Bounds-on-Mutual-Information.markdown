@@ -244,6 +244,15 @@ I_{NCE} &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\frac{p\left(Y\righ
 \end{align}$$
 
 This is exactly the MMI objective scaled by the term $$\left( f\left(X, Y\right) - f^{*} \right)$$. We therefore see that under this objective function, a good $$f\left(X, Y\right)$$ is one that learns to discriminate between the correct *output* and competing outputs, as well ensuring that different *inputs* result in different outputs.
+
+## Gradient of the alternative factorization
+
+The above objective problem leaves us with a catch-22. We are trying to estimate $$p\left(Y | X\right)$$, but doing so requires an estimate of $$p\left(Y | X \right)$$. This motivates a semi-supervized training scheme where labeled data are used to produce an estimate of $$p\left(Y | X\right)$$, and then for a fixed $$p\left(Y | X\right)$$ we update the model with unlabeled data. We therefore will treat $$p\left(Y | X \right)$$ as a constant in the gradient computation.
+
+$$\begin{align}
+\nabla_{\theta} I_{NCE} &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \left(\nabla_{\theta} f\left(X, Y\right) - \nabla_{\theta} f^{\*}\right)\right] \\
+&= \mathbb{E}_{p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \nabla_{\theta} f\left(X, Y\right) \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{\sum_{i=1}^K e^{f\left(X_i, Y\right)} \nabla_{\theta} f\left(X_i, Y\right)}{\sum_{i=1}^K e^{f\left(X_i, Y\right)}}\right] \\
+\end{align}$$
 <!--
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right) \left(f\left(X, Y\right) - \log{\frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} 
 e^{f\left(Z_i, Y\right)}\right)} \right] \\
