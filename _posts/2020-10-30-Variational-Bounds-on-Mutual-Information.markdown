@@ -247,7 +247,7 @@ This is exactly the MMI objective scaled by the term $$\left( f\left(X, Y\right)
 
 ## Gradient of the alternative factorization
 
-The above objective problem leaves us with a catch-22. We are trying to estimate $$p\left(Y | X\right)$$, but doing so requires an estimate for it. This motivates a semi-supervized training scheme where labeled data are used to produce an estimate of the posterior distribution, and then hold it fixed when updating the model with unlabeled data.
+The above objective leaves us with a catch-22. We are trying to estimate a posterior distribution, but doing so requires an estimate for it. This motivates a semi-supervized training scheme where labeled data are used to produce an estimate of the posterior distribution, which is then held ixed when updating the model with unlabeled data.
 
 $$\begin{align}
 \nabla_{\theta} I_{NCE} &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \left(\nabla_{\theta} f\left(X, Y\right) - \nabla_{\theta} f^{*}\right)\right] \\
