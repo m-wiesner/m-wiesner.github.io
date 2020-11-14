@@ -250,8 +250,8 @@ This is exactly the MMI objective scaled by the term $$\left( f\left(X, Y\right)
 The above objective leaves us with a catch-22. We are trying to estimate a posterior distribution, but doing so requires an estimate for it. This motivates a semi-supervized training scheme where labeled data are used to produce an estimate of the posterior distribution, which is then held ixed when updating the model with unlabeled data.
 
 $$\begin{align}
-\nabla_{\theta} I_{NCE} &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \left(\nabla_{\theta} f\left(X, Y\right) - \nabla_{\theta} f^{*}\right)\right] \\
-&= \mathbb{E}_{p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \nabla_{\theta} f\left(X, Y\right) \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{\sum_{i=1}^K e^{f\left(X_i, Y\right)} \nabla_{\theta} f\left(X_i, Y\right)}{\sum_{i=1}^K e^{f\left(X_i, Y\right)}}\right] \\
+\frac{\partial I_{NCE}}{\partial y_s^{\tau}} &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \left(\frac{\partial f\left(X, Y\right)}{\partial y_s^{\tau}} - \frac{\partial f^{*}\right)}{\partial y_s^{\tau}}\right] \\
+&= \mathbb{E}_{p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{\partial f\left(X, Y\right)}{\partial y_s^{\tau}} \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{\sum_{i=1}^K e^{f\left(X_i, Y\right)} \frac{\partial f\left(X_i, Y\right)}{\partial y_s^{\tau}}}{\sum_{i=1}^K e^{f\left(X_i, Y\right)}}\right] \\
 \end{align}$$
 <!--
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right) \left(f\left(X, Y\right) - \log{\frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} 
