@@ -249,7 +249,7 @@ This is exactly the MMI objective scaled by the term $$\left( f\left(X, Y\right)
 
 The above objective leaves us with a catch-22. We are trying to estimate a posterior distribution, but doing so requires an estimate for it. This motivates a semi-supervised training scheme where labeled data are used to produce an estimate of the posterior distribution, which is then held ixed when updating the model with unlabeled data. We also will assume that the $$K-1$$ draws from $$p\left(Z\right)$$ will be the $$K-1$$ other examples in a minibatch. We call the whole minibatch 
 
-$$X = \{X, Z_2, \ldots, Z_k \right} = \{X_1, X_2, \ldots, X_k\}$$ 
+$$X = \{X, Z_2, \ldots, Z_k \} = \{X_1, X_2, \ldots, X_k\}$$ 
 
 $$\begin{align}
 \frac{\partial I_{NCE}}{\partial y_s^{\tau}\left(j\right)} &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \left(\frac{\partial f\left(X, Y\right)}{\partial y_s^{\tau}\left(j\right)} - \frac{\partial f^{*}}{\partial y_s^{\tau}\left(j\right)}\right)\right] \\
