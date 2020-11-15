@@ -251,7 +251,7 @@ The above objective leaves us with a catch-22. We are trying to estimate a poste
 
 $$\begin{align}
 \frac{\partial I_{NCE}}{\partial y_s^{\tau}\left(j\right)} &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \left(\frac{\partial f\left(X, Y\right)}{\partial y_s^{\tau}\left(j\right)} - \frac{\partial f^{*}}{\partial y_s^{\tau}\left(j\right)}\right)\right] \\
-&= \mathbb{E}_{p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{\partial f\left(X, Y\right)}{\partial y_s^{\tau}\left(j\right)} \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{\sum_{i=1}^K e^{f\left(X_i, Y\right)} \frac{\partial f\left(X_i, Y\right)}{\partial y_s^{\tau}\left(j\right)}}{\sum_{i=1}^K e^{f\left(X_i, Y\right)}}\right] \\
+&= \mathbb{E}_{p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{\partial f\left(X, Y\right)}{\partial y_s^{\tau}\left(j\right)} \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{ e^{f\left(X, Y\right)} \frac{\partial f\left(X, Y\right)}{\partial y_s^{\tau}\left(j\right)} + \sum_{i=2}^K e^{f\left(Z_i, Y\right)}\frac{\partial f\left(Z_i, Y\right)}{\partial y_s^{\tau}\left(j\right)}}{e^{f\left(X, Y\right)} + \sum_{i=2}^K e^{f\left(Z_i, Y\right)}}\right] \\
 \end{align}$$
 
 For the critic we use $$f\left(X, Y\right) = \sum_{t} \phi\left(X\right)_{Y_t}^t$$
