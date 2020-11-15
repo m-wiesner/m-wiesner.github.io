@@ -259,7 +259,7 @@ $$\begin{align}
 For the critic we use $$f\left(X, Y\right) = \sum_{t} \phi\left(X\right)_{Y_t}^t$$
 Therefore ...
 $$\begin{align}
-\frac{\partial I_{NCE}}{\partial y_s^{\tau}\left(j\right)} &= \mathbb{E}_{p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \mathbb{1}\left(Y_{\tau}, s\right) \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{e^{f\left(X_j, Y\right)} \mathbb{1}\left(Y_{\tau}, s\right)}{\sum_{i=1}^K e^{f\left(X_i, Y\right)}}\right]
+\frac{\partial I_{NCE}}{\partial y_s^{\tau}\left(j\right)} &= \mathbb{E}_{p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \mathbb{1}\left(Y_{\tau}, s\right) \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{e^{f\left(X_j, Y\right)}}{\sum_{i=1}^K e^{f\left(X_i, Y\right)}}\mathbb{1}\left(Y_{\tau}, s\right)\right]
 \end{align}$$
 <!--
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right) \left(f\left(X, Y\right) - \log{\frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} 
