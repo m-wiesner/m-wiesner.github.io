@@ -261,6 +261,15 @@ Therefore ...
 $$\begin{align}
 \frac{\partial I_{NCE}}{\partial y_s^{\tau}\left(j\right)} &= \mathbb{E}_{p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \mathbb{1}\left(Y_{\tau}, s\right) \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{e^{f\left(X_j, Y\right)}}{\sum_{i=1}^K e^{f\left(X_i, Y\right)}}\mathbb{1}\left(Y_{\tau}, s\right)\right]
 \end{align}$$
+
+## Tractable Alternative Factorization
+The above alternative factorization is unfortunately completely intractable. To solve this we can bound it one more time using Jensen's Inequality.
+
+$$\begin{align}
+  \sum_Y p\left(Y | X \right) \left(f\left(X, Y\right) - f^{*}\right) &= \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \sum_Y p\left(Y | X\right) \log{\sum_{i=1}^K e^{f\left(X_i, Y\right)}} \\
+  &\geq \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \log{\sum_Y p\left(Y | X\right) \sum_{i=1}^K e^{f\left(X_i, Y\right)}} \\
+  &= \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \log{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}} \\
+\end{align}$$
 <!--
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right) \left(f\left(X, Y\right) - \log{\frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} 
 e^{f\left(Z_i, Y\right)}\right)} \right] \\
