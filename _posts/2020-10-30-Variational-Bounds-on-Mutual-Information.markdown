@@ -269,7 +269,7 @@ $$\begin{align}
   \sum_Y p\left(Y | X \right) \left(f\left(X, Y\right) - f^{*}\right) &= \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \sum_Y p\left(Y | X\right) \log{\sum_{i=1}^K e^{f\left(X_i, Y\right)}} \\
   &\geq \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \log{\sum_Y p\left(Y | X\right) \sum_{i=1}^K e^{f\left(X_i, Y\right)}} \\
   &= \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \log{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}} \\
-  &= \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \log{\sum_{i=1}^K e^{[\![\left(\phi\left(X\right) + \phi\left(X_i\right)\right) \circ G]\!]}} \\
+  &= \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \log{\sum_{i=1}^K e^{[\![\left(\phi\left(X\right) + \phi\left(X_i\right)\right) \circ G]\!] - [\![\phi\left(X\right) \circ G]\!]}} \\
 \end{align}$$
 <!--
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right) \left(f\left(X, Y\right) - \log{\frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} 
