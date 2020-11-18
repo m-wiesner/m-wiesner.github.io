@@ -255,7 +255,7 @@ $$\begin{align}
   &= \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \log{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}} \\
 \end{align}$$
 
-Finally, by moving around the location of $$X$$ within the minibatch, we can approximate the expectation over $$p\left(X\right)$$ with 
+Finally, by moving around the location of $$X$$ within the minibatch, we can approximate the expectation over $$p\left(X\right)$$ and $$p\left(X\right)p\left(Z\right)$$ with 
 
 $$\begin{align}
 \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[ \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \log{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}} \right] &= \mathbb{E}_{p\left(X\right)} \left[ \sum_Y p\left(Y | X \right) f\left(X, Y\right) \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)}\left[\log{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}}\right] \\
