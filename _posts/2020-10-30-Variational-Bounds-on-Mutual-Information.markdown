@@ -258,7 +258,7 @@ $$\begin{align}
 
 ## Gradient of the alternative factorization
 
-The above objective leaves us with a catch-22. We are trying to estimate a posterior distribution, but doing so requires an estimate for it. This motivates a semi-supervised training scheme where labeled data are used to produce an estimate of the posterior distribution, which is then held ixed when updating the model with unlabeled data.
+The above objective leaves us with a catch-22. We are trying to estimate a posterior distribution, but doing so requires an estimate for it. This motivates a semi-supervised training scheme where labeled data are used to produce an estimate of the posterior distribution, which is then held fixed when updating the model with unlabeled data.
 
 $$\begin{align}
 \frac{\partial I_{NCE}}{\partial y_s^{\tau}\left(j\right)} &= \mathbb{E}_{p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \mathbb{1}\left(Y_{\tau}, s\right) \mathbb{1}\left(j, 1\right)\right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)}\left[\frac{\sum_Y p\left(Y | X\right)e^{f\left(X_j, Y\right)} \mathbb{1}\left(Y_{\tau}, s\right)}{\sum_{i=1}^K\sum_Y p\left(Y|X\right)e^{f\left(X_i, Y\right)}}\right]\\
