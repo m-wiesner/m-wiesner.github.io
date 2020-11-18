@@ -259,7 +259,7 @@ Finally, by moving around the location of $$X$$ within the minibatch, we can app
 
 $$\begin{align}
 \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[ \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \log{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}} \right] &= \mathbb{E}_{p\left(X\right)} \left[ \sum_Y p\left(Y | X \right) f\left(X, Y\right) \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)}\left[\log{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}}\right] \\
-&\approx \frac{1}{K} \sum_{i=1}^K \sum_Y p\left(Y | X_i \right) f\left(X_i, Y\right) - \frac{1}{K} \sum_{k=1}^K \log{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}} \\
+&\approx \frac{1}{K} \sum_{i=1}^K \sum_Y p\left(Y | X_i \right) f\left(X_i, Y\right) - \frac{1}{K} \sum_{k=1}^K \log{\sum_{i=1}^K \sum_Y p\left(Y | X_k\right) e^{f\left(X_i, Y\right)}} \\
 \end{align}$$
 
 ## Gradient of the alternative factorization
