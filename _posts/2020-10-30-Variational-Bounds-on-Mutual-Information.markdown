@@ -272,6 +272,20 @@ $$\begin{align}
 &= \frac{1}{K} \gamma_{X_j}\left(s, \tau\right) - \frac{1}{K} \sum_{k=1}^K \frac{\alpha_{X_{k,j}}\left(s, \tau\right)\beta_{X_{k, j}}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{X_{k, i}}\left(\sigma, \tau\right)\beta_{X_{k,i}}\left(\sigma, \tau\right)}\\
 \end{align}$$
 
+So we can now see the semi-supervised training algorithm that this gradient computation suggests.
+
+### Semi-supervised Algorithm
+$$\begin{align}
+\mbox{Sample} B_{sup} &~ \mathcal{D}_{sup} \\
+\mbox{Sample} B_{unsup} &~ \mathcal{D}_{unsup} \\
+\mbox{Update } \Theta \mbox{ according to } &\mathcal{L}_{MMI}\left(B_{sup}, \Theta \right) \\
+\mbox{compute} \phi\left(B_{unsup}\right) &\\
+\mbox{\textbf{for}} &\mbox{all combinations } \left(i, j\right) \\
+& \phi_{i,j} = \phi\left(B_{unsup}\right)_i + \phi\left(B_{unsup}\right)_j \\
+& \mbox{Do forward-backward on} \phi_{i,j} \circ G \mbox{and store} \\
+\mbox{compute gradients using the graident fomula from before}\\
+\end{align}$$
+
 <!--
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right) \left(f\left(X, Y\right) - \log{\frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} 
 e^{f\left(Z_i, Y\right)}\right)} \right] \\
