@@ -268,8 +268,8 @@ $$\begin{align}
 The above objective leaves us with a catch-22. We are trying to estimate a posterior distribution, but doing so requires an estimate for it. This motivates a semi-supervised training scheme where labeled data are used to produce an estimate of the posterior distribution, which is then held fixed when updating the model with unlabeled data.
 
 $$\begin{align}
-\frac{\partial I_{NCE}}{\partial y_s^{\tau}\left(j\right)} &= \frac{1}{K} \sum_{l=1}^{K} \sum_{Y} p\left(Y | X\right) \mathbb{1}\left(Y_{\tau}, s\right) \mathbb{1}\left(j, l\right)\right] - \frac{1}{K} \sum_{i=k}^K\frac{\sum_Y p\left(Y | X_k\right)e^{f\left(X_j, Y\right)} \mathbb{1}\left(Y_{\tau}, s\right)}{\sum_{i=1}^K\sum_Y p\left(Y|X_k\right)e^{f\left(X_i, Y\right)}} \\
-&= \frac{1}{K} \sum_{l=1}^{K} \gamma_{X_l}\left(s, \tau\right) \mathbb{1}\left(j, l\right) - \frac{1}{K} \sum_{i=k}^K \frac{\alpha_{X_{i,j}}\left(s, \tau\right)\beta_{X_{i, j}}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{X_{i,k}}\left(\sigma, \tau\right)\beta_{X_{i,k}}\left(\sigma, \tau\right)}\\
+\frac{\partial I_{NCE}}{\partial y_s^{\tau}\left(j\right)} &= \frac{1}{K} \sum_{Y} p\left(Y | X\right) \mathbb{1}\left(Y_{\tau}, s\right) - \frac{1}{K} \sum_{k=1}^K \frac{\sum_Y p\left(Y | X_k\right) e^{f\left(X_j, Y\right)} \mathbb{1}\left(Y_{\tau}, s\right)}{\sum_{i=1}^K \sum_Y p\left(Y|X_k\right)e^{f\left(X_i, Y\right)}} \\
+&= \frac{1}{K} \gamma_{X_j}\left(s, \tau\right) - \frac{1}{K} \sum_{k=1}^K \frac{\alpha_{X_{k,j}}\left(s, \tau\right)\beta_{X_{k, j}}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{X_{k, i}}\left(\sigma, \tau\right)\beta_{X_{k,i}}\left(\sigma, \tau\right)}\\
 \end{align}$$
 
 <!--
