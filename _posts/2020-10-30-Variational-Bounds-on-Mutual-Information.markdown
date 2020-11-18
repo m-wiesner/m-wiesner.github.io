@@ -245,33 +245,26 @@ I_{NCE} &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\frac{p\left(Y\righ
 
 This is exactly the MMI objective scaled by the term $$\left( f\left(X, Y\right) - f^{*} \right)$$. We therefore see that under this objective function, a good $$f\left(X, Y\right)$$ is one that learns to discriminate between the correct *output* and competing outputs, as well ensuring that different *inputs* result in different outputs.
 
-## Gradient of the alternative factorization
-
-The above objective leaves us with a catch-22. We are trying to estimate a posterior distribution, but doing so requires an estimate for it. This motivates a semi-supervised training scheme where labeled data are used to produce an estimate of the posterior distribution, which is then held ixed when updating the model with unlabeled data. We also will assume that the $$K-1$$ draws from $$p\left(Z\right)$$ will be the $$K-1$$ other examples in a minibatch. We call the whole minibatch 
+## Tractable Alternative Factorization
+The above alternative factorization is unfortunately completely intractable. To solve this we can bound it one more time using Jensen's Inequality. Also we will assume that the $$K-1$$ draws from $$p\left(Z\right)$$ will be the $$K-1$$ other examples in a minibatch. We call the whole minibatch 
 
 $$X = \{X, Z_2, \ldots, Z_k \} = \{X_1, X_2, \ldots, X_k\}$$ 
-
-$$\begin{align}
-\frac{\partial I_{NCE}}{\partial y_s^{\tau}\left(j\right)} &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \left(\frac{\partial f\left(X, Y\right)}{\partial y_s^{\tau}\left(j\right)} - \frac{\partial f^{*}}{\partial y_s^{\tau}\left(j\right)}\right)\right] \\
-&= \mathbb{E}_{p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{\partial f\left(X, Y\right)}{\partial y_s^{\tau}\left(j\right)} \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{\sum_{i=1}^K e^{f\left(X_i, Y\right)}\frac{\partial f\left(X_i, Y\right)}{\partial y_s^{\tau}\left(j\right)}}{\sum_{i=1}^K e^{f\left(X_i, Y\right)}}\right] \\
-\end{align}$$
-
-For the critic we use $$f\left(X, Y\right) = \sum_{t} \phi\left(X\right)_{Y_t}^t$$
-Therefore ...
-$$\begin{align}
-\frac{\partial I_{NCE}}{\partial y_s^{\tau}\left(j\right)} &= \mathbb{E}_{p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \mathbb{1}\left(Y_{\tau}, s\right) \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \frac{e^{f\left(X_j, Y\right)}}{\sum_{i=1}^K e^{f\left(X_i, Y\right)}}\mathbb{1}\left(Y_{\tau}, s\right)\right]
-\end{align}$$
-
-## Tractable Alternative Factorization
-The above alternative factorization is unfortunately completely intractable. To solve this we can bound it one more time using Jensen's Inequality.
 
 $$\begin{align}
   \sum_Y p\left(Y | X \right) \left(f\left(X, Y\right) - f^{*}\right) &= \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \sum_Y p\left(Y | X\right) \log{\sum_{i=1}^K e^{f\left(X_i, Y\right)}} \\
   &\geq \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \log{\sum_Y p\left(Y | X\right) \sum_{i=1}^K e^{f\left(X_i, Y\right)}} \\
   &= \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \log{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}} \\
-  &= \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \log{\sum_{i=1}^K e^{[\![\left(\phi\left(X\right) + \phi\left(X_i\right)\right) \circ G]\!] - [\![\phi\left(X\right) \circ G]\!]}} \\
-  &= \sum_Y p\left(Y | X \right) f\left(X, Y\right) + [\![\phi\left(X\right) \circ G]\!] - \log{\sum_{i=1}^K e^{[\![\left(\phi\left(X\right) + \phi\left(X_i\right)\right) \circ G]\!]}} \\
 \end{align}$$
+
+## Gradient of the alternative factorization
+
+The above objective leaves us with a catch-22. We are trying to estimate a posterior distribution, but doing so requires an estimate for it. This motivates a semi-supervised training scheme where labeled data are used to produce an estimate of the posterior distribution, which is then held ixed when updating the model with unlabeled data.
+
+$$\begin{align}
+\frac{\partial I_{NCE}}{\partial y_s^{\tau}\left(j\right)} &= \mathbb{E}_{p\left(X\right)} \left[\sum_{Y} p\left(Y | X\right) \mathbb{1}\left(Y_{\tau}, s\right) \mathbb{1}\left(j, 1\right)\right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)}\left[\frac{\sum_Y p\left(Y | X\right)e^{f\left(X_j, Y\right)} \mathbb{1}\left(Y_{\tau}, s\right)}{\sum_{i=1}^K\sum_Y p\left(Y|X\right)e^{f\left(X_i, Y\right)}}\right]\\
+&= \mathbb{E}_{p\left(X\right)} \left[\gamma_{X}\left(s, \tau\right) \mathbb{1}\left(j, 1\right)\right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)}\left[\frac{\alpha_{X_j}\left(s, \tau\right)\beta_{X_j}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{X_i}\left(\sigma, \tau\right)\beta_{X_i}\left(\sigma, \tau\right)}\right]\\
+\end{align}$$
+
 <!--
 &= \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[\sum_Y p\left(Y|X\right) \left(f\left(X, Y\right) - \log{\frac{1}{K}\left(e^{f\left(X, Y\right)} + \sum_{i=2}^{K} 
 e^{f\left(Z_i, Y\right)}\right)} \right] \\
