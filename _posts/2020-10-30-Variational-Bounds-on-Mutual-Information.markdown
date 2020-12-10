@@ -266,7 +266,7 @@ $$\begin{align}
 
 ## Gradient of the alternative factorization
 
-The above objective leaves us with a catch-22. We are trying to estimate a posterior distribution, but doing so requires an estimate for it. One potential solution is to hold fixed the posterior distribution when updating the model with unlabeled data. Also assume that our expectations are over minibatches and $$X$$ is simply the first element in the minibatch $$X_1$$. In this case the gradient becomes ...
+The above objective leaves us with a catch-22. We are trying to estimate a posterior distribution, but doing so requires an estimate for it. One potential solution is to hold fixed the posterior distribution when updating the model with unlabeled data. Also assume that our expectations are over minibatches $$\mathcal{B} = \{X_1, \ldots, X_K\}$$ and $$X$$ is simply the first element in the minibatch $$X_1$$. In this case the gradient becomes ...
 
 $$\begin{align}
 \frac{\partial I_{NCE}}{\partial y_s^{\tau}\left(j\right)} &= \mathbb{E}_{\mathcal{B}}\left[\sum_{Y} p\left(Y | X_1\right) \mathbb{1}\left(Y_{\tau}, s\right) - \frac{\sum_Y p\left(Y | X_1\right) e^{f\left(X_j, Y\right)} \mathbb{1}\left(Y_{\tau}, s\right)}{\sum_{i=1}^K \sum_Y p\left(Y|X_1\right)e^{f\left(X_i, Y\right)}}\right] \\
