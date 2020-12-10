@@ -270,7 +270,7 @@ The above objective leaves us with a catch-22. We are trying to estimate a poste
 
 $$\begin{align}
 \frac{\partial I_{NCE}}{\partial y_s^{\tau}\left(j\right)} &= \mathbb{E}_{\mathcal{B}}\left[\sum_{Y} p\left(Y | X_1\right) \mathbb{1}\left(Y_{\tau}, s\right) \mathbb{1}\left(j, 1\right) - \frac{\sum_Y p\left(Y | X_1\right) e^{f\left(X_j, Y\right)} \mathbb{1}\left(Y_{\tau}, s\right)}{\sum_{i=1}^K \sum_Y p\left(Y|X_1\right)e^{f\left(X_i, Y\right)}}\right] \\
-&= \mathbb{E}_{\mathcal{B}}\left[ \gamma_{X_1}\left(s, \tau\right) -  \frac{\alpha_{X_{1,j}}\left(s, \tau\right)\beta_{X_{1, j}}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{X_{1, i}}\left(\sigma, \tau\right)\beta_{X_{1,i}}\left(\sigma, \tau\right)} \right]\\
+&= \mathbb{E}_{\mathcal{B}}\left[ \gamma_{X_1}\left(s, \tau\right)\mathbb{1}\left(j, 1\right) -  \frac{\alpha_{X_{1,j}}\left(s, \tau\right)\beta_{X_{1, j}}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{X_{1, i}}\left(\sigma, \tau\right)\beta_{X_{1,i}}\left(\sigma, \tau\right)} \right]\\
 \end{align}$$
 
 Since in a single minibatch we have $$K$$ examples of speech, and $$K-1$$ negative samples, we can use a single example to generate $$K$$ unique minibatches where instead of using $$X_1$$ as $$X$$ we use $$X_i$$. The loss function for the minibatch of data then becomes.
