@@ -280,8 +280,6 @@ $$\begin{align}
 &= \frac{1}{K} \gamma_{X_j}\left(s, \tau\right) - \frac{1}{K} \sum_{k=1}^K \frac{\alpha_{X_{k,j}}\left(s, \tau\right)\beta_{X_{k, j}}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{X_{k, i}}\left(\sigma, \tau\right)\beta_{X_{k,i}}\left(\sigma, \tau\right)} \\
 \end{align}$$
 
-We can see from the gradient update that this objective function encourages the model to predict paths such that for $$k \neq j$$ the weight of any path $$\pi$$ through the graph with edges whose scores are $$y\left(j\right)_{\pi_t}^t + y\left(k\right)_{\pi_t}^t + w(\pi, t) \to -\infity$$ while for $$k = j$$ the weight of a path 
-
 
 ## Updating p(Y | X)
 
@@ -289,7 +287,9 @@ The problem with the above update is that as mentioned before, the optimal criti
 
 $$ \sum_Y p\left(Y | X\right) f\left(X, Y\right) $$
 
-is intractable because of the form of $$f\left(X, Y\right)$$. If this were a simple classification task, then we could probably evaluate this quantity, however, in sequence tasks, evaluating $$f\left(X, Y\right)$$ of the sequence $$Y$$, for all possible values is not feasible. Nonetheless we take the gradient of this term holding fixed $$f\left(X, Y\right)$$ this time. For the purpose of taking the gradient, I will actually use a specific functional form for $$p\left(Y | X\right) = \frac{p\left(Y\right)e^{f\left(X, Y\right)}}{\mathbb{E}_{p\left(Y\right)}\left[e^{f\left(X, Y\right)}\right]}$$ 
+is intractable because of the form of $$f\left(X, Y\right)$$. If this were a simple classification task, then we could probably evaluate this quantity, however, in sequence tasks, evaluating $$f\left(X, Y\right)$$ of the sequence $$Y$$, for all possible values is not feasible. Nonetheless we take the gradient of this term holding fixed $$f\left(X, Y\right)$$ this time. For the purpose of taking the gradient, I will actually use a specific functional form for 
+
+$$p\left(Y | X\right) = \frac{p\left(Y\right)e^{f\left(X, Y\right)}}{\mathbb{E}_{p\left(Y\right)}\left[e^{f\left(X, Y\right)}\right]}$$ 
 
 $$\begin{align}
 \frac{\partial p\left(Y | X\right)}{\partial y_s^{\tau}\left(j\right)} &= \frac{\partial}{\partial y_s^{\tau}\left(j\right)} p\left(Y\right) \left(\sum_Y p\left(y\right)e^{f\left(X, Y\right)}\right)^{-1} \\
