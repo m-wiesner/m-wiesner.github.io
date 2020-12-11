@@ -315,6 +315,11 @@ $$\begin{align}
 &= \mathbb{E}_{\mathcal{B}}\left[\frac{\alpha_{1, j}\left(s, \tau\right)\beta_{1, j}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\sum_{\sigma}\alpha_{1, j}\left(s, \tau\right)\beta_{1,j}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{1, i}\left(\sigma, \tau\right)\beta_{1, i}\left(\sigma, \tau\right)}\right]
 \end{align}$$
 
+We can use the same trick to generate multiple minibatch samples using a single minibatch and then putting all the gradients together we get.
+
+$$\begin{align}
+\frac{1}{K}\left[ \sum_Y p\left(Y | X_j\right) f\left(X_j, Y\right)\left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_j}\left(s, \tau \right)\right) + \gamma_{X_j}\left(s, \tau\right) - \sum_{k=1}^{K} \frac{2 \alpha_{k, j}\left(s, \tau\right)\beta_{k, j}\left(s, \tau\right) - \gamma_{X_k}\left(s, \tau\right)\sum_{\sigma}\alpha_{k, j}\left(s, \tau\right)\beta_{k,j}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{k, i}\left(\sigma, \tau\right)\beta_{k, i}\left(\sigma, \tau\right)}
+\end{align}$$
 
 <!--
 ### Semi-supervised Algorithm
