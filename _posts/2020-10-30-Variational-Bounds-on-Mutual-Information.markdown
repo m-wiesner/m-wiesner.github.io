@@ -277,7 +277,7 @@ Since in a single minibatch we have $$K$$ examples of speech, and $$K-1$$ negati
 
 $$\begin{align}
 \frac{\partial I_{NCE}}{\partial y_s^{\tau}\left(j\right)} &= \frac{1}{K} \sum_{k=1}^K \gamma_{X_k}\left(s, \tau\right)\mathbb{1}\left(j, k\right) -  \frac{\alpha_{X_{k,j}}\left(s, \tau\right)\beta_{X_{k, j}}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{X_{k, i}}\left(\sigma, \tau\right)\beta_{X_{k,i}}\left(\sigma, \tau\right)}\\
-&= \frac{1}{K} \gamma_{X_j}\left(s, \tau\right) - \frac{1}{K} \sum_{k=1}^K \frac{\alpha_{X_{k,j}}\left(s, \tau\right)\beta_{X_{k, j}}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{X_{k, i}}\left(\sigma, \tau\right)\beta_{X_{k,i}}\left(\sigma, \tau\right)} \\
+&= \frac{1}{K} \left[\gamma_{X_j}\left(s, \tau\right) - \sum_{k=1}^K \frac{\alpha_{X_{k,j}}\left(s, \tau\right)\beta_{X_{k, j}}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{X_{k, i}}\left(\sigma, \tau\right)\beta_{X_{k,i}}\left(\sigma, \tau\right)} \right]\\
 \end{align}$$
 
 
