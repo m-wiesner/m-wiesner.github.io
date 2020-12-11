@@ -311,7 +311,8 @@ $$\begin{align}
 Having worked out the gradient of the posterior we can easily get the gradient of the second term in the objective function.
 
 $$\begin{align}
-\frac{\partial}{\partial y_s^{\tau}\left(j\right)} \log{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}} &= \frac{1}{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}} \sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}\left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X}\left(s, \tau\right)\right)
+\frac{\partial}{\partial y_s^{\tau}\left(j\right)} \mathbb{E}_{\mathcal{B}}\left[\log{\sum_{i=1}^K \sum_Y p\left(Y | X_1\right) e^{f\left(X_i, Y\right)}} \right] &= \mathbb{E}_{\mathcal{B}}\left[\frac{1}{\sum_{i=1}^K \sum_Y p\left(Y | X_1\right) e^{f\left(X_i, Y\right)}} \sum_Y p\left(Y | X_1\right) e^{f\left(X_j, Y\right)}\left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau\right)\right)\right] \\
+&= \mathbb{E}_{\mathcal{B}}\left[\frac{\alpha_{1, j}\left(s, \tau\right)\beta_{1, j}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\sum_{\sigma}\alpha_{1, j}\left(s, \tau\right)\beta_{1,j}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{1, i}\left(\sigma, \tau\right)\beta_{1, i}\left(\sigma, \tau\right)}\right]
 \end{align}$$
 
 
