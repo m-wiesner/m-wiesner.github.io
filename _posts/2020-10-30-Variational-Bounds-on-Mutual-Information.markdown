@@ -283,19 +283,32 @@ $$\begin{align}
 
 ## Updating p(Y | X)
 
-The problem with the above update is that as mentioned before, the optimal critic is $$ \log{\frac{p\left(y|x\right)}{p\left(y\right)}}$$. When we evaluate over the wrong distribution $$q\left(Y | X\right) \neq p\left(Y | X\right)$$, then we are only able to train the network to perform as well as the original posterior we supplied. To increase the mutual information, we have to also be able to update our model for the posterior distribution. Unfortunately, we run into some computation that as far as I can tell is intractable. Notably
+The problem with the above update is that as mentioned before, the optimal critic is
+
+$$ f\left(X, Y\right) = \log{\frac{p\left(y|x\right)}{p\left(y\right)}}$$.
+
+When we evaluate over the wrong distribution
+$$q\left(Y | X\right) \neq p\left(Y | X\right)$$
+then we are only able to train the network to perform as well as the original posterior we supplied. To increase the mutual information, we have to also be able to update our model for the posterior distribution. Unfortunately, we run into some computation that as far as I can tell is intractable. Notably
 
 $$ \sum_Y p\left(Y | X\right) f\left(X, Y\right) $$
 
-is intractable because of the form of $$f\left(X, Y\right)$$. If this were a simple classification task, then we could probably evaluate this quantity, however, in sequence tasks, evaluating $$f\left(X, Y\right)$$ of the sequence $$Y$$, for all possible values is not feasible. Nonetheless we take the gradient of this term holding fixed $$f\left(X, Y\right)$$ this time. For the purpose of taking the gradient, I will actually use a specific functional form for 
+is intractable because of the form of $$f\left(X, Y\right)$$. If this were a simple classification task, then we could probably evaluate this quantity, however, in sequence tasks, evaluating $$f\left(X, Y\right)$$ of the sequence $$Y$$, for all possible values is not feasible. Nonetheless we take the gradient of this term holding fixed 
+
+$$f\left(X, Y\right)$$ 
+
+this time. For the purpose of taking the gradient, I will actually use a specific functional form for 
 
 $$p\left(Y | X\right) = \frac{p\left(Y\right)e^{f\left(X, Y\right)}}{\mathbb{E}_{p\left(Y\right)}\left[e^{f\left(X, Y\right)}\right]}$$ 
 
 $$\begin{align}
-\frac{\partial p\left(Y | X\right)}{\partial y_s^{\tau}\left(j\right)} &= \frac{\partial}{\partial y_s^{\tau}\left(j\right)} p\left(Y\right) \left(\sum_Y p\left(y\right)e^{f\left(X, Y\right)}\right)^{-1} \\
-&= p\left(Y\right)e^{f\left(X, Y\right)} \frac{\partial}{\partial y_s^{\tau}\left(j\right)} f\left(X, Y\right) \left(\sum_Y p\left(y\right)e^{f\left(X, Y\right)}\right)^{-1} - p\left(Y\right)e^{f\left(X, Y\right)}\frac{\sum_Y p\left(y\right)e^{f\left(X, Y\right) \frac{\partial  f\left(X, Y\right)}{\partial y_s^{\tau}\left(j\right)}}{\left(\sum_Y p\left(y\right)e^{f\left(X, Y\right)\right)^2} \\
+\frac{\partial p\left(Y | X\right)}{\partial y_s^{\tau}\left(j\right)} &= \frac{\partial}{\partial y_s^{\tau}\left(j\right)} p\left(Y\right) e^{\fleft(X, Y\right)}\left(\sum_Y p\left(y\right)e^{f\left(X, Y\right)}\right)^{-1} \\
 \end{align}$$
 
+<!--
+&= p\left(Y\right)e^{f\left(X, Y\right)} \frac{\partial}{\partial y_s^{\tau}\left(j\right)} f\left(X, Y\right) \left(\sum_Y p\left(y\right)e^{f\left(X, Y\right)}\right)^{-1} - p\left(Y\right)e^{f\left(X, Y\right)}\frac{\sum_Y p\left(y\right)e^{f\left(X, Y\right) \frac{\partial  f\left(X, Y\right)}{\partial y_s^{\tau}\left(j\right)}}{\left(\sum_Y p\left(y\right)e^{f\left(X, Y\right)\right)^2} \\
+\end{align}$$
+-->
 
 <!--
 ### Semi-supervised Algorithm
