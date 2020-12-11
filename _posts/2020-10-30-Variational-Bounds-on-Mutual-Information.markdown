@@ -308,7 +308,7 @@ $$\begin{align}
 &\implies \sum_Y \frac{\partial p\left(Y | X \right)}{\partial y_s^{\tau}\left(j\right)} f\left(X, Y\right) = \sum_Y p\left(Y | X\right) f\left(X, Y\right)\left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X}\left(s, \tau \right)\right) \\
 \end{align}$$
 
-Having worked out the gradient of $$p\left(Y | X\right)$$ we can easily get the gradient of the second term in the objective function.
+Having worked out the gradient of the posterior we can easily get the gradient of the second term in the objective function.
 
 $$\begin{align}
 \frac{\partial}{\partial y_s^{\tau}\left(j\right)} \log{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}} &= \frac{1}{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}} \sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}\left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X}\left(s, \tau\right)\right)
