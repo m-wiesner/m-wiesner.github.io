@@ -328,7 +328,7 @@ Having worked out the gradient of the posterior we can easily get the gradient o
 $$\begin{align}
 \frac{\partial}{\partial y_s^{\tau}\left(j\right)} \mathbb{E}_{\mathcal{B}}\left[\log{\sum_{i=1}^K \sum_Y p\left(Y | X_1\right) e^{f\left(X_i, Y\right)}} \right] &= \mathbb{E}_{\mathcal{B}}\left[\frac{1}{\sum_{i=1}^K \sum_Y p\left(Y | X_1\right) e^{f\left(X_i, Y\right)}} \sum_Y p\left(Y | X_1\right) e^{f\left(X_j, Y\right)}\left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau\right)\right)\right] \\
 &= \mathbb{E}_{\mathcal{B}}\left[\frac{\alpha_{1, j}\left(s, \tau\right)\beta_{1, j}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\sum_{\sigma}\alpha_{1, j}\left(s, \tau\right)\beta_{1,j}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{1, i}\left(\sigma, \tau\right)\beta_{1, i}\left(\sigma, \tau\right)}\right] \\
-&= \left(\gamma_{X_{1, j}}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}
+&= \mathbb{E}_{\mathcal{B}}\left[ \left(\gamma_{X_{1, j}}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}\right]
 \end{align}$$
 
 We can use the same trick to generate multiple minibatch samples using a single minibatch and then putting all the gradients together we get.
