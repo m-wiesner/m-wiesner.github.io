@@ -255,10 +255,10 @@ $$\begin{align}
   &= \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \log{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}} \\
 \end{align}$$
 
-Finally, by moving around the location of $$X$$ within the minibatch, we can approximate the expectation over $$p\left(X\right)$$ and $$p\left(X\right)p\left(Z\right)$$ with 
+So finally we have 
 
 $$\begin{align}
-\mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[ \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \log{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}} \right] &= \mathbb{E}_{p\left(X\right)} \left[ \sum_Y p\left(Y | X \right) f\left(X, Y\right) \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)}\left[\log{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}}\right] \\
+I_{NCE} = \mathbb{E}_{p\left(Z\right)p\left(X\right)} \left[ \sum_Y p\left(Y | X \right) f\left(X, Y\right) - \log{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}} \right] &= \mathbb{E}_{p\left(X\right)} \left[ \sum_Y p\left(Y | X \right) f\left(X, Y\right) \right] - \mathbb{E}_{p\left(Z\right)p\left(X\right)}\left[\log{\sum_{i=1}^K \sum_Y p\left(Y | X\right) e^{f\left(X_i, Y\right)}}\right] \\
 \end{align}$$
 <!--
 &\approx \frac{1}{K} \sum_{i=1}^K \sum_Y p\left(Y | X_i \right) f\left(X_i, Y\right) - \frac{1}{K} \sum_{k=1}^K \log{\sum_{i=1}^K \sum_Y p\left(Y | X_k\right) e^{f\left(X_i, Y\right)}} \\
@@ -327,7 +327,8 @@ Having worked out the gradient of the posterior we can easily get the gradient o
 
 $$\begin{align}
 \frac{\partial}{\partial y_s^{\tau}\left(j\right)} \mathbb{E}_{\mathcal{B}}\left[\log{\sum_{i=1}^K \sum_Y p\left(Y | X_1\right) e^{f\left(X_i, Y\right)}} \right] &= \mathbb{E}_{\mathcal{B}}\left[\frac{1}{\sum_{i=1}^K \sum_Y p\left(Y | X_1\right) e^{f\left(X_i, Y\right)}} \sum_Y p\left(Y | X_1\right) e^{f\left(X_j, Y\right)}\left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau\right)\right)\right] \\
-&= \mathbb{E}_{\mathcal{B}}\left[\frac{\alpha_{1, j}\left(s, \tau\right)\beta_{1, j}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\sum_{\sigma}\alpha_{1, j}\left(s, \tau\right)\beta_{1,j}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{1, i}\left(\sigma, \tau\right)\beta_{1, i}\left(\sigma, \tau\right)}\right]
+&= \mathbb{E}_{\mathcal{B}}\left[\frac{\alpha_{1, j}\left(s, \tau\right)\beta_{1, j}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\sum_{\sigma}\alpha_{1, j}\left(s, \tau\right)\beta_{1,j}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{1, i}\left(\sigma, \tau\right)\beta_{1, i}\left(\sigma, \tau\right)}\right] \\
+&= \left(\gamma_{X_{1, j}}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}
 \end{align}$$
 
 We can use the same trick to generate multiple minibatch samples using a single minibatch and then putting all the gradients together we get.
