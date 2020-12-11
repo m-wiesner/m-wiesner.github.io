@@ -303,9 +303,8 @@ $$p\left(Y | X\right) = \frac{p\left(Y\right)e^{f\left(X, Y\right)}}{\mathbb{E}_
 
 $$\begin{align}
 \frac{\partial p\left(Y | X \right)}{\partial y_s^{\tau}\left(j\right)} &= \frac{\partial}{\partial y_s^{\tau}\left(j\right)} p\left(Y\right) e^{f\left(X, Y\right)}\left(\sum_Y p\left(Y\right)e^{f\left(X, Y\right)}\right)^{-1} \\
-&= p\left(Y\right)e^{f\left(X, Y\right)} \frac{\partial}{\partial y_s^{\tau}\left(j\right)} f\left(X, Y\right) \left(\sum_Y p\left(y\right)e^{f\left(X, Y\right)}\right)^{-1} - p\left(Y\right)e^{f\left(X, Y\right)}\frac{\sum_Y p\left(y\right)e^{f\left(X, Y\right) \frac{\partial  f\left(X, Y\right)}{\partial y_s^{\tau}\left(j\right)}}{\left(\sum_Y p\left(y\right)e^{f\left(X, Y\right)\right)^2} \\
-&= p\left(Y | X\right) \left(\mathbb{1}\left(y_{\tau}, s\right) - \gamma_{X}\left(s, \tau \right)\right)
-\end{align}$$
+&= p\left(Y\right)e^{f\left(X, Y\right)} \frac{\partial}{\partial y_s^{\tau}\left(j\right)} f\left(X, Y\right)\left(\sum_Y p\left(y\right)e^{f\left(X, Y\right)}\right)^{-1} - p\left(Y\right)e^{f\left(X, Y\right)} \frac{\sum_Y p\left(y\right)e^{f\left(X, Y\right)}\frac{\partial  f\left(X, Y\right)}{\partial y_s^{\tau}\left(j\right)}}{\left(\sum_Y p\left(y\right)e^{f\left(X, Y\right)}\right)^2} \\
+&= p\left(Y | X\right) \left(\mathbb{1}\left(y_{\tau}, s\right) - \gamma_{X}\left(s, \tau \right)\right) \\
 \end{align}$$
 
 <!--
