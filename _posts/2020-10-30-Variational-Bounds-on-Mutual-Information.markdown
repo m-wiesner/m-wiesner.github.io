@@ -337,7 +337,13 @@ $$\begin{align}
 \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right)\left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X}\left(s, \tau \right)\right) + \gamma_{X_1}\left(s, \tau\right)\left(1 + \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}\right) -  \gamma_{X_{1, j}}\left(s, \tau\right) \frac{2e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}
 \end{align}$$
 
-We can use the same trick to generate multiple minibatch samples using a single minibatch and then putting all the gradients together we get...
+Now we have to deal with the intractable(?) first term.
+
+$$\begin{align}
+\sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) &= \frac{1}{Z\left(X_1\right)} \sum_Y e^{\sum_t \phi\left(X_{1_{Y_t}}^t\right)} \sum_t \phi\left(X_{1_{Y_t}}^t\right) \\
+&= \frac{1}{Z\left(X_1\right)} \sum_Y \sum_t \phi\left(X_{1_{Y_t}}^t\right) e^{\sum_t \phi\left(X_{1_{Y_t}}^t\right)} \\
+&= \frac{1}{Z\left(X_1\right)} \sum_t \sum_Y \phi\left(X_{1_{Y_t}}^t\right) e^{\sum_t\phi\left(X_{1_{Y_t}}^t\right)} \\
+\end{align}$$
 
 <!--
 ### Semi-supervised Algorithm
