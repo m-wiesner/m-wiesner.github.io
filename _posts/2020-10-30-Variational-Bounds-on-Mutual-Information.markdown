@@ -334,7 +334,7 @@ $$\begin{align}
 Putting the gradients together we get 
 
 $$\begin{align}
-\sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right)\left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X}\left(s, \tau \right)\right) + \gamma_{X_1}\left(s, \tau\right) - \gamma_{X_{1, j}}\left(s, \tau\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}} + \left(\gamma_{X_1}\left(s, \tau\right) -  \gamma_{X_{1, j}}\left(s, \tau\right) \right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}
+\sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right)\left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X}\left(s, \tau \right)\right) + \gamma_{X_1}\left(s, \tau\right)\left(1 + \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}\right) -  \gamma_{X_{1, j}}\left(s, \tau\right) \frac{2e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}
 \end{align}$$
 
 We can use the same trick to generate multiple minibatch samples using a single minibatch and then putting all the gradients together we get...
