@@ -345,6 +345,7 @@ $$\begin{align}
 &= \frac{1}{Z\left(X_1\right)} \sum_t \sum_Y \phi\left(X_{1_{Y_t}}^t\right) e^{\sum_t\phi\left(X_{1_{Y_t}}^t\right)} \\
 \end{align}$$
 
+
 <!--
 ### Semi-supervised Algorithm
 $$\begin{align}
