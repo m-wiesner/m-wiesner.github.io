@@ -340,9 +340,10 @@ $$\begin{align}
 Now we have to deal with the intractable(?) first term.
 
 $$\begin{align}
-\sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) &= \frac{1}{Z\left(X_1\right)} \sum_Y e^{\sum_t \phi\left(X_{1_{Y_t}}^t\right)} \sum_t \phi\left(X_{1_{Y_t}}^t\right) \\
-&= \frac{1}{Z\left(X_1\right)} \sum_Y \sum_t \phi\left(X_{1_{Y_t}}^t\right) e^{\sum_t \phi\left(X_{1_{Y_t}}^t\right)} \\
-&= \frac{1}{Z\left(X_1\right)} \sum_t \sum_Y \phi\left(X_{1_{Y_t}}^t\right) e^{\sum_t\phi\left(X_{1_{Y_t}}^t\right)} \\
+\sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) &= \frac{1}{Z\left(X_1\right)} \sum_Y e^{\sum_t \phi\left({X_1}_{Y_t}^t\right)} \sum_{t^{\prime}} \phi\left({X_1}_{Y_{t^{\prime}}}^{t^{\prime}}\right) \\
+&= \frac{1}{Z\left(X_1\right)} \sum_Y \sum_{t^{\prime}} \phi\left({X_1}_{Y_{t^{\prime}}}^{t^{\prime}}\right) e^{\sum_t \phi\left({X_1}_{Y_t}^t\right)} \\
+&= \frac{1}{Z\left(X_1\right)} \sum_{t^{\prime}} \sum_Y \phi\left({X_1}_{Y_{t^{\prime}}}^{t^{\prime}}\right) e^{\sum_t\phi\left({X_1}_{Y_{t^{\prime}}}^{t^{\prime}}\right)} \\
+&= \frac{1}{Z\left(X_1\right)} \sum_{t^{\prime}} \sum_Y e^{\sum_t \phi\left({X_1}_{Y_t}^t\right) + \frac{1}{T}\log{\phi\left({X_1}_{Y_{t^{\prime}}}^{t^{\prime}}\right)}} \\
 \end{align}$$
 
 
