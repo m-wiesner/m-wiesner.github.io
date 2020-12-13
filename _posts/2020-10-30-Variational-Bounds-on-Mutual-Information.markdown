@@ -346,7 +346,7 @@ $$\begin{align}
 &\simeq \frac{T}{N Z\left(X_1\right)} \sum_{i=1}^N \sum_Y e^{\sum_t \phi\left({X_1}_{Y_t}^t\right) + \frac{1}{T}\log{\phi\left({X_1}_{Y_{t_i^{\prime}}}^{t_i^{\prime}}\right)}} \\
 &=\frac{\hat{Z}\left(X_1\right)}{Z\left(X_1\right)} \\
 &\implies \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau\right) \right) \simeq \hat{\gamma}_{X_1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau \right) \frac{\hat{Z}\left(X_1\right)}{Z\left(X_1\right)} \\
-&\implies \frac{\partial}{\partial y_s^{\tau}\left(j\right)} \mathbb{E}_{\mathcal{B}}\left[ I_{MCE} \right] = \hat{\gamma}_{X_1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau \right) \frac{\hat{Z}\left(X_1\right)}{Z\left(X_1\right)} + \gamma_{X_1}\left(s, \tau\right)\left(1 + \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}\right) -  \gamma_{X_{1, j}}\left(s, \tau\right) \frac{2e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}
+&\implies \frac{\partial}{\partial y_s^{\tau}\left(j\right)} \mathbb{E}_{\mathcal{B}}\left[ I_{MCE} \right] = \hat{\gamma}_{X_1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau \right)  + \gamma_{X_1}\left(s, \tau\right)\left[\left(1-\frac{\hat{Z}\left(X_1\right)}{Z\left(X_1\right)}\right) + \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}\right] -  \gamma_{X_{1, j}}\left(s, \tau\right) \frac{2e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}
 \end{align}$$
 
 
