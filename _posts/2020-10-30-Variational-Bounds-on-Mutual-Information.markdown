@@ -338,7 +338,7 @@ $$\begin{align}
 \end{align}$$
 -->
 
-
+You can interpret this as an acoustic confidence of an input weighted by how distinguishable it is on average (from a sample of $$K$$ other examples).
 Now we have to deal with the intractable(?) first term.
 
 $$\begin{align}
