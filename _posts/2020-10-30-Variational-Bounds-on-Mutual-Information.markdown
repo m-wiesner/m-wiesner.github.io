@@ -326,16 +326,18 @@ $$\begin{align}
 Having worked out the gradient of the posterior we can easily get the gradient of the second term in the objective function.
 
 $$\begin{align}
-\frac{\partial}{\partial y_s^{\tau}\left(j\right)} \mathbb{E}_{\mathcal{B}}\left[\log{\sum_{i=1}^K \sum_Y p\left(Y | X_1\right) e^{f\left(X_i, Y\right)}} \right] &= \mathbb{E}_{\mathcal{B}}\left[\frac{1}{\sum_{i=1}^K \sum_Y p\left(Y | X_1\right) e^{f\left(X_i, Y\right)}} \sum_Y p\left(Y | X_1\right) e^{f\left(X_j, Y\right)}\left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau\right)\right)\right] \\
-&= \mathbb{E}_{\mathcal{B}}\left[\frac{\alpha_{1, j}\left(s, \tau\right)\beta_{1, j}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\sum_{\sigma}\alpha_{1, j}\left(s, \tau\right)\beta_{1,j}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{1, i}\left(\sigma, \tau\right)\beta_{1, i}\left(\sigma, \tau\right)}\right] \\
-&= \mathbb{E}_{\mathcal{B}}\left[ \left(\gamma_{X_{1, j}}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}\right]
+\frac{\partial}{\partial y_s^{\tau}\left(j\right)} \mathbb{E}_{\mathcal{B}}\left[\log{\sum_{i=1}^K \sum_Y p\left(Y | X_1\right) e^{f\left(X_i, Y\right)}} \right] &= \mathbb{E}_{\mathcal{B}}\left[\frac{1}{\sum_{i=1}^K \sum_Y p\left(Y | X_1\right) e^{f\left(X_i, Y\right)}} \sum_Y p\left(Y | X_1\right) e^{f\left(X_1, Y\right)}\left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau\right)\right)\right] \\
+&= \mathbb{E}_{\mathcal{B}}\left[\frac{\alpha_{1, 1}\left(s, \tau\right)\beta_{1, 1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\sum_{\sigma}\alpha_{1, 1}\left(s, \tau\right)\beta_{1,1}\left(s, \tau\right)}{\sum_{i=1}^K \sum_{\sigma} \alpha_{1, i}\left(\sigma, \tau\right)\beta_{1, i}\left(\sigma, \tau\right)}\right] \\
+&= \mathbb{E}_{\mathcal{B}}\left[ \left(\gamma_{X_{1, 1}}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\right) \frac{e^{E\left(1, 1\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}\right]
 \end{align}$$
 
+<!--
 Putting the gradients together we get 
-
 $$\begin{align}
 \mathbb{1}\left(j, 1\right)\sum_Y p\left(Y | X\right) \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right)\left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X}\left(s, \tau \right)\right) + \gamma_{X_1}\left(s, \tau\right)\left(1 + \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}\right) -  \gamma_{X_{1, j}}\left(s, \tau\right) \frac{2e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}
 \end{align}$$
+-->
+
 
 Now we have to deal with the intractable(?) first term.
 
@@ -346,7 +348,8 @@ $$\begin{align}
 &\simeq \frac{T}{N Z\left(X_1\right)} \sum_{i=1}^N \sum_Y e^{\sum_t \phi\left({X_1}_{Y_t}^t\right) + \frac{1}{T}\log{\phi\left({X_1}_{Y_{t_i^{\prime}}}^{t_i^{\prime}}\right)}} \\
 &=\frac{\hat{Z}\left(X_1\right)}{Z\left(X_1\right)} \\
 &\implies \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau\right) \right) \simeq \hat{\gamma}_{X_1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau \right) \frac{\hat{Z}\left(X_1\right)}{Z\left(X_1\right)} \\
-&\implies \frac{\partial}{\partial y_s^{\tau}\left(j\right)} I_{MCE} = \mathbb{E}_{\mathcal{B}}\left[ \mathbb{1}\left(1, j\right)\left(\hat{\gamma}_{X_1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau \right) \frac{\hat{Z}\left(X_1\right)}{Z\left(X_1\right)}\right) - \left(\gamma_{X_{1, j}}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}} + \mathbb{1}\left(1, j\right)\gamma_{X_1}\left(s, \tau\right) - \gamma_{X_{1, j}}\left(s, \tau\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}  \right]\\
+&\implies \frac{\partial}{\partial y_s^{\tau}\left(j\right)} I_{MCE} \simeq \mathbb{E}_{\mathcal{B}}\left[ \mathbb{1}\left(1, j\right)\left(\hat{\gamma}_{X_1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau \right) \frac{\hat{Z}\left(X_1\right)}{Z\left(X_1\right)}\right) - \left(\gamma_{X_{1, j}}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}} + \mathbb{1}\left(1, j\right)\gamma_{X_1}\left(s, \tau\right) - \gamma_{X_{1, j}}\left(s, \tau\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}  \right]\\
+&\simeq \frac{1}{K}\left[ \left(\hat{\gamma}_{X_j}\left(s, \tau\right) - \gamma_{X_j}\left(s, \tau \right) \frac{\hat{Z}\left(X_j\right)}{Z\left(X_j\right)}\right) - \sum_{k=1}^{K}\left(\gamma_{X_{k, j}}\left(s, \tau\right) - \gamma_{X_k}\left(s, \tau\right)\right) \frac{e^{E\left(k, j\right)}}{\sum_{i=1}^K e^{E\left(k, i\right)}} + \mathbb{1}\left(1, j\right)\gamma_{X_1}\left(s, \tau\right) - \gamma_{X_{1, j}}\left(s, \tau\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}  \right]
 \end{align}$$
 
 
