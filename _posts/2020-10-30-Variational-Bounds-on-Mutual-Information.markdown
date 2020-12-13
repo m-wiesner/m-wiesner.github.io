@@ -348,10 +348,12 @@ $$\begin{align}
 &\simeq \frac{T}{N Z\left(X_1\right)} \sum_{i=1}^N \sum_Y e^{\sum_t \phi\left({X_1}_{Y_t}^t\right) + \frac{1}{T}\log{\phi\left({X_1}_{Y_{t_i^{\prime}}}^{t_i^{\prime}}\right)}} \\
 &=\frac{\hat{Z}\left(X_1\right)}{Z\left(X_1\right)} \\
 &\implies \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau\right) \right) \simeq \hat{\gamma}_{X_1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau \right) \frac{\hat{Z}\left(X_1\right)}{Z\left(X_1\right)} \\
-&\implies \frac{\partial}{\partial y_s^{\tau}\left(j\right)} I_{MCE} \simeq \mathbb{E}_{\mathcal{B}}\left[ \mathbb{1}\left(1, j\right)\left(\hat{\gamma}_{X_1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau \right) \frac{\hat{Z}\left(X_1\right)}{Z\left(X_1\right)}\right) - \left(\gamma_{X_{1, j}}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}} + \mathbb{1}\left(1, j\right)\gamma_{X_1}\left(s, \tau\right) - \gamma_{X_{1, j}}\left(s, \tau\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}  \right]\\
+&\implies \frac{\partial}{\partial y_s^{\tau}\left(j\right)} I_{MCE} \simeq \mathbb{E}_{\mathcal{B}}\left[ \mathbb{1}\left(1, j\right)\left(\hat{\gamma}_{X_1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau \right) \frac{\hat{Z}\left(X_1\right)}{Z\left(X_1\right)}\right) - \left(\gamma_{X_{1, 1}}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\right) \frac{e^{E\left(1, 1\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}\right) + \mathbb{1}\left(1, j\right)\left(\gamma_{X_1}\left(s, \tau\right) - \gamma_{X_{1, j}}\left(s, \tau\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}  \right]\\
+\end{align}$$
+<!--
 &\simeq \frac{1}{K}\left[ \left(\hat{\gamma}_{X_j}\left(s, \tau\right) - \gamma_{X_j}\left(s, \tau \right) \frac{\hat{Z}\left(X_j\right)}{Z\left(X_j\right)}\right) - \sum_{k=1}^{K}\left(\gamma_{X_{k, j}}\left(s, \tau\right) - \gamma_{X_k}\left(s, \tau\right)\right) \frac{e^{E\left(k, j\right)}}{\sum_{i=1}^K e^{E\left(k, i\right)}} + \mathbb{1}\left(1, j\right)\gamma_{X_1}\left(s, \tau\right) - \gamma_{X_{1, j}}\left(s, \tau\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}  \right]
 \end{align}$$
-
+-->
 
 <!--
 &\implies \frac{\partial}{\partial y_s^{\tau}\left(j\right)} I_{MCE} = \mathbb{E}_{\mathcal{B}}\left[ \hat{\gamma}_{X_1}\left(s, \tau\right) + \gamma_{X_1}\left(s, \tau\right)\left[\left(1-\frac{\hat{Z}\left(X_1\right)}{Z\left(X_1\right)}\right) + \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}\right] -  \gamma_{X_{1, j}}\left(s, \tau\right) \frac{2e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}\right]
