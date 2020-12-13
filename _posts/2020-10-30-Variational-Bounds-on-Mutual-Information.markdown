@@ -345,7 +345,7 @@ $$\begin{align}
 &= \frac{1}{Z\left(X_1\right)} \sum_{t^{\prime}} \sum_Y e^{\sum_t \phi\left({X_1}_{Y_t}^t\right) + \frac{1}{T}\log{\phi\left({X_1}_{Y_{t^{\prime}}}^{t^{\prime}}\right)}} \\
 &\simeq \frac{T}{N Z\left(X_1\right)} \sum_{i=1}^N \sum_Y e^{\sum_t \phi\left({X_1}_{Y_t}^t\right) + \frac{1}{T}\log{\phi\left({X_1}_{Y_{t_i^{\prime}}}^{t_i^{\prime}}\right)}} \\
 &=\frac{\hat{Z}\left(X_1\right)}{Z\left(X_1\right)} \\
-&\implies \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau\right) \simeq \hat{gamma}_{X_1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau \right) \frac{\hat{Z}\left(X_1\right)}{Z\left(X_1\right)} \\
+&\implies \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau\right) \right) \simeq \hat{gamma}_{X_1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau \right) \frac{\hat{Z}\left(X_1\right)}{Z\left(X_1\right)} \\
 \end{align}$$
 
 
