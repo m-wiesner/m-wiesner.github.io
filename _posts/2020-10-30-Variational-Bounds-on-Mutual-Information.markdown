@@ -349,7 +349,6 @@ $$\begin{align}
 &= T \frac{Z\left(X_1\right)}{NZ\left(X_1\right)} \sum_{i=1}^N \sum_{\sigma}\gamma_{X_1}\left(\sigma, t_i\right) \phi\left(X_1\right)^{t_i}\\
 &=\frac{T}{N} \sum_{i=1}^N \sum_{\sigma}\gamma_{X_1}\left(\sigma, t_i\right) \phi\left(X_1\right)^{t_i} \\
 &= T \hat{Z}\left(X_1 \right)\\
-&\implies \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \mathbb{1}\left(Y_{\tau}, s\right) &\simeq T \frac{Z\left(X_1\right)}{NZ\left(X_1\right)} \sum_{i=1}^N \gamma_{X_1}\left(s, t_i\right) \phi\left(X_1\right)^{t_i} \mathbb{1}\left(Y_{\tau}, s\right)\\
 &\implies \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau\right) \right) \simeq \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau \right)\right) T\hat{Z}\left(X_1\right) \\
 \end{align}$$
 
