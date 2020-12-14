@@ -358,7 +358,7 @@ This is clearly not necessarily a lower bound any more, but it makes computation
 
 $$\begin{align}
 I_{NCE} &= \mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{\sum_{i=1}^{K} e^{f\left(X_i, Y\right)}}}\right] \\
-&= \mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[\sum_Y p\left(Y | X\right)\log{\frac{e^{f\left(X, Y\right)}}{\sum_{i=1}^{K} e^{f\left(X_i, Y\right)}}}\right]
+&= \mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[\sum_Y p\left(Y | X\right)\log{\frac{e^{f\left(X, Y\right)}}{\sum_{i=1}^{K} e^{f\left(X_i, Y\right)}}}\right] \\
 &\simeq \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\log{\sum_Y p\left(Y | X\right)e^{f\left(X, Y\right)}} - \log{\sum_{i=1}^{K} \sum_Y p\left(Y | X\right)e^{f\left(X_i, Y\right)}}\right] \\
 &= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\log{\frac{\sum_Y p\left(Y | X\right)e^{f\left(X, Y\right)}}{\sum_{i=1}^{K} \sum_Y p\left(Y | X\right)e^{f\left(X_i, Y\right)}}}\right] \\
 &= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\log{\frac{\sum_Y p\left(Y | X\right)e^{f\left(X, Y\right)}}{\sum_{i=1}^{K} \sum_Y p\left(Y | X\right)e^{f\left(X_i, Y\right)}}}\right]  \\
