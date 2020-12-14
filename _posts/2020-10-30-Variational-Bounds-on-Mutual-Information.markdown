@@ -346,18 +346,22 @@ $$\begin{align}
 &= \frac{1}{Z\left(X_1\right)} \sum_Y p\left(Y\right) \sum_{t^{\prime}} \phi\left({X_1}_{Y_{t^{\prime}}}^{t^{\prime}}\right) e^{\sum_t \phi\left({X_1}_{Y_t}^t\right)} \\
 &= \frac{1}{Z\left(X_1\right)} \sum_{t^{\prime}} \sum_Y \phi\left({X_1}_{Y_{t^{\prime}}}^{t^{\prime}}\right)  p\left(Y\right) e^{\sum_t \phi\left({X_1}_{Y_t}^t\right)} \\
 &\simeq \frac{T}{N Z\left(X_1\right)} \sum_{i=1}^N \sum_Y \phi\left({X_1}_{Y_{t_i}}^{t_i}\right) p\left(Y\right) e^{\sum_t \phi\left({X_1}_{Y_t}^t\right)} \\
-&= T \frac{Z\left(X_1\right)}{NZ\left(X_1\right)} \sum_{i=1}^N \sum_s\gamma_{X_1}\left(s, t_i\right) \phi\left(X_1\right)^{t_i}\\
-&=\frac{T}{N} \sum_{i=1}^N \sum_s\gamma_{X_1}\left(s, t_i\right) \phi\left(X_1\right)^{t_i} \\
+&= T \frac{Z\left(X_1\right)}{NZ\left(X_1\right)} \sum_{i=1}^N \sum_{\sigma}\gamma_{X_1}\left(\sigma, t_i\right) \phi\left(X_1\right)^{t_i}\\
+&=\frac{T}{N} \sum_{i=1}^N \sum_{\sigma}\gamma_{X_1}\left(\sigma, t_i\right) \phi\left(X_1\right)^{t_i} \\
 &= T \hat{Z}\left(X_1 \right)\\
+&\implies \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \mathbb{1}\left(Y_{\tau}, s\right) &\simeq T \frac{Z\left(X_1\right)}{NZ\left(X_1\right)} \sum_{i=1}^N \gamma_{X_1}\left(s, t_i\right) \phi\left(X_1\right)^{t_i} \mathbb{1}\left(Y_{\tau}, s\right)\\
+& &= T \hat{\gamma}\left(s, \right)
 &\implies \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau\right) \right) \simeq \left(\hat{\gamma}_{X_1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau \right)\right) \frac{T\hat{Z}\left(X_1\right)}{Z\left(X_1\right)} \\
 \end{align}$$
 
 I think this term is something like a frame-level acoustic score.
 
+<!--
 $$\begin{align}
 &\implies \frac{\partial}{\partial y_s^{\tau}\left(j\right)} I_{MCE} \simeq \mathbb{E}_{\mathcal{B}}\left[ \mathbb{1}\left(1, j\right)\left(\left(\hat{\gamma}_{X_1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau \right)\right) \frac{T\hat{Z}\left(X_1\right)}{Z\left(X_1\right)}\right) - \left(\gamma_{X_{1, 1}}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\right) \frac{e^{E\left(1, 1\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}} + \mathbb{1}\left(1, j\right)\gamma_{X_1}\left(s, \tau\right) - \gamma_{X_{1, j}}\left(s, \tau\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}  \right]\\
 &\simeq \frac{1}{K} \left[ \hat{\gamma}_{X_j}\left(s, \tau\right) + \gamma_{X_j}\left(s, \tau \right) \left(1 - \frac{T\hat{Z}\left(X_j\right)}{Z\left(X_j\right)}\right) - \sum_{k=1}^K \left[\left(\gamma_{X_k}\left(s, \tau\right) - \gamma_{X_{k, k}}\left(s, \tau\right)\right) \frac{e^{E\left(k, k\right)}}{\sum_{i=1}^K e^{E\left(k, i\right)}} + \gamma_{X_{k, j}}\left(s, \tau\right) \frac{e^{E\left(k, j\right)}}{\sum_{i=1}^K e^{E\left(k, i\right)}}\right]\right] \\
 \end{align}$$
+-->
 <!--
 &\simeq \frac{1}{K}\left[ \left(\hat{\gamma}_{X_j}\left(s, \tau\right) - \gamma_{X_j}\left(s, \tau \right) \frac{\hat{Z}\left(X_j\right)}{Z\left(X_j\right)}\right) - \sum_{k=1}^{K}\left(\gamma_{X_{k, j}}\left(s, \tau\right) - \gamma_{X_k}\left(s, \tau\right)\right) \frac{e^{E\left(k, j\right)}}{\sum_{i=1}^K e^{E\left(k, i\right)}} + \mathbb{1}\left(1, j\right)\gamma_{X_1}\left(s, \tau\right) - \gamma_{X_{1, j}}\left(s, \tau\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}  \right]
 \end{align}$$
