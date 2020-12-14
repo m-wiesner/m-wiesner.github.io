@@ -342,10 +342,10 @@ You can interpret this as an acoustic confidence of an input weighted by how dis
 Now we have to deal with the intractable(?) first term.
 
 $$\begin{align}
-\sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) &= \frac{1}{Z\left(X_1\right)} \sum_Y p\left(Y\right) e^{\sum_t \phi\left({X_1}_{Y_t}^t\right)} \sum_{t^{\prime}} \phi\left({X_1}_{Y_{t^{\prime}}}^{t^{\prime}}\right) \\
-&= \frac{1}{Z\left(X_1\right)} \sum_Y p\left(Y\right) \sum_{t^{\prime}} \phi\left({X_1}_{Y_{t^{\prime}}}^{t^{\prime}}\right) e^{\sum_t \phi\left({X_1}_{Y_t}^t\right)} \\
-&= \frac{1}{Z\left(X_1\right)} \sum_{t^{\prime}} \sum_Y \phi\left({X_1}_{Y_{t^{\prime}}}^{t^{\prime}}\right)  p\left(Y\right) e^{\sum_t \phi\left({X_1}_{Y_t}^t\right)} \\
-&\simeq \frac{T}{N Z\left(X_1\right)} \sum_{i=1}^N \sum_Y \phi\left({X_1}_{Y_{t_i}}^{t_i}\right) p\left(Y\right) e^{\sum_t \phi\left({X_1}_{Y_t}^t\right)} \\
+\sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) &= \frac{1}{Z\left(X_1\right)} \sum_Y p\left(Y\right) e^{\sum_t \phi\left(X_1\right)_{Y_t}^t} \sum_{t^{\prime}} \phi\left(X_1\right)_{Y_{t^{\prime}}}^{t^{\prime}} \\
+&= \frac{1}{Z\left(X_1\right)} \sum_Y p\left(Y\right) \sum_{t^{\prime}} \phi\left(X_1\right)_{Y_{t^{\prime}}}^{t^{\prime}} e^{\sum_t \phi\left(X_1\right)_{Y_t}^t} \\
+&= \frac{1}{Z\left(X_1\right)} \sum_{t^{\prime}} \sum_Y \phi\left(X_1\right)_{Y_{t^{\prime}}}^{t^{\prime}}  p\left(Y\right) e^{\sum_t \phi\left(X_1\right)_{Y_t}^t} \\
+&\simeq \frac{T}{N Z\left(X_1\right)} \sum_{i=1}^N \sum_Y \phi\left(X_1\right)_{Y_{t_i}}^{t_i} p\left(Y\right) e^{\sum_t \phi\left(X_1\right)_{Y_t}^t} \\
 &= T \frac{Z\left(X_1\right)}{NZ\left(X_1\right)} \sum_{i=1}^N \sum_{\sigma}\gamma_{X_1}\left(\sigma, t_i\right) \phi\left(X_1\right)^{t_i}\\
 &=\frac{T}{N} \sum_{i=1}^N \sum_{\sigma}\gamma_{X_1}\left(\sigma, t_i\right) \phi\left(X_1\right)^{t_i} \\
 &= T \hat{Z}\left(X_1 \right)\\
