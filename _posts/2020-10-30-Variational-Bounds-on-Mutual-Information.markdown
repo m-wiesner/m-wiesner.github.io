@@ -350,8 +350,7 @@ $$\begin{align}
 &=\frac{T}{N} \sum_{i=1}^N \sum_{\sigma}\gamma_{X_1}\left(\sigma, t_i\right) \phi\left(X_1\right)^{t_i} \\
 &= T \hat{Z}\left(X_1 \right)\\
 &\implies \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \mathbb{1}\left(Y_{\tau}, s\right) &\simeq T \frac{Z\left(X_1\right)}{NZ\left(X_1\right)} \sum_{i=1}^N \gamma_{X_1}\left(s, t_i\right) \phi\left(X_1\right)^{t_i} \mathbb{1}\left(Y_{\tau}, s\right)\\
-& &= T \hat{\gamma}\left(s, \right)
-&\implies \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau\right) \right) \simeq \left(\hat{\gamma}_{X_1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau \right)\right) \frac{T\hat{Z}\left(X_1\right)}{Z\left(X_1\right)} \\
+&\implies \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau\right) \right) \simeq \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau \right)\right) T\hat{Z}\left(X_1\right) \\
 \end{align}$$
 
 I think this term is something like a frame-level acoustic score.
