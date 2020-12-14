@@ -362,7 +362,7 @@ I_{NCE} &= \mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\l
 &\simeq \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\log{\sum_Y p\left(Y | X\right)e^{f\left(X, Y\right)}} - \log{\sum_{i=1}^{K} \sum_Y p\left(Y | X\right)e^{f\left(X_i, Y\right)}}\right] \\
 &= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\log{\frac{\sum_Y p\left(Y | X\right)e^{f\left(X, Y\right)}}{\sum_{i=1}^{K} \sum_Y p\left(Y | X\right)e^{f\left(X_i, Y\right)}}}\right] \\
 &= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\log{\frac{\sum_Y p\left(Y | X\right)e^{f\left(X, Y\right)}}{\sum_{i=1}^{K} \sum_Y p\left(Y | X\right)e^{f\left(X_i, Y\right)}}}\right]  \\
-&= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[e^{[\![\left(\phi_X + \phi_X\right ) \circ G]\!]}\right] - logsumexp\left([\![\left(\phi_{X_i} + \phi_X\right) \circ G]\!]\right)}\right] \\
+&= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[e^{[\![\left(\phi_X + \phi_X\right) \circ G]\!] - \mbox{logsumexp}_i\left([\![\left(\phi_X + \phi_{X_i}\right) \circ G]\!]\right )}\right] \\
 \end{align}$$
 
 
