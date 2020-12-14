@@ -352,8 +352,6 @@ $$\begin{align}
 &\implies \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau\right) \right) \simeq \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau \right) T\hat{Z}\left(X_1\right) \\
 \end{align}$$
 
-I think this term is something like a frame-level acoustic score.
-
 <!--
 $$\begin{align}
 &\implies \frac{\partial}{\partial y_s^{\tau}\left(j\right)} I_{MCE} \simeq \mathbb{E}_{\mathcal{B}}\left[ \mathbb{1}\left(1, j\right)\left(\left(\hat{\gamma}_{X_1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau \right)\right) \frac{T\hat{Z}\left(X_1\right)}{Z\left(X_1\right)}\right) - \left(\gamma_{X_{1, 1}}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\right) \frac{e^{E\left(1, 1\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}} + \mathbb{1}\left(1, j\right)\gamma_{X_1}\left(s, \tau\right) - \gamma_{X_{1, j}}\left(s, \tau\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}  \right]\\
