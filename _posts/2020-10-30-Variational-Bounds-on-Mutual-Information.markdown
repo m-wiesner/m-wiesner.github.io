@@ -354,7 +354,7 @@ $$\begin{align}
 
 
 ## Alternative Approximation
-This is clearly not a lower bound any more, but it makes computation easy.
+This is clearly not necessarily a lower bound any more, but it makes computation easy. I just used Jensen's Inequality on the numerator and denominator separately after splitting the log fraction up. The second term is lower than it should be, but the first term is greater than it should be.
 
 $$\begin{align}
 I_{NCE} &= \mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{\sum_{i=1}^{K} e^{f\left(X_i, Y\right)}}}\right] \\
