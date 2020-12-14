@@ -352,6 +352,21 @@ $$\begin{align}
 &\implies \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \left(\mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau\right) \right) \simeq \sum_Y p\left(Y | X_1\right) f\left(X_1, Y\right) \mathbb{1}\left(Y_{\tau}, s\right) - \gamma_{X_1}\left(s, \tau \right) T\hat{Z}\left(X_1\right) \\
 \end{align}$$
 
+
+## Alternative Approximation
+This is clearly not a lower bound any more, but it makes computation easy.
+
+$$\begin{align}
+I_{NCE} &= \mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[\log{\frac{e^{f\left(X, Y\right)}}{\sum_{i=1}^{K} e^{f\left(X_i, Y\right)}}}\right] \\
+&= \mathbb{E}_{p\left(X, Y\right)p\left(Z\right)}\left[\sum_Y p\left(Y | X\right)\log{\frac{e^{f\left(X, Y\right)}}{\sum_{i=1}^{K} e^{f\left(X_i, Y\right)}}}\right]
+&\simeq \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\log{\sum_Y p\left(Y | X\right)e^{f\left(X, Y\right)}} - \log{\sum_{i=1}^{K} \sum_Y p\left(Y | X\right)e^{f\left(X_i, Y\right)}}\right] \\
+&= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\log{\frac{\sum_Y p\left(Y | X\right)e^{f\left(X, Y\right)}}{\sum_{i=1}^{K} \sum_Y p\left(Y | X\right)e^{f\left(X_i, Y\right)}}}\right] \\
+&= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[\log{\frac{\sum_Y p\left(Y | X\right)e^{f\left(X, Y\right)}}{\sum_{i=1}^{K} \sum_Y p\left(Y | X\right)e^{f\left(X_i, Y\right)}}}\right]  \\
+&= \mathbb{E}_{p\left(X\right)p\left(Z\right)}\left[e^{[\![\left(\phi_X + \phi_X\right ) \circ G]\!]}\right] - logsumexp\left([\![\left(\phi_{X_i} + \phi_X\right ) \circ G]\!]\right)}\right]
+\end{align}$$
+
+
+
 <!--
 $$\begin{align}
 &\implies \frac{\partial}{\partial y_s^{\tau}\left(j\right)} I_{MCE} \simeq \mathbb{E}_{\mathcal{B}}\left[ \mathbb{1}\left(1, j\right)\left(\left(\hat{\gamma}_{X_1}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau \right)\right) \frac{T\hat{Z}\left(X_1\right)}{Z\left(X_1\right)}\right) - \left(\gamma_{X_{1, 1}}\left(s, \tau\right) - \gamma_{X_1}\left(s, \tau\right)\right) \frac{e^{E\left(1, 1\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}} + \mathbb{1}\left(1, j\right)\gamma_{X_1}\left(s, \tau\right) - \gamma_{X_{1, j}}\left(s, \tau\right) \frac{e^{E\left(1, j\right)}}{\sum_{i=1}^K e^{E\left(1, i\right)}}  \right]\\
