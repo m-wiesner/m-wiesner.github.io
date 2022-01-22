@@ -4,23 +4,31 @@ layout: page
 ---
 <!-- ![Profile Image]({{ site.url }}/{{ site.picture }}) -->
 
-<p>I am a PhD student in the Center for Language and Speech Processing at Johns
-Hopkins University. I am broadly interested in speech technologies, but I
+<p>I am a research scientist at the Johns Hopkins affiliated <a href="https://hltcoe.jhu.edu/">Human Language Technology Center of Excellence</a> (HLTCOE). I am broadly interested in speech technologies, but I
 have primarily worked on multilingual and cross-lingual acoustic modeling for
-low-resource language ASR and topic identification. I am advised by
-<a href="https://www.clsp.jhu.edu/faculty/sanjeev-khudanpur">Sanjeev Khudanpur</a>
-and often work with
-<a href="https://www.clsp.jhu.edu/faculty/jan-trmal">Jan Trmal</a> and
-<a href="https://www.clsp.jhu.edu/faculty/shinji-watanabe">Shinji Watanabe</a>.
-I have worked on end-to-end speech recognition in Fairseq and ESPnet. I am an occasional
+low-resource language ASR and topic identification. Recently, I have been increasingly interested in Machine Translation.
+I finished my PhD at Johns Hopkins University in 2021 advised by
+<a href="https://www.clsp.jhu.edu/faculty/sanjeev-khudanpur">Sanjeev Khudanpur</a>.
+I have worked on end-to-end speech recognition ESPnet and Fairseq and I am an occasional
 contributer to Kaldi. Before starting at Johns Hopkins I used to
 work on machine learning applications in atmospheric science. Outside of work,
-I spend most of my time making music and with my family.</p>
+I spend most of my time making music and with my family.</p> 
 
 <hr>
 
 <h2>Publications</h2>
 
+<p><a href="https://arxiv.org/pdf/2110.04863.pdf">Injecting Text and Cross-Lingual Supervision in Few-shot Learning from Self-supervised Models</a><br />
+<em style="font-size: 75%"><strong>Matthew Wiesner</strong>, Desh Raj, Sanjeev Khudanpur, Accepted at ICASSP 2022</p>
+
+<p><a href="https://www.isca-speech.org/archive/pdfs/interspeech_2021/wiesner21_interspeech.pdf">Training Hybrid Models on Noisy Transliterated Transcripts for
+  Code-Switched Speech Recognition</a><br />
+<em style="font-size: 75%"><strong>Matthew Wiesner</strong>, Mousmita Sarma, Ashish Arora, Desh Raj, Dongji Gao, Ruizhe Huang,
+Supreet Preet, Moris Johnson, Zikra Iqbal, Nagendra Goel, Jan Trmal, Paola García, Sanjeev Khudanpur, Interspeech 2021</em></p>
+
+<p><a href="https://www.isca-speech.org/archive/pdfs/interspeech_2021/salesky21_interspeech.pdf">The Multilingual TEDx Corpus for Speech Recognition and Translation</a><br />
+<em style="font-size: 75%">Elizabeth Salesky, <strong>Matthew Wiesner</strong>, Jacob Bremerman, Roldano Cattoni, Matteo Negri, Marco Turchi, Douglas W. Oard, Matt Post, Interspeech 2021</em></p>
+  
 <p><a href="https://arxiv.org/pdf/2005.13962.pdf">A Corpus for Large-Scale Phonetic Typology</a><br />
 <em style="font-size: 75%">Elizabeth Salesky, Eleanor Chodroff, Tiago Pimentel, <strong>Matthew Wiesner</strong>, Ryan Cotterell, Alan W Black, Jason Eisner, ACL 2020</em></p>
 
@@ -65,7 +73,7 @@ I spend most of my time making music and with my family.</p>
 
 <h2>Education</h2>
 
-<b>Ph.D. Candidate in Electrical Engineering</b> (Sep 2014 - present) <br />
+<b>Ph.D. in Electrical Engineering</b> (Oct 2021) <br />
 Johns Hopkins University, MD, USA
 <br />
 <br />
@@ -79,7 +87,7 @@ McGill University, QC, CA
 <hr>
 
 <h2>Projects</h2>
-
+<a href="https://github.com/m-wiesner/nnet_pytorch/tree/conda_install">nnet_pytorch: A pytorch replacement for nnet3 in Kaldi</a><br />
 <a href="https://github.com/m-wiesner/Jotto">Jotto: The Code Breaking Game</a><br />
 <a href="https://github.com/m-wiesner/BCUBED">B3 Clustering Metric</a><br />
 <a href="https://soundcloud.com/groschatorange">Music</a>
