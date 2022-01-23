@@ -19,7 +19,7 @@ I spend most of my time making music and with my family.</p>
 <h2>Publications</h2>
 
 <p><a href="https://arxiv.org/pdf/2110.04863.pdf">Injecting Text and Cross-Lingual Supervision in Few-shot Learning from Self-supervised Models</a><br />
-<em style="font-size: 75%"><strong>Matthew Wiesner</strong>, Desh Raj, Sanjeev Khudanpur, Accepted at ICASSP 2022</p>
+<em style="font-size: 75%"><strong>Matthew Wiesner</strong>, Desh Raj, Sanjeev Khudanpur, Accepted at ICASSP 2022</em>?</p>
 
 <p><a href="https://www.isca-speech.org/archive/pdfs/interspeech_2021/wiesner21_interspeech.pdf">Training Hybrid Models on Noisy Transliterated Transcripts for
   Code-Switched Speech Recognition</a><br />
