@@ -18,8 +18,17 @@ I spend most of my time making music and with my family.</p>
 
 <h2>Publications</h2>
 
+<p><a href="https://arxiv.org/pdf/2211.01458.pdf">Toward Zero-Shot Code-Switched Speech Recognition</a><br />
+<em style="font-size: 75%">Brian Yan, <strong>Matthew Wiesner</strong>, Ondřej Kleich, Preethi Jyothi, Shinji Watanabe, Accepted at ICASSP 2023</em></p>
+
+<p>Building Keyword Search Systems from End-To-End ASR Systems<br />
+<em style="font-size: 75%">Ruizhe Huang, <strong>Matthew Wiesner</strong>, Leibny Paola García-Perera, Dan Povey, Jan Trmal, Sanjeev Khudanpur, Accepted at ICASSP 2023</em></p>
+
+<p><a href="https://aclanthology.org/2022.iwslt-1.29.pdf">JHU IWSLT 2022 Dialect Speech Translation System Description</a><br />
+<em style="font-size: 75%">Jinyi Yang, Amir Hussein, <strong>Matthew Wiesner</strong>, Sanjeev Khudanpur, IWSLT 2022</em></p>
+
 <p><a href="https://arxiv.org/pdf/2110.04863.pdf">Injecting Text and Cross-Lingual Supervision in Few-shot Learning from Self-supervised Models</a><br />
-<em style="font-size: 75%"><strong>Matthew Wiesner</strong>, Desh Raj, Sanjeev Khudanpur, Accepted at ICASSP 2022</em></p>
+<em style="font-size: 75%"><strong>Matthew Wiesner</strong>, Desh Raj, Sanjeev Khudanpur, ICASSP 2022</em></p>
 
 <p><a href="https://www.isca-speech.org/archive/pdfs/interspeech_2021/wiesner21_interspeech.pdf">Training Hybrid Models on Noisy Transliterated Transcripts for
   Code-Switched Speech Recognition</a><br />
