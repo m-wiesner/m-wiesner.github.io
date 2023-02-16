@@ -18,7 +18,7 @@ I spend most of my time making music and with my family.</p>
 
 <h2>Publications</h2>
 
-<p><a href="https://arxiv.org/pdf/2211.01458.pdf">Toward Zero-Shot Code-Switched Speech Recognition</a><br />
+<p><a href="https://arxiv.org/pdf/2211.01458.pdf">Towards Zero-Shot Code-Switched Speech Recognition</a><br />
 <em style="font-size: 75%">Brian Yan, <strong>Matthew Wiesner</strong>, Ondřej Kleich, Preethi Jyothi, Shinji Watanabe, Accepted at ICASSP 2023</em></p>
 
 <p>Building Keyword Search Systems from End-To-End ASR Systems<br />
