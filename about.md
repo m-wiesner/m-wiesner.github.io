@@ -22,10 +22,10 @@ Symposium on Security and Privacy in Speech Communication 2024</em></p>
 
 <p><a href="https://arxiv.org/pdf/2409.09543"> Target Speaker ASR with Whisper</a>
 <a href="https://www.chimechallenge.org/current/awards"><em style="font-size: 75%"><small><span style="color:red">CHiME-8 Award Follow-up Paper!</span></small></em></a><br />
-<em style="font-size: 75%"> Alexander Polok, Dominik Klement, <srong> Matthew Wiesner</srong>, Sanjeev Khudanpur, Jan Černocky, Lukáš Burget, Accepted at ICASSP 2025</em></p>
+<em style="font-size: 75%"> Alexander Polok, Dominik Klement, <strong>Matthew Wiesner</strong>, Sanjeev Khudanpur, Jan Černocky, Lukáš Burget, Accepted at ICASSP 2025</em></p>
 
 <p><a href="https://aclanthology.org/2024.naacl-long.286.pdf"> Where are you from? Geolocation Speech and Applications to Language Identification</a><br />
-<em style="font-size: 75%"> <strong>Matthew Wiesner</strong>, Patrick Foley, Bismarck Bamfo Odoom, Leibny Paola Garcia, Kenton Murray, Philipp Koehn </em> </p>
+<em style="font-size: 75%"> <strong>Matthew Wiesner</strong>, Patrick Foley, Bismarck Bamfo Odoom, Leibny Paola Garcia, Kenton Murray, Philipp Koehn, NAACL 2024 </em> </p>
 
 <p><a href="https://arxiv.org/pdf/2211.01458.pdf">Towards Zero-Shot Code-Switched Speech Recognition</a><br />
 <em style="font-size: 75%">Brian Yan, <strong>Matthew Wiesner</strong>, Ondřej Kleich, Preethi Jyothi, Shinji Watanabe, ICASSP 2023</em></p>
