@@ -15,11 +15,11 @@ I spend most of my time making music and with my family.</p>
 
 Please see my <a href="https://scholar.google.com/citations?user=6SVPrPUAAAAJ&hl=en&oi=ao">Google Scholar</a> page for a full list of publications<br />
 
-<p><a href="https://www.voiceprivacychallenge.org/vp2024/docs/T8_____JHU_CLSP_____JHU_Submission_to_the_Voice_Privacy_Challenge_2024.pdf"> HLTCOE JHU Submission to the Voice Privacy Challenge 2024 <em style="font-size: 75%"><small><span style="color:red">Best Paper!</span></small></em></a><br />
+<p><a href="https://www.voiceprivacychallenge.org/vp2024/docs/T8_____JHU_CLSP_____JHU_Submission_to_the_Voice_Privacy_Challenge_2024.pdf"> HLTCOE JHU Submission to the Voice Privacy Challenge 2024</a> <em style="font-size: 75%"><small><span style="color:red">Best Paper!</span></small></em><br />
 <em style="font-size: 75%">Henry Li Xinyuan, Zexin Cai, Ashi Garg, Kevin Duh, Leibny Paola García-Perera, Sanjeev Khudanpur, Nicholas Andrews, <strong>Matthew Wiesner</strong>, 
 Symposium on Security and Privacy in Speech Communication 2024</em></p>
 
-<p><a href="https://arxiv.org/pdf/2409.09543"> Target Speaker ASR with Whisper <small><span style="color:red">CHiME-8 Award Follow-up Paper!</span></small></a><br />
+<p><a href="https://arxiv.org/pdf/2409.09543"> Target Speaker ASR with Whisper </a><a href="https://www.chimechallenge.org/current/awards"><small><span style="color:red">CHiME-8 Award Follow-up Paper!</span></small></a><br />
 <em style="font-size: 75%"> Alexander Polok, Dominik Klement, <srong> Matthew Wiesner</srong>, Sanjeev Khudanpur, Jan Černocky, Lukáš Burget, Accepted at ICASSP 2025</em></p>
 
 <p><a href="https://aclanthology.org/2024.naacl-long.286.pdf"> Where are you from? Geolocation Speech and Applications to Language Identification</a><br />
