@@ -112,5 +112,5 @@ McGill University, QC, CA
 <a href="https://github.com/m-wiesner/BCUBED">B3 Clustering Metric</a><br />
 <a href="https://soundcloud.com/groschatorange">Music</a>
 
-<h2><a href="https://m-wiesner.github.io/Matthew_s_Resume-7.pdf">Résumé</a></h2>
+<h2><a href="https://m-wiesner.github.io/matthew_resume_2025_01.pdf">Résumé</a></h2>
 
