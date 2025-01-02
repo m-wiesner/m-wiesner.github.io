@@ -15,11 +15,12 @@ I spend most of my time making music and with my family.</p>
 
 Please see my <a href="https://scholar.google.com/citations?user=6SVPrPUAAAAJ&hl=en&oi=ao">Google Scholar</a> page for a full list of publications<br />
 
-<p><a href="https://www.voiceprivacychallenge.org/vp2024/docs/T8_____JHU_CLSP_____JHU_Submission_to_the_Voice_Privacy_Challenge_2024.pdf"> HLTCOE JHU Submission to the Voice Privacy Challenge 2024</a> <em style="font-size: 75%"><small><span style="color:red">Best Paper!</span></small></em><br />
+<p><a href="https://www.voiceprivacychallenge.org/vp2024/docs/T8_____JHU_CLSP_____JHU_Submission_to_the_Voice_Privacy_Challenge_2024.pdf"> HLTCOE JHU Submission to the Voice Privacy Challenge 2024</a>
+<em style="font-size: 75%"><small><span style="color:red">Best Paper!</span></small></em><br />
 <em style="font-size: 75%">Henry Li Xinyuan, Zexin Cai, Ashi Garg, Kevin Duh, Leibny Paola García-Perera, Sanjeev Khudanpur, Nicholas Andrews, <strong>Matthew Wiesner</strong>, 
 Symposium on Security and Privacy in Speech Communication 2024</em></p>
 
-<p><a href="https://arxiv.org/pdf/2409.09543"> Target Speaker ASR with Whisper </a>
+<p><a href="https://arxiv.org/pdf/2409.09543"> Target Speaker ASR with Whisper</a>
 <a href="https://www.chimechallenge.org/current/awards"><em style="font-size: 75%"><small><span style="color:red">CHiME-8 Award Follow-up Paper!</span></small></em></a><br />
 <em style="font-size: 75%"> Alexander Polok, Dominik Klement, <srong> Matthew Wiesner</srong>, Sanjeev Khudanpur, Jan Černocky, Lukáš Burget, Accepted at ICASSP 2025</em></p>
 
@@ -39,7 +40,8 @@ Symposium on Security and Privacy in Speech Communication 2024</em></p>
 <em style="font-size: 75%"><strong>Matthew Wiesner</strong>, Desh Raj, Sanjeev Khudanpur, ICASSP 2022</em></p>
 
 <p><a href="https://www.isca-speech.org/archive/pdfs/interspeech_2021/wiesner21_interspeech.pdf">Training Hybrid Models on Noisy Transliterated Transcripts for
-  Code-Switched Speech Recognition <em style="font-size: 75%"> <small><span style="color:red">MUCS 2021 ASR Challenge Award </span></small></em></a><br />
+  Code-Switched Speech Recognition</a>
+<a href="https://navana-tech.github.io/MUCS2021/challenge_winners.html"> <em style="font-size: 75%"> <small><span style="color:red">MUCS 2021 ASR Challenge Award </span></small></em></a><br />
 <em style="font-size: 75%"><strong>Matthew Wiesner</strong>, Mousmita Sarma, Ashish Arora, Desh Raj, Dongji Gao, Ruizhe Huang,
 Supreet Preet, Moris Johnson, Zikra Iqbal, Nagendra Goel, Jan Trmal, Paola García, Sanjeev Khudanpur, Interspeech 2021</em></p>
 
