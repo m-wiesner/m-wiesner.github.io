@@ -4,25 +4,32 @@ layout: page
 ---
 <!-- ![Profile Image]({{ site.url }}/{{ site.picture }}) -->
 
-<p>I am a research scientist at the Johns Hopkins affiliated <a href="https://hltcoe.jhu.edu/">Human Language Technology Center of Excellence</a> (HLTCOE). I am broadly interested in speech technologies, but I
-have primarily worked on multilingual and cross-lingual acoustic modeling for
-low-resource language ASR and topic identification. Recently, I have been increasingly interested in Machine Translation.
+<p>I am a research scientist at the Johns Hopkins affiliated <a href="https://hltcoe.jhu.edu/">Human Language Technology Center of Excellence</a> (HLTCOE). I am broadly interested in speech processing with an emphasis on multilinguality. I have worked on and am interested in applications in automatic speech recognition, speech translation, keyword search, topic identification from speech, voice anonymization, language identification, and multi-talker ASR. I have helped develop and contributed to a number of open-source speech processing tools including Kaldi, ESPnet, Fairseq, and Lhotse.
 I finished my PhD at Johns Hopkins University in 2021 advised by
-<a href="https://www.clsp.jhu.edu/faculty/sanjeev-khudanpur">Sanjeev Khudanpur</a>.
-I have worked on end-to-end speech recognition ESPnet and Fairseq and I am an occasional
-contributer to Kaldi. Before starting at Johns Hopkins I used to
-work on machine learning applications in atmospheric science. Outside of work,
+<a href="https://www.clsp.jhu.edu/faculty/sanjeev-khudanpur">Sanjeev Khudanpur</a>. Outside of work,
 I spend most of my time making music and with my family.</p> 
 
 <hr>
 
-<h2>Publications</h2>
+<h2>Selected Publications</h2>
+
+Please see my <a href="https://scholar.google.com/citations?user=6SVPrPUAAAAJ&hl=en&oi=ao">Google Scholar</a> page for a full list of publications<br />
+
+<p><a href="https://www.voiceprivacychallenge.org/vp2024/docs/T8_____JHU_CLSP_____JHU_Submission_to_the_Voice_Privacy_Challenge_2024.pdf"> HLTCOE JHU Submission to the Voice Privacy Challenge 2024 <em style="font-size: 75%"><small><span style="color:red">Best Paper!</span></small></em></a><br />
+<em style="font-size: 75%">Henry Li Xinyuan, Zexin Cai, Ashi Garg, Kevin Duh, Leibny Paola García-Perera, Sanjeev Khudanpur, Nicholas Andrews, <strong>Matthew Wiesner</strong>, 
+Symposium on Security and Privacy in Speech Communication 2024</em></p>
+
+<p><a href="https://arxiv.org/pdf/2409.09543"> Target Speaker ASR with Whisper <small><span style="color:red">CHiME-8 Award Follow-up Paper!</span></small></a><br />
+<em style="font-size: 75%"> Alexander Polok, Dominik Klement, <srong> Matthew Wiesner</srong>, Sanjeev Khudanpur, Jan Černocky, Lukáš Burget, Accepted at ICASSP 2025</em><\p>
+
+<p><a href="https://aclanthology.org/2024.naacl-long.286.pdf"> Where are you from? Geolocation Speech and Applications to Language Identification</a><br />
+<em style="font-size: 75%"> <strong>Matthew Wiesner</strong>, Patrick Foley, Bismarck Bamfo Odoom, Leibny Paola Garcia, Kenton Murray, Philipp Koehn </em> </p>
 
 <p><a href="https://arxiv.org/pdf/2211.01458.pdf">Towards Zero-Shot Code-Switched Speech Recognition</a><br />
-<em style="font-size: 75%">Brian Yan, <strong>Matthew Wiesner</strong>, Ondřej Kleich, Preethi Jyothi, Shinji Watanabe, Accepted at ICASSP 2023</em></p>
+<em style="font-size: 75%">Brian Yan, <strong>Matthew Wiesner</strong>, Ondřej Kleich, Preethi Jyothi, Shinji Watanabe, ICASSP 2023</em></p>
 
-<p>Building Keyword Search Systems from End-To-End ASR Systems<br />
-<em style="font-size: 75%">Ruizhe Huang, <strong>Matthew Wiesner</strong>, Leibny Paola García-Perera, Dan Povey, Jan Trmal, Sanjeev Khudanpur, Accepted at ICASSP 2023</em></p>
+<p><a href="https://par.nsf.gov/servlets/purl/10465905">Building Keyword Search Systems from End-To-End ASR Systems</a><br />
+<em style="font-size: 75%">Ruizhe Huang, <strong>Matthew Wiesner</strong>, Leibny Paola García-Perera, Dan Povey, Jan Trmal, Sanjeev Khudanpur, ICASSP 2023</em></p>
 
 <p><a href="https://aclanthology.org/2022.iwslt-1.29.pdf">JHU IWSLT 2022 Dialect Speech Translation System Description</a><br />
 <em style="font-size: 75%">Jinyi Yang, Amir Hussein, <strong>Matthew Wiesner</strong>, Sanjeev Khudanpur, IWSLT 2022</em></p>
@@ -31,7 +38,7 @@ I spend most of my time making music and with my family.</p>
 <em style="font-size: 75%"><strong>Matthew Wiesner</strong>, Desh Raj, Sanjeev Khudanpur, ICASSP 2022</em></p>
 
 <p><a href="https://www.isca-speech.org/archive/pdfs/interspeech_2021/wiesner21_interspeech.pdf">Training Hybrid Models on Noisy Transliterated Transcripts for
-  Code-Switched Speech Recognition</a><br />
+  Code-Switched Speech Recognition<small><span style="color:red">MUCS 2021 ASR Challenge Award </span></small></a><br />
 <em style="font-size: 75%"><strong>Matthew Wiesner</strong>, Mousmita Sarma, Ashish Arora, Desh Raj, Dongji Gao, Ruizhe Huang,
 Supreet Preet, Moris Johnson, Zikra Iqbal, Nagendra Goel, Jan Trmal, Paola García, Sanjeev Khudanpur, Interspeech 2021</em></p>
 
@@ -95,7 +102,8 @@ McGill University, QC, CA
 
 <hr>
 
-<h2>Projects</h2>
+<h2>Some Projects</h2>
+<a href="https://huggingface.co/spaces/geolocation-from-speech-demo/geolocation-from-speech-demo">Geolocation from speech </a><br />
 <a href="https://github.com/m-wiesner/nnet_pytorch/tree/conda_install">nnet_pytorch: A pytorch replacement for nnet3 in Kaldi</a><br />
 <a href="https://github.com/m-wiesner/Jotto">Jotto: The Code Breaking Game</a><br />
 <a href="https://github.com/m-wiesner/BCUBED">B3 Clustering Metric</a><br />
