@@ -52,4 +52,13 @@ $$ df = \left(\left(x + dx\right)^T \left(x + dx\right)\right)  - x^T x = x^T x 
 
 $$ df = \left(\nabla f\right)^T dx = 2x^T dx \implies \nabla f = 2x.$$
 
-Similary we can
+Similary we can define the matrix perturbations and associated "gradients". The product rule is quite helpful for this and still works for vector and matrix calculus.
+
+$$ df(u, v) = f(u + du)g(v + dv) - f(u)g(v) = (f(u) + f\`(u)\ du)(g(u) + g\`(v)dv) - f(u)g(v) $$
+$$ = f\`(u)\ du\ g\`(v) dv + f\`(u)\ du\ g(u) + f(u)g\`(v)\ dv + f(u)g(v) - f(u)g(v)$$  
+
+$$d\left(AA^{-1}\right) = d\left(I\right) = \mathbb{0}_{n \times x} = Ad(A^{-1}) + dAA^{-1} \implies dA^{-1} = - A^{-1} dA A^{-1}$$
+
+This result will be important.
+
+>$$ dA^{-1} = - A^{-1} dA A^{-1} $$
