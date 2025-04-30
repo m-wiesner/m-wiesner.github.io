@@ -8,7 +8,7 @@ tag:
 - Statistics
 star: false
 category: blog
-author: MatthewWiesner
+author: Matthew Wiesner
 description: Bootstrap Sampling Tutorial and Example
 ---
 
