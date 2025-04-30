@@ -8,7 +8,7 @@ tag:
 - Machine Learning
 star: false
 category: blog
-author: MatthewWiesner
+author: Matthew Wiesner
 published: true
 description: Review of [On Variational Bounds on Mutual Information](https://arxiv.org/pdf/1905.06922.pdf)
 ---
