@@ -8,7 +8,8 @@ tag:
 - Machine Learning
 star: false
 category: blog
-author: MatthewWiesner
+author: Matthew Wiesner
+published: true
 description: Some basic results needed to understand Neural ODEs
 ---
 
