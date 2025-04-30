@@ -8,7 +8,7 @@ tag:
 - Machine Learning
 star: false
 category: blog
-author: MatthewWiesner
+author: Matthew Wiesner
 description: Everything about LF-MMI
 ---
 
