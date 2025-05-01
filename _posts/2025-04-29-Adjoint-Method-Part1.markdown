@@ -94,22 +94,22 @@ So compute
 
 # Adjoint Method for Non-Linear Functions
 
-Let us repeat the above exercise using a general non-linear definition of $$x$$ in terms of parameters $$p$$ described by $$g(x, p) = 0$$.
+Let us repeat the above exercise using a general non-linear definition of $$x$$ in terms of parameters $$p$$ described by $$g(x, \theta) = 0$$.
 
 As before we can take the gradient of the implicit function, and solve for $$dx$$, which by the multivariate chain rule is ...
 
-$$dg = \frac{\partial g}{\partial p} dp + \frac{\partial g}{\partial x} dx = 0$$
-$$ \implies dx = -(\frac{\partial g}{\partial x})^{-1} \frac{\partial g}{\partial p} dp$$
+$$dg = \frac{\partial g}{\partial \theta} dp + \frac{\partial g}{\partial x} dx = 0$$
+$$ \implies dx = -(\frac{\partial g}{\partial x})^{-1} \frac{\partial g}{\partial \theta} d\theta$$
 
-the terms $$\frac{\partial g}{\partial p}$$ and $$\frac{\partial g}{\partial x}$$ are the Jacobian matrices w.r.t $$x$$ and $$p$$ respectively.
+the terms $$\frac{\partial g}{\partial \theta}$$ and $$\frac{\partial g}{\partial x}$$ are the Jacobian matrices w.r.t $$x$$ and $$\theta$$ respectively.
 
 Just as before we will plug this into $$df = f`\left(x\right) dx$$, obtaining
 
-$$df = -(f`(x) (\frac{\partial g}{\partial x})^{-1}) \frac{\partial g}{\partial p} dp$$
+$$df = -(f`(x) (\frac{\partial g}{\partial x})^{-1}) \frac{\partial g}{\partial \theta} d\theta$$
 
 Here, $$v^T = f`(x) (\frac{\partial g}{\partial x})^{-1} \implies \frac{\partial g}{\partial x}^T v = f`(x)^T$$ and $$v = (\frac{\partial g}{\partial x}^T)^{-1} f`(x)^T$$
 
 # Summary
-In summary, we can compute the gradient with respect to any parameter $$p_i$$, by first computing the gradient with respect to $$x$$, i.e, $$f`\left(x\right)$$ and then solving a linear system of equations $$\frac{\partial g}{\partial x}^T v = f`\left(x\right)^T$$ to compute $$v^T = \left(f`\left(x\right) \left(\frac{\partial g}{\partial x}\right)^{-1}\right)$$, and hence $$df = -v^T \frac{\partial g}{\partial p} dp$$.
+In summary, we can compute the gradient with respect to any parameter $$p_i$$, by first computing the gradient with respect to $$x$$, i.e, $$f`\left(x\right)$$ and then solving a linear system of equations $$\frac{\partial g}{\partial x}^T v = f`\left(x\right)^T$$ to compute $$v^T = \left(f`\left(x\right) \left(\frac{\partial g}{\partial x}\right)^{-1}\right)$$, and hence $$df = -v^T \frac{\partial g}{\partial \theta} d\theta$$.
 
 In the next post we'll consider what happens when x is the solution of an ordinary differential equation.
