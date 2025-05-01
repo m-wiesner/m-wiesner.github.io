@@ -98,7 +98,7 @@ Let us repeat the above exercise using a general non-linear definition of $$x$$ 
 
 As before we can take the gradient of the implicit function, and solve for $$dx$$, which by the multivariate chain rule is ...
 
-$$dg = \frac{\partial g}{\partial \theta} dp + \frac{\partial g}{\partial x} dx = 0$$
+$$dg = \frac{\partial g}{\partial \theta} d\theta + \frac{\partial g}{\partial x} dx = 0$$
 $$ \implies dx = -(\frac{\partial g}{\partial x})^{-1} \frac{\partial g}{\partial \theta} d\theta$$
 
 the terms $$\frac{\partial g}{\partial \theta}$$ and $$\frac{\partial g}{\partial x}$$ are the Jacobian matrices w.r.t $$x$$ and $$\theta$$ respectively.
