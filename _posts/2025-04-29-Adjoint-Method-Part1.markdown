@@ -14,8 +14,8 @@ description: Some basic results needed to understand Neural ODEs
 ---
 
 I took a break from energy based models for a while, and in the meantime diffusion methods really took off.
-I want to learn about diffusion mehtods, and neural ODES more generally and these are just some basic results that
-I think are needed to understand neural ODES. Since I am hoping this will be a mostly standalone reference, I am including
+I want to learn about diffusion mehtods, and neural ODEs more generally and these are just some basic results that
+I think are needed to understand neural ODEs. Since I am hoping this will be a mostly standalone reference, I am including
 some basic review.
 
 # Matrix/Vector Calculus
